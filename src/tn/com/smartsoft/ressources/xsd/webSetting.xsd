@@ -1,0 +1,90 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.WebDefinition">
+   <xsd:sequence>
+    <xsd:element name="variable-system" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="response-views" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="response-view" type="tn.com.smartsoft.framework.presentation.definition.ResponseViewDefinition" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="web-beans" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="scripts" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="images" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="encoding" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="locale" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="window-response-view" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tags" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.ResponseViewDefinition">
+   <xsd:sequence>
+    <xsd:element name="header" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="content-type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="web-setting" type="tn.com.smartsoft.framework.presentation.definition.WebDefinition"/>
+ </xsd:schema>

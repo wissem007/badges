@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListModuleRef" model-name="listModuleRef" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListEntite" model-name="listEntite" id-property="entiteIdIndex">
+		<ext-store-field id="entiteIdIndex" property="entiteId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+	</ext-store>
+	<ext-store id="storeListEntiteRef" model-name="listEntiteRef" id-property="entiteIdIndex">
+		<ext-store-field id="entiteIdIndex" property="entiteId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+	</ext-store>
+	<ext-panel id="p1" layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModule" maxLength="50" width="250" editable="${isEditableModule}"  allow-blank="false" next-element="entiteId">
+			<ajax-event name="change" action-listener="getEntiteFilter" handle-params="el,e" is-wait="false" maxLength="50" width="200">
+				<request-field field="module" />
+				<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('entiteId').clearValue();	         			
+	           			desktop.getCmp('entiteId').getStore().removeAll();
+	           			desktop.getCmp('entiteId').getStore().load();
+						
+	                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="entiteId" property="searcheBean.entiteId" display-field="libelleIndex" display-field-id="entiteIdIndex" store-id="storeListEntite" maxLength="50" width="250" editable="${isEditableEntite}"  allow-blank="false">
+			<ajax-event name="change" action-listener="getModuleRefFilter" handle-params="el,e" is-wait="false" maxLength="50" width="200">
+				<request-field field="entiteId" />
+				<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('refModuleId').clearValue();	         			
+	           			desktop.getCmp('refModuleId').getStore().removeAll();
+	           			desktop.getCmp('refModuleId').getStore().load();
+	           			desktop.getCmp('refEntiteId').clearValue();	         			
+	           			desktop.getCmp('refEntiteId').getStore().removeAll();
+						
+	                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-text id="propertyName" property="searcheBean.propertyName" width="250" next-element="entiteId" />
+		<ext-field-text id="libelle" property="searcheBean.libelle" width="250" next-element="rang" />
+		<ext-field-combo id="refModuleId" property="searcheBean.refModuleId" display-field="libelleIndex" store-id="storeListModuleRef" maxLength="50" width="250">
+			<ajax-event name="change" action-listener="getEntiteRefFilter" handle-params="el,e" is-wait="false" maxLength="50" width="200">
+				<request-field field="refModuleId" />
+				<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('refEntiteId').clearValue();	         			
+	           			desktop.getCmp('refEntiteId').getStore().removeAll();
+	           			desktop.getCmp('refEntiteId').getStore().load();
+						
+	                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="refEntiteId" property="searcheBean.refEntiteId" display-field="libelleIndex" store-id="storeListEntiteRef" maxLength="50" width="250" />
+		</ext-panel>
+</root>

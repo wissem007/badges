@@ -1,0 +1,80 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.definition.ModuleDefinition">
+   <xsd:sequence>
+    <xsd:element name="module-id" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="default-data-source" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="add-mapping" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="data-source-name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="data-source" type="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="sub-modules" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="sub-module" type="tn.com.smartsoft.framework.configuration.definition.SubModuleDefinition" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition">
+   <xsd:sequence>
+    <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="mapping" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="product-name" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.definition.SubModuleDefinition">
+   <xsd:sequence>
+    <xsd:element name="sujet" type="tn.com.smartsoft.framework.configuration.definition.SujetDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="sub-module-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="default-data-source" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.definition.SujetDefinition">
+   <xsd:sequence>
+    <xsd:element name="beans" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="sujet-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="default-data-source" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="module" type="tn.com.smartsoft.framework.configuration.definition.ModuleDefinition"/>
+ </xsd:schema>

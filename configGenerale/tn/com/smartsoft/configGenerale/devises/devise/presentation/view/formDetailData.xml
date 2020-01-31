@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="250">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" width="200" next-element="sousUnite" />
+		<ext-field-text id="sousUnite" property="detailBean.sousUnite" label-exp="$L{sousUnite}" allow-blank="false" width="200" next-element="symboleMonetaire" />
+		<ext-field-text id="symboleMonetaire" property="detailBean.symboleMonetaire" allow-blank="false" width="50" maxLength="3" next-element="isoNumeric" />
+		<ext-field-number id="isoNumeric" property="detailBean.isoNumeric" allow-blank="false" label-exp="$L{isoNumeric}" maxLength="4" width="100" next-element="isoAlpha" />
+		<ext-field-text id="isoAlpha" property="detailBean.isoAlpha" allow-blank="false" label-exp="$L{isoAlpha}" maxLength="4" width="100" next-element="nombreDecimales" />
+		<ext-field-spinner id="nombreDecimales" property="detailBean.nombreDecimales" allow-blank="false" minStringValue="1" maxStringValue="5" width="50" next-element="valider" />
+	</ext-panel>
+</root>

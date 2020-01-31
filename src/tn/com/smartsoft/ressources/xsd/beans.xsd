@@ -1,0 +1,348 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.definition.BeansDefinition">
+   <xsd:sequence>
+    <xsd:element name="variable-system" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="bean" type="tn.com.smartsoft.framework.beans.definition.BeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="dao-bean" type="tn.com.smartsoft.framework.dao.definition.DaoBeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="dao-parse-bean" type="tn.com.smartsoft.framework.dao.definition.DaoParseBeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="business-bean" type="tn.com.smartsoft.framework.business.definition.BusinessBeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="controler-bean" type="tn.com.smartsoft.framework.presentation.definition.ControleBeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="user-action-bean" type="tn.com.smartsoft.framework.presentation.definition.UserActionDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="binding-model" type="tn.com.smartsoft.framework.presentation.definition.BindingModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="window" type="tn.com.smartsoft.framework.presentation.definition.WindowDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.BeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="set-property" type="tn.com.smartsoft.framework.beans.definition.PropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-map" type="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-list" type="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-component-id" type="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.PropertyDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition">
+   <xsd:sequence>
+    <xsd:element name="add" type="tn.com.smartsoft.framework.beans.definition.MapEntryDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="key-type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.MapEntryDefinition">
+   <xsd:attribute name="key" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition">
+   <xsd:sequence>
+    <xsd:element name="add" type="tn.com.smartsoft.framework.beans.definition.ListEntryDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ListEntryDefinition">
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DaoBeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="query-method" type="tn.com.smartsoft.framework.dao.definition.DaoQueryMethodDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="sql-query-method" type="tn.com.smartsoft.framework.dao.definition.DaoSqlQueryMethodDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="interface" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DaoQueryMethodDefinition">
+   <xsd:sequence>
+    <xsd:element name="query" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="required">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="accessor" type="tn.com.smartsoft.framework.dao.definition.DbQueryAccessorDefinition" minOccurs="0" maxOccurs="1"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="is-updater" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="dao-parse-bean" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class-resultat" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="session-arg-rang" type="xsd:int" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="prefix-arg-name" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DbQueryAccessorDefinition">
+   <xsd:sequence>
+    <xsd:element name="lock-mode" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="alias" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="mode" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="cached" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="fetch-size" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="max-results" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="cache-region" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DaoSqlQueryMethodDefinition">
+   <xsd:sequence>
+    <xsd:element name="query" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="required">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="accessor" type="tn.com.smartsoft.framework.dao.definition.DbQueryAccessorDefinition" minOccurs="0" maxOccurs="1"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="is-updater" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="dao-parse-bean" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class-resultat" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="session-arg-rang" type="xsd:int" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="prefix-arg-name" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DaoParseBeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="dao-parse-bean" type="tn.com.smartsoft.framework.dao.definition.DaoParseBeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="property" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="recursive" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.business.definition.BusinessBeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="set-dao-session" type="tn.com.smartsoft.framework.business.definition.DaoSessionRefDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-dao-bean" type="tn.com.smartsoft.framework.business.definition.DaoBeanRefDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-dao-parse-bean" type="tn.com.smartsoft.framework.business.definition.DaoParseBeanRefDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-property" type="tn.com.smartsoft.framework.beans.definition.PropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-map" type="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-list" type="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-component-id" type="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.business.definition.DaoSessionRefDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="data-source-name" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.business.definition.DaoBeanRefDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sujet" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sub-module" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="module" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.business.definition.DaoParseBeanRefDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sujet" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sub-module" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="module" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.ControleBeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="set-business-bean" type="tn.com.smartsoft.framework.business.definition.BusinessBeanRefDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-property" type="tn.com.smartsoft.framework.beans.definition.PropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-map" type="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-list" type="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-component-id" type="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="extends" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.business.definition.BusinessBeanRefDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sujet" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sub-module" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="module" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.UserActionDefinition">
+   <xsd:sequence>
+    <xsd:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="binding-model" type="tn.com.smartsoft.framework.presentation.definition.BindingModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="binding-model-ref" type="tn.com.smartsoft.framework.presentation.definition.BindingRefModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="binding-property-model" type="tn.com.smartsoft.framework.presentation.definition.BindingPropertyModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="window" type="tn.com.smartsoft.framework.presentation.definition.WindowDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="window-ref" type="tn.com.smartsoft.framework.presentation.definition.WindowRefDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="report" type="tn.com.smartsoft.framework.presentation.definition.ReportDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="extends" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="model-class" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="controler-bean" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="home-window-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="on-home-methode" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.BindingModelDefinition">
+   <xsd:sequence>
+    <xsd:element name="binding-model" type="tn.com.smartsoft.framework.presentation.definition.BindingModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="binding-property-model" type="tn.com.smartsoft.framework.presentation.definition.BindingPropertyModelDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="mode" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.BindingPropertyModelDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="mode" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="libelle-exp" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="user-type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.BindingRefModelDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.WindowDefinition">
+   <xsd:sequence>
+    <xsd:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="location" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="view-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="on-init-methode" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="on-render-methode" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="on-security-check-methode" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="on-destroy-methode" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.WindowRefDefinition">
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.ReportDefinition">
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="location" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ds-property" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="beans" type="tn.com.smartsoft.framework.configuration.definition.BeansDefinition"/>
+ </xsd:schema>

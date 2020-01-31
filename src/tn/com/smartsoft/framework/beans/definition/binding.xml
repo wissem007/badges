@@ -1,0 +1,41 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.beans.definition">
+  <class name="BeanDefinition" node="bean">
+    <property name="name" attribute="name" />
+    <property name="classValue" attribute="class" />
+    <many-ref addedMethode="addPropertyDefinition" classRef="PropertyDefinition" />
+    <many-ref addedMethode="addPropertyDefinition" classRef="MapPropertyDefinition" />
+    <many-ref addedMethode="addPropertyDefinition" classRef="ListPropertyDefinition" />
+    <many-ref addedMethode="addPropertyDefinition" classRef="ComponentIdDefinition" />
+  </class>
+  <class name="ComponentIdDefinition" node="set-component-id">
+    <property name="name" attribute="name" />
+    <property name="id" attribute="id" />
+  </class>
+  <class name="PropertyDefinition" node="set-property">
+    <property name="name" attribute="name" />
+    <property name="value" attribute="value" />
+    <property name="ref" attribute="ref" />
+  </class>
+  <class name="MapPropertyDefinition" node="set-map">
+    <property name="name" attribute="name" />
+    <property name="type" attribute="type" />
+    <property name="keyType" attribute="key-type" />
+    <many-ref addedMethode="addEntry" classRef="MapEntryDefinition" />
+  </class>
+  <class name="ListPropertyDefinition" node="set-list">
+    <property name="name" attribute="name" />
+    <property name="type" attribute="type" />
+    <many-ref addedMethode="addEntry" classRef="ListEntryDefinition" />
+  </class>
+  <class name="ListEntryDefinition" node="add">
+    <property name="value" attribute="value" />
+    <property name="type" attribute="type" />
+    <property name="ref" attribute="ref" />
+  </class>
+  <class name="MapEntryDefinition" node="add">
+    <property name="key" attribute="key" />
+    <property name="value" attribute="value" />
+    <property name="type" attribute="type" />
+    <property name="ref" attribute="ref" />
+  </class>
+</xml-mapping>

@@ -1,0 +1,51 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.configuration.definition">
+	<class name="ApplicationDefinition" node="setting">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<include addedMethode="setDataBaseDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DataBaseDefinition" node="data-base-setting" includeAttribute="location"></include>
+		<many-ref addedMethode="addBeanDefinition" classRef="tn.com.smartsoft.framework.beans.definition.BeanDefinition" />
+		<property-node name="adminDataSource" node="admin-data-source" />
+		<property-node name="defaultDataSource" node="default-data-source" />
+		<one-ref name="defaultUserActionId" node="default-user-action" classRef="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" />
+		<one-ref name="loginUserActionId" node="login-user-action" classRef="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" />
+		<many-ref addedMethode="addDataSourceDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition" />
+		<mapped-property-node addedMethode="addMapping" node="add-mapping" attributeKey="data-source-name" attributeValue="location" />
+		<include addedMethode="addModuleDefinition" classRef="ModuleDefinition" node="modules/module" includeAttribute="location" setterParentName="applicationDefinition"></include>
+		<include addedMethode="setWebDefinition" classRef="tn.com.smartsoft.framework.presentation.definition.WebDefinition" node="web-setting" includeAttribute="location"></include>
+	</class>
+	<class name="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" node="user-action">
+		<property name="module" attribute="module-id" />
+		<property name="subModule" attribute="sub-module-id" />
+		<property name="sujet" attribute="sujet-id" />
+		<property name="id" attribute="user-action-id" />
+	</class>
+	<class name="ModuleDefinition" node="module">
+		<property-node name="moduleId" node="module-id" attribute="value" />
+		<property-node name="defaultDataSource" node="default-data-source" />
+		<many-ref addedMethode="addDataSourceDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition" />
+		<many-ref addedMethode="addSubModuleDefinition" classRef="SubModuleDefinition" manyNode="sub-modules" setterParentName="parentModuleDefinition" />
+		<many-ref addedMethode="addDataSourceDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition" />
+		<mapped-property-node addedMethode="addMapping" node="add-mapping" attributeKey="data-source-name" attributeValue="location" />
+		<one-ref name="defaultUserActionId" node="default-user-action" classRef="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" />
+	</class>
+	<class name="SubModuleDefinition" node="sub-module">
+		<property name="subModuleId" attribute="sub-module-id" />
+		<property name="defaultDataSource" attribute="default-data-source" />
+		<many-ref addedMethode="addSujetDefinition" classRef="SujetDefinition" setterParentName="parentSubModuleDef" />
+	</class>
+	<class name="BeansDefinition" node="beans">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<many-ref addedMethode="addBeanDefinition" classRef="tn.com.smartsoft.framework.beans.definition.BeanDefinition" />
+		<many-ref addedMethode="addDaoBeanDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DaoBeanDefinition" />
+		<many-ref addedMethode="addDaoParseBeanDefinition" classRef="tn.com.smartsoft.framework.dao.definition.DaoParseBeanDefinition" />
+		<many-ref addedMethode="addBusinessBeanDefinition" classRef="tn.com.smartsoft.framework.business.definition.BusinessBeanDefinition" />
+		<many-ref addedMethode="addControleBeanDefinition" classRef="tn.com.smartsoft.framework.presentation.definition.ControleBeanDefinition" />
+		<many-ref addedMethode="addUserActionDefinition" classRef="tn.com.smartsoft.framework.presentation.definition.UserActionDefinition" />
+		<many-ref addedMethode="addBindingModelDefinition" classRef="tn.com.smartsoft.framework.presentation.definition.BindingModelDefinition" />
+		<many-ref addedMethode="addWindowBeanDefinition" classRef="tn.com.smartsoft.framework.presentation.definition.WindowDefinition" />
+	</class>
+	<class name="SujetDefinition" node="sujet">
+		<property name="sujetId" attribute="sujet-id" />
+		<property name="defaultDataSource" attribute="default-data-source" />
+		<include addedMethode="addBeansDefinition" classRef="BeansDefinition" node="beans" includeAttribute="location" setterParentName="compositeBeansDefinition"></include>
+	</class>
+</xml-mapping>

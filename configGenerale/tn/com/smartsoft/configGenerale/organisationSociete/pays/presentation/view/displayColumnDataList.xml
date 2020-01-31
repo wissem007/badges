@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ 	<ext-store root="data" model-name="listBean" id-property="paysId"  reload-submit-all-field="true" reload-action-listener="doFilter" >
+		<!-- ext-store-field id="paysId" property="paysId[$i]" /-->
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<!--ext-store-field id="libelleArabe" property="libelleArabe[$i]" /-->
+		<ext-store-field id="nationaliteIndex" property="nationalite[$i]" />
+    	<ext-store-field id="deviseLibelle" property="devise[$i].libelle" />
+    	<ext-store-field id="indicatifTelIndex" property="indicatifTel" />
+    	
+    	<ext-store-field id="cleIbanIndex"  property="cleIban[$i]"/>    
+    	<ext-store-field id="codeIsoIndex"  property="codeIso[$i]"/>
+  					
+	</ext-store>
+
+ 	<!--ext-grid-column data-index="paysId" width="300" locked="true" /-->
+	<ext-grid-column data-index="libelleIndex" width="300" />
+ 	<!--ext-grid-column data-index="libelleArabe" width="300" /-->
+ 	<ext-grid-column data-index="nationaliteIndex" width="300" />
+	<ext-grid-column data-index="deviseLibelle" label-exp="$L{devise}" width="300" />
+	<ext-grid-column data-index="indicatifTelIndex" label-exp="$L{indicatifTel}" width="100" />
+	
+   	<ext-grid-column data-index="cleIbanIndex" label-exp="$L{cleIban}" width="50"  />    
+   	<ext-grid-column data-index="codeIsoIndex" label-exp="$L{codeIso}"  width="100" />
+
+</root>
+ 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-store id="storelistSaisons" model-name="listSaisons" id-property="idIndex">
+			<ext-store-field id="idIndex" property="saisonId" />
+			<ext-store-field id="libelleIndex" property="nom" />
+		</ext-store>
+		<ext-store id="storelistClasses" model-name="listClasses" id-property="idIndex">
+			<ext-store-field id="idIndex" property="eleveClasseId" />
+			<ext-store-field id="libelleIndex" property="nom" />
+		</ext-store>
+		<ext-store id="storelistStatus" model-name="listStatus" id-property="idIndex">
+			<ext-store-field id="idIndex" property="statuDemandesId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+		</ext-store>
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="$L{criteresRecherche}" layout="column" collapsible="true" body-style="padding:5px;" border="false">
+				<ext-panel layout="tform" border="false" label-width="120" body-style="padding:0px">
+					<ext-layout-config name="columns" value="3" expected="false" />
+					<ext-layout-config name="tableAttrs" value="{width:'99%'}" expected="false" />
+					<ext-field-combo id="eleveSaisonId" property="searcheBean.eleveSaisonId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistSaisons" maxLength="50" width="100" label-exp="Saison" colspan="1" />
+					<ext-field-combo id="statuDemandesId" property="searcheBean.statuDemandesId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistStatus" maxLength="50" width="150" label-exp="Status" colspan="2" />
+					<ext-field-text id="codePermanent" property="searcheBean.codePermanent" width="100" next-element="" colspan="1" />
+					<ext-field-combo id="eleveClasseId" property="searcheBean.eleveClasseId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistClasses" maxLength="50" width="250" label-exp="Classs" colspan="2" />
+				</ext-panel>
+			</ext-panel>
+			<ext-grid id="listBean" title-exp="${titleList}" store-id="storeListBean" height="${gridHeight||364}" hidden="true" editable="true">
+				<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+					<ext-store-field id="eleveDemandeCarteIdIndex" property="eleveDemandeCarteId" />
+					<ext-store-field id="dateNaisanceIndex" property="eleveSaison.eleve.dateNaisance" />
+					<ext-store-field id="nomIndex" property="eleveSaison.eleve.nom" />
+					<ext-store-field id="prenomIndex" property="eleveSaison.eleve.prenom" />
+					<ext-store-field id="codePermanentIndex" property="codePermanent" />
+					<ext-store-field id="eleveSaisonIdIndex" property="eleveSaisonId" />
+					<ext-store-field id="telResponsable1Index" property="telResponsable1" />
+					<ext-store-field id="telResponsable2Index" property="telResponsable2" />
+					<ext-store-field id="seasonIndex" property="eleveSaison.saison.nom" />
+					<ext-store-field id="classeIndex" property="eleveSaison.classe.nom" />
+					<ext-store-field id="dateDemandeIndex" property="dateDemande" />
+					<ext-store-field id="dateImpresionIndex" property="dateImpresion" />
+					<ext-store-field id="statuDemandeIndex" property="statuDemande.libelle" />
+					<ext-store-field id="checkedIndex" property="checked" />
+				</ext-store>
+				<ext-grid-column data-index="eleveDemandeCarteIdIndex" width="85" label-exp="Photo" renderer="photoRender">
+				</ext-grid-column>
+				<ext-grid-column data-index="nomIndex" width="150" />
+				<ext-grid-column data-index="prenomIndex" width="150" />
+				<ext-grid-column data-index="dateNaisanceIndex" width="100" />
+				<ext-grid-column data-index="codePermanentIndex" width="120" />
+				<ext-grid-column data-index="telResponsable1Index" width="100" label-exp="Tel responsable1" />
+				<ext-grid-column data-index="telResponsable2Index" width="100" label-exp="Tel responsable2" />
+				<ext-grid-column data-index="eleveSaisonIdIndex" width="100" label-exp="Saison" />
+				<ext-grid-column data-index="classeIndex" width="200" label-exp="Classe" />
+				<ext-grid-column data-index="dateDemandeIndex" width="100" />
+				<ext-grid-column data-index="checkedIndex" hideable="false" sortable="false" width="60" xtype="check" editable="true">
+					<ext-field-checkbox xtype="check" />
+				</ext-grid-column>
+			</ext-grid>
+		</ext-panel>
+		<ext-tbutton id="searche" tpl-id="16">
+			<ajax-event name="click" action-listener="doFilter" handle-params="el,e" is-wait="true" is-all-request-field="true">
+				<success>
+								<![CDATA[
+				              Ext.sss.Utils.reloadGrid(response,desktop,'listBean');
+				             ]]>
+				</success>
+			</ajax-event>
+		</ext-tbutton>
+		<ext-tbutton id="valider" tpl-id="9">
+			<submited-event name="click" action-listener="${validateMethod}" />
+		</ext-tbutton>
+		<ext-tbutton id="reportListCartes" tpl-id="33" text="Impresion">
+			<open-media-event name="click" ext="PDF" action-listener="doImpression" />
+		</ext-tbutton>
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="doHomePage" />
+		</ext-tbutton>
+	</root>
+	<js-function name="photoRender" list-param="value, metaData, record, rowIndex, colIndex, store,handler">
+		<![CDATA[
+		    var src='detailWindow.res?expression=$PV[listBean*s'+rowIndex+'*e.photo]&rand='+Math.random();
+		    value='<img  height="80" width="70" src="'+src+'" />';
+		    return value;
+ 	 	]]>
+	</js-function>
+</window>
+
+ 

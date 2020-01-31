@@ -1,0 +1,159 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.definition.ApplicationDefinition">
+   <xsd:sequence>
+    <xsd:element name="variable-system" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="admin-data-source" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="default-data-source" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:attribute name="value" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="add-mapping" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="data-source-name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="default-user-action" type="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" minOccurs="0" maxOccurs="1"/>
+    <xsd:element name="login-user-action" type="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl" minOccurs="0" maxOccurs="1"/>
+    <xsd:element name="bean" type="tn.com.smartsoft.framework.beans.definition.BeanDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="data-source" type="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="data-base-setting" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="modules" minOccurs="0" maxOccurs="1">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="module" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+         <xsd:attribute name="location" type="xsd:string" use="optional">
+         </xsd:attribute>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="web-setting" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.configuration.impl.ComponentIdImpl">
+   <xsd:attribute name="module-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sub-module-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="sujet-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="user-action-id" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.BeanDefinition">
+   <xsd:sequence>
+    <xsd:element name="set-property" type="tn.com.smartsoft.framework.beans.definition.PropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-map" type="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-list" type="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="set-component-id" type="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="class" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.PropertyDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.MapPropertyDefinition">
+   <xsd:sequence>
+    <xsd:element name="add" type="tn.com.smartsoft.framework.beans.definition.MapEntryDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="key-type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.MapEntryDefinition">
+   <xsd:attribute name="key" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ListPropertyDefinition">
+   <xsd:sequence>
+    <xsd:element name="add" type="tn.com.smartsoft.framework.beans.definition.ListEntryDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ListEntryDefinition">
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.beans.definition.ComponentIdDefinition">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="id" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.dao.definition.DataSourceDefinition">
+   <xsd:sequence>
+    <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="mapping" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="location" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="product-name" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="setting" type="tn.com.smartsoft.framework.configuration.definition.ApplicationDefinition"/>
+ </xsd:schema>

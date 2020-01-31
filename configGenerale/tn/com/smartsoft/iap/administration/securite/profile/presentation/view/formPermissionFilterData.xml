@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="$L{criteresRecherche}" layout="column" collapsible="true" body-style="padding:15px;" border="false">
+				<ext-store root="data" id="storeListProfiles" model-name="listProfiles" id-property="profileIdIndex">
+					<ext-store-field id="profileIdIndex" property="profileId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+				</ext-store>
+				<ext-fieldset layout="form" columnWidth=".90" body-style="padding:10px;" label-width="60">
+					<ext-field-combo id="profileIdFilter" property="searcheBean.profileId" allow-blank="false" display-field="libelleIndex" store-id="storeListProfiles" width="500" />
+				</ext-fieldset>
+			</ext-panel>
+		</ext-panel>
+		<ext-tbutton id="searche" tpl-id="16">
+			<submited-event name="click" action-listener="onInitByProfil" />
+		</ext-tbutton>
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="doHomePage" handle-params="el,e" />
+		</ext-tbutton>
+	</root>
+</window>

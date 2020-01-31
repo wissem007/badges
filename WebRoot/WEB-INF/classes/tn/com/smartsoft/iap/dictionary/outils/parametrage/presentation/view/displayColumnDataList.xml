@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-expand-all="true" id-property="menuId" parent-property="parentMenuId" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="menuIdIndex" property="menuId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="rangIndex" property="rang" />
+		<ext-store-field id="helpIndex" property="help" />
+		<ext-store-field id="iconUrlIndex" property="iconUrl" />
+		<ext-store-field id="etatBusinessIndex" property="etatBusiness" />
+	</ext-store>
+	<ext-grid-column data-index="etatBusinessIndex" labelField="libelleIndex" xtype="treeCheck" width="100">
+		<ext-field-checkbox />
+	</ext-grid-column>
+	<ext-grid-column data-index="rangIndex" width="50" />
+	<ext-grid-column data-index="helpIndex" width="400" />
+	<ext-grid-column data-index="iconUrlIndex" width="50" />
+</root>

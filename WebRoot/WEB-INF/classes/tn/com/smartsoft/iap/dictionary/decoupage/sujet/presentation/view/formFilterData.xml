@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModule" model-name="listSubModule" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="sujetId" property="searcheBean.sujetId" maxLength="50" width="200" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" maxLength="30" width="300" next-element="version" />
+	<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModule" next-element="subModule">
+		<ajax-event name="change" action-listener="getSubModule" handle-params="el,e" is-wait="false" maxLength="50" width="300">
+			<request-field field="module" />
+			<success>
+					<![CDATA[
+                    var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('subModule').clearValue();
+           			desktop.getCmp('subModule').getStore().removeAll();           			   
+					desktop.getCmp('subModule').getStore().load();                  
+                 ]]>
+			</success>
+		</ajax-event>
+	</ext-field-combo>
+	<ext-field-combo id="subModule" label-exp="$L{subbmodule}" property="searcheBean.subModuleId" display-field="libelleIndex" store-id="storeListSubModule" next-element="searche" />
+</root>

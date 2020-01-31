@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listEleve" pageWidth="860" pageHeight="540" orientation="Landscape" columnWidth="860" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="BaseDir" class="java.lang.String"/>
+	<parameter name="File_SEP" class="java.lang.String"/>
+	<field name="codePermanent" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[codePermanent]]></fieldDescription>
+	</field>
+	<field name="elevePrenom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.eleve.prenom]]></fieldDescription>
+	</field>
+	<field name="eleveDateNaissance" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.eleve.dateNaisance]]></fieldDescription>
+	</field>
+	<field name="saison" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.saison.nom]]></fieldDescription>
+	</field>
+	<field name="elevePhoto" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.photo]]></fieldDescription>
+	</field>
+	<field name="eleveClass" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.classe.nom]]></fieldDescription>
+	</field>
+	<field name="eleveNom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.eleve.nom]]></fieldDescription>
+	</field>
+	<field name="rep1Prenom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.prenomResponsable1]]></fieldDescription>
+	</field>
+	<field name="rep1Nom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.nomResponsable1]]></fieldDescription>
+	</field>
+	<field name="rep1Tel" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.telResponsable1]]></fieldDescription>
+	</field>
+	<field name="rep2Prenom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.prenomResponsable2]]></fieldDescription>
+	</field>
+	<field name="rep2Nom" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.nomResponsable2]]></fieldDescription>
+	</field>
+	<field name="rep2Tel" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.telResponsable2]]></fieldDescription>
+	</field>
+	<field name="serviceCantine" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.serviceCantine]]></fieldDescription>
+	</field>
+	<field name="serviceGarde" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.serviceGarde]]></fieldDescription>
+	</field>
+	<field name="dispaly" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.dispaly]]></fieldDescription>
+	</field>
+	<field name="barcode" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.barcode]]></fieldDescription>
+	</field>
+	<field name="qrcode" class="tn.com.smartsoft.framework.presentation.view.report.RValue">
+		<fieldDescription><![CDATA[eleveSaison.qrcode]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="540" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="860" height="540"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{BaseDir}+$P{File_SEP}+"verso.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="15" y="246" width="395" height="38"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{elevePrenom}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="352" width="395" height="38"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{eleveDateNaissance}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="402" width="395" height="38"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{eleveClass}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="453" width="395" height="38"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codePermanent}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="648" y="474" width="198" height="48" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="arial" size="34" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{saison}.toString()]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="654" y="244" width="186" height="216"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[((tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean)$F{elevePhoto}.toObject()).getInputStream()]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="15" y="300" width="395" height="38"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{eleveNom}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="574" y="57" width="126" height="120"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Code eleve]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="705" y="57" width="120" height="120" backcolor="#000000"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[((tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean)$F{qrcode}.toObject()).getInputStream()]]></imageExpression>
+			</image>
+		</band>
+		<band height="540" splitType="Prevent">
+			<textField>
+				<reportElement x="209" y="127" width="558" height="38"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{rep1Tel}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="127" width="210" height="38"/>
+				<textElement>
+					<font size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Téléphone:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="209" y="71" width="558" height="38"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{rep1Nom}.toString()+" "+$F{rep1Prenom}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="266" width="210" height="38"/>
+				<textElement>
+					<font size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Téléphone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="210" width="210" height="38"/>
+				<textElement>
+					<font fontName="SansSerif" size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Responsable 2:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="209" y="210" width="558" height="38"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{rep2Nom}.toString()+" "+$F{rep2Prenom}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="266" width="558" height="38"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{rep2Tel}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="71" width="210" height="38"/>
+				<textElement>
+					<font fontName="SansSerif" size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Responsable 1:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="340" width="458" height="31"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Code eleve]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="80" y="378" width="700" height="150"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[((tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean)$F{barcode}.toObject()).getInputStream()]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

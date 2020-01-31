@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="organismeIdIndex" property="organismeId" />
+		<ext-store-field id="societeIdIndex" property="societeId" />
+		<ext-store-field id="displayNameIndex" property="displayName" />
+	</ext-store>
+	<ext-grid-column data-index="organismeIdIndex" width="150" />
+	<ext-grid-column data-index="societeIdIndex" width="150" />
+	<ext-grid-column data-index="displayNameIndex" width="150" />
+</root>

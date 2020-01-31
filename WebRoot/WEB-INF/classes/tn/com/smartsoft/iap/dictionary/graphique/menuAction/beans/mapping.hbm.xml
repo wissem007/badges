@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans">
+	<joined-subclass name="MenuActionBean" table="UI_MENU_ACTIONS" extends="tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean">
+		<meta attribute="entite-id">menuAction</meta>
+		<key>
+			<column name="UI_MENU_ID" />
+			<column name="AD_MODULE_ID" />
+		</key>
+		<property name="actionId" column="AD_ACTION_ID" />
+		<property name="sujetId" column="AD_SUJET_ID" />
+		<property name="subModuleId" column="AD_SUB_MODULE_ID" />
+		<property name="parentMenuId" column="UI_PARENT_MENU_ID" />
+		<many-to-one name="action" class="tn.com.smartsoft.iap.dictionary.decoupage.action.beans.ActionBean" fetch="join" update="false" insert="false">
+			<column name="AD_ACTION_ID" />
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="parentMenu" class="tn.com.smartsoft.iap.dictionary.graphique.menuItem.beans.MenuItemBean" fetch="join" update="false" insert="false">
+			<column name="UI_PARENT_MENU_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</joined-subclass>
+</hibernate-mapping>

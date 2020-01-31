@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="hbox" first-focus="userName">
+		<ext-layout-config name="pack" value="center" />
+		<ext-layout-config name="align" value="middle" />
+		<ext-panel auto-width="false" title-exp="$LV{InfoLogin}" layout="form" height="300" width="320" frame="true" body-style="padding:5px;background-color:#ffffff;">
+			<ext-box>
+				<ext-html tag="table" width="100%" attrebut="html">
+					<ext-html tag="tr">
+						<ext-html tag="td" class="login-app-label" rowspan="4" width="270">
+							<ext-html tag="img" src="images/logo/logo.png" width="270" height="120" />
+							<submited-event name="click" action-listener="login" />
+						</ext-html>
+					</ext-html>
+				</ext-html>
+			</ext-box>
+			<ext-field-text id="userName" property="userBean.userName" next-element="passeWord" allowBlank="false" width="150">
+				<ajax-event name="change" action-listener="getDispalyName" is-wait="true" msg-container="displayName">
+					<request-field field="userName" />
+					<success>
+					<![CDATA[
+			 			var object = Ext.util.JSON.decode(response.responseText);
+						if (!object.success && object.message) {
+							desktop.getCmp("displayName").setValue("");
+							desktop.alert(object.message, "info");
+						} else {
+						  desktop.getCmp("displayName").setValue(object.displayName);
+						}
+			        ]]>
+					</success>
+				</ajax-event>
+			</ext-field-text>
+			<ext-field-text id="displayName" property="userBean.displayName" editable="false" width="150" />
+			<ext-field-text id="passeWord" property="userBean.passeWord" next-element="loginBtn" width="150" />
+			<ext-panel-button id="loginBtn" tpl-id="9">
+				<submited-event name="click" action-listener="login" />
+			</ext-panel-button>
+		</ext-panel>
+	</root>
+</window>

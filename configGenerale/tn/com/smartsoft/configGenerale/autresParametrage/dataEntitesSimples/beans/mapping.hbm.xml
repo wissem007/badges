@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.configGenerale.autresParametrage.dataEntitesSimples.beans" auto-import="false">
+	<class name="DataEntitesSimpleBean" table="AD_DATA_ENTITES_SIMPLES">
+		<meta attribute="entite-id">dataEntitesSimple</meta>
+		<composite-id name="id" class="DataEntitesSimpleBeanId">
+			<key-property name="dataEntitesSimplesId" column="AD_DATA_ENTITES_SIMPLES_ID" />
+			<key-property name="entitesSimplesId" column="AD_ENTITES_SIMPLES_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="abreviation" column="ABREVIATION" />
+		<property name="ordre" column="ORDRE" />
+		<property name="matPersCre" column="MAT_PERS_CRE" />
+		<property name="dateCreation" column="DATE_CREATION" />
+		<property name="matPersMod" column="MAT_PERS_MOD" />
+		<property name="dateModification" column="DATE_MODIFICATION" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.securite.role.beans" auto-import="false">
+	<class name="RoleBean" table="AD_ROLES">
+		<meta attribute="entite-id">role</meta>
+		<composite-id name="id" class="RoleBeanId">
+			<key-property name="roleId" column="AD_ROLE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="rang" column="RANG" />
+		<property name="help" column="HELP" />
+		<many-to-one name="parentModule" class="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+	<joined-subclass name="ItemRoleBean" table="AD_ITEM_ROLES" extends="RoleBean">
+		<meta attribute="entite-id">itemRole</meta>
+		<key>
+			<column name="AD_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</key>
+		<property name="prentRoleId" column="AD_PRENT_ROLE_ID" />
+		<property name="dependenceRoleId" column="AD_DEPENDENCE_ROLE_ID" />
+		<many-to-one name="parentRole" class="tn.com.smartsoft.iap.dictionary.securite.groupedRole.beans.EntiteRoleBean" fetch="join" update="false" insert="false">
+			<column name="AD_PRENT_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="depandenceRole" class="ItemRoleBean" fetch="join" update="false" insert="false">
+			<column name="AD_DEPENDENCE_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</joined-subclass>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListSociete" model-name="listSociete" id-property="societeIdIndex">
+		<ext-store-field id="societeIdIndex" property="societeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store root="data" id="storeListOrganisme" model-name="listOrganisme" id-property="organismeIdIndex">
+		<ext-store-field id="organismeIdIndex" property="organismeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-combo id="societeId" property="detailBean.societeId" width="250" display-field="libelleIndex" store-id="storeListSociete" next-element="organismeId">
+			<ajax-event name="change" action-listener="getOrganisme" handle-params="el,e" is-wait="false" maxLength="50">
+				<request-field field="societeId" />
+				<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('organismeId').clearValue();	         			
+	           			desktop.getCmp('organismeId').getStore().removeAll();
+	           			desktop.getCmp('organismeId').getStore().load();
+						
+	                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="organismeId" property="detailBean.organismeId" width="250" display-field="libelleIndex" store-id="storeListOrganisme" next-element="displayName">
+			<script-event name="select" handle-params="el,e" is-wait="false">
+				       <![CDATA[
+                           	var index=desktop.getCmp('organismeId').selectedIndex;
+			 				var record = desktop.getCmp('organismeId').getStore().getAt(index);
+			 				desktop.getCmp('displayName').setValue(record.get("libelleIndex"));
+			 				
+                        ]]>
+			</script-event>
+		</ext-field-combo>
+		<ext-field-text id="displayName" property="detailBean.displayName" width="250" next-element="" />
+	</ext-panel>
+	<ext-grid id="modules" title-exp="$L{module}" height="450"  editable="${isEditableGrid}">
+		<ext-store model-name="detailBean.modules">
+			<ext-store-field id="etatBusinessIndex" property="etatBusiness" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+		</ext-store>
+		<ext-grid-column data-index="etatBusinessIndex" width="50">
+			<ext-field-checkbox />
+		</ext-grid-column>
+		<ext-grid-column data-index="libelleIndex" width="400" />
+	</ext-grid>
+</root>

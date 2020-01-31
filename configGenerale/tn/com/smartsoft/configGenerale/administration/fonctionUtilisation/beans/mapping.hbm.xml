@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db" package="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans">
+	<class name="FonctionUtilisationBean" table="ac_fonction_utilisation">
+		<meta attribute="entite-id">fonctionUtilisation</meta>
+		<id name="fonctionUtilisationId" column="ac_fonction_utilisation_id">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="libelle" />
+		<bag name="profils" cascade="none" inverse="true" table="ac_fonction_util_profil">
+			<key>
+				<column name="ac_fonction_utilisation_id" />
+			</key>
+			<one-to-many class="FonctionUtilProfilBean" />
+		</bag>
+	</class>
+	<class name="FonctionUtilProfilBean" table="ac_fonction_util_profil">
+		<meta attribute="entite-id">fonctionUtilProfil</meta>
+		<composite-id name="id" class="FonctionUtilProfilBeanId">
+			<key-property name="fonctionUtilisationId" column="ac_fonction_utilisation_id" />
+			<key-property name="profileId" column="ac_profile_id" />
+			<key-property name="moduleId" column="ad_module_id" />
+		</composite-id>
+		<many-to-one name="profil" class="tn.com.smartsoft.iap.administration.securite.profile.beans.ProfileBean" fetch="join" update="false" insert="false">
+			<column name="ac_profile_id" />
+			<column name="ad_module_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListParentSociete" model-name="listParentSociete" id-property="societeIdIndex" >
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="societeIdIndex" property="societeId[$i]" />
+	</ext-store>
+	<ext-field-number id="organismeId" property="searcheBean.organismeId" maxLength="4" width="100" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="255" next-element="societe" />
+	
+	<ext-composite-field label-exp="Societe">
+		<ext-field-suggest id="societe" property="searcheBean.societeId" link-property="searcheBean.parentSociete.societeId" display-field="societeIdIndex" store-id="storeListParentSociete"
+			width="100" next-element="societeLibelle">
+			<linked-field-item field-ref="societeLibelle" align="left" />
+		</ext-field-suggest>
+		<ext-field-suggest id="societeLibelle" property="searcheBean.societeId" display-property="searcheBean.parentSociete.libelle" display-field="libelleIndex" store-id="storeListParentSociete" width="350" next-element="searche">
+			<linked-field-item field-ref="societe" align="left" />
+		</ext-field-suggest>
+	</ext-composite-field>
+</root>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.messageType.beans">
+	<class name="MessageTypeBean" table="UI_MESSAGE_TYPES">
+		<meta attribute="entite-id">messageType</meta>
+		<id name="messageTypeId" column="UI_MESSAGE_TYPE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="LIBELLE" />
+	</class>
+</hibernate-mapping>

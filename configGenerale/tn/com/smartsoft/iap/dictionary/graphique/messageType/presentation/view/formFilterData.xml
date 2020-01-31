@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-field-number id="messageTypeId" property="searcheBean.messageTypeId" maxLength="2" width="30" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" maxLength="60" width="200" next-element="searche" />
+</root>

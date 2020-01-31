@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="moduleId" property="detailBean.moduleId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableModuleId}" colspan="2" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="60" width="200" next-element="rang" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" maxLength="2" width="40" next-element="help" min-value="0"/>
+		<ext-field-text id="help" property="detailBean.help" allow-blank="false" maxLength="255" width="200" next-element="iconUrl" />
+		<ext-field-text id="iconUrl" property="detailBean.iconUrl" allow-blank="false" maxLength="255" width="200" next-element="valider" />
+	</ext-panel>
+</root>

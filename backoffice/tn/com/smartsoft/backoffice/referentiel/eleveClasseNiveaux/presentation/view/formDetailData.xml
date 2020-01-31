@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-fieldset title-exp="$L{identification}" layout="tform" label-width="130" border="true">
+		<ext-layout-config name="columns" value="4" expected="false" />
+		<ext-field-text id="libelle" property="detailBean.nom" width="350" next-element="deviseId" colspan="3" allow-blank="false" />
+	</ext-fieldset>
+</root>

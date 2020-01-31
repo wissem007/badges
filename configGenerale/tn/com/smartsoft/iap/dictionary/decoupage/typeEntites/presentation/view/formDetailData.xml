@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-field-number id="typeEntiteId" property="detailBean.typeEntiteId" width="250" next-element="libelle" />
+	<ext-field-text id="libelle" property="detailBean.libelle" width="250" next-element="valider" />
+</root>

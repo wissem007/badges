@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+	</ext-store>
+
+	<ext-panel layout="tform" border="false" label-width="250">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+		<ext-field-text id="libelle" property="detailBean.libelle" maxLength="60" allow-blank="false" width="255" next-element="nationalite" />
+		<!--ext-field-text id="libelleArabe" property="detailBean.libelleArabe" maxLength="250" width="255" next-element="nationalite" / -->
+		<ext-field-text id="nationalite" property="detailBean.nationalite" maxLength="60" allow-blank="false" width="255" next-element="devise" />
+		<ext-field-combo id="devise" label-exp="$LV{devise}" property="detailBean.deviseId" allow-blank="false" link-property="detailBean.devise.deviseId" display-field="libelleIndex"
+			store-id="storeListDevise" next-element="indicatifTel" />
+		<ext-field-text id="indicatifTel" label-exp="$L{indicatifTel}" property="detailBean.indicatifTel" maxLength="5" width="50" next-element="cleIban" />
+		<ext-field-text id="cleIban" label-exp="$L{cleIban}" property="detailBean.cleIban" maxLength="2" width="50" next-element="longeurCleIban" />
+		<ext-field-spinner id="longeurCleIban" property="detailBean.longeurCleIban" minStringValue="10" maxStringValue="40" maxLength="2" width="50" next-element="barreMin" />
+		<ext-field-number id="barreMin" property="detailBean.codeBarreMin" maxLength="3" width="50" next-element="barreMax">
+
+			<script-event name="blur" handle-params="e">
+                <![CDATA[
+                      var min = desktop.getCmp('barreMin').getValue();
+                      var max = desktop.getCmp('barreMax').getValue();
+                      
+                     
+                     if( min>max)
+                       desktop.getCmp('barreMax').setValue(min);
+                                         
+                	]]>
+			</script-event>
+		</ext-field-number>
+		<ext-field-number id="barreMax" property="detailBean.codeBarreMax" maxLength="3" width="50" next-element="codeIso">
+
+			<script-event name="blur" handle-params="e">
+                <![CDATA[
+                     var min = desktop.getCmp('barreMin').getValue();
+                     var max = desktop.getCmp('barreMax').getValue();
+                      
+                     
+                     if( min>max)
+                       desktop.getCmp('barreMin').setValue(max);
+                     
+                	]]>
+			</script-event>
+
+		</ext-field-number>
+		<ext-field-text id="codeIso" label-exp="$L{codeIso}" property="detailBean.codeIso" maxLength="2" width="50" next-element="valider" />
+	</ext-panel>
+</root>
+
+

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/module.xsd">
+	<module-id value="dictionary" />
+	<default-data-source value="DefaultSession" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/typeEntites/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/administration/referentiel/file/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/menu/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/userType/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/userDisplayFields/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/message/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/sequences/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/vue/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/messageType/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/libelle/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/subModule/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/menuItem/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/sujet/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/application/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/actionType/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/action/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/toolAction/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/actionTemplate/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/graphique/menuAction/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/module/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/entite/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/securite/role/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/securite/groupedRole/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/iap/dictionary/decoupage/niveauApplicatif/beans/mapping.hbm.xml" />
+	<sub-modules>
+		<sub-module sub-module-id="decoupage" default-data-source="DefaultSession">
+			<sujet sujet-id="application" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/application/application.beans.xml" />
+			</sujet>
+			<sujet sujet-id="module" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/module/module.beans.xml" />
+			</sujet>
+			<sujet sujet-id="subModule" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/subModule/subModule.beans.xml" />
+			</sujet>
+			<sujet sujet-id="sujet" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/sujet/sujet.beans.xml" />
+			</sujet>
+			<sujet sujet-id="entite" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/entite/entite.beans.xml" />
+			</sujet>
+			<sujet sujet-id="typeEntites" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/typeEntites/typeEntites.beans.xml" />
+			</sujet>
+			<sujet sujet-id="niveauApplicatif" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/niveauApplicatif/niveauApplicatif.beans.xml" />
+			</sujet>
+			<sujet sujet-id="action" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/action/action.beans.xml" />
+			</sujet>
+			<sujet sujet-id="actionType" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/actionType/actionType.beans.xml" />
+			</sujet>
+			<sujet sujet-id="sequences" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/decoupage/sequences/sequences.beans.xml" />
+			</sujet>
+		</sub-module>
+		<sub-module sub-module-id="securite" default-data-source="DefaultSession">
+			<sujet sujet-id="role" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/securite/role/role.beans.xml" />
+			</sujet>
+			<sujet sujet-id="groupedRole" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/securite/groupedRole/groupedRole.beans.xml" />
+			</sujet>
+		</sub-module>
+		<sub-module sub-module-id="outils" default-data-source="DefaultSession">
+			<sujet sujet-id="parametrage" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/outils/parametrage/parametrage.beans.xml" />
+			</sujet>
+		</sub-module>
+		<sub-module sub-module-id="graphique" default-data-source="DefaultSession">
+			<sujet sujet-id="vue" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/vue/vue.beans.xml" />
+			</sujet>
+			<sujet sujet-id="libelle" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/libelle/libelle.beans.xml" />
+			</sujet>
+			<sujet sujet-id="message" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/message/message.beans.xml" />
+			</sujet>
+			<sujet sujet-id="messageType" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/messageType/messageType.beans.xml" />
+			</sujet>
+			<sujet sujet-id="actionTemplate" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/actionTemplate/actionTemplate.beans.xml" />
+			</sujet>
+			<sujet sujet-id="menuAction" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/menuAction/menuAction.beans.xml" />
+			</sujet>
+			<sujet sujet-id="menuItem" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/menuItem/menuItem.beans.xml" />
+			</sujet>
+			<sujet sujet-id="toolAction" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/toolAction/toolAction.beans.xml" />
+			</sujet>
+			<sujet sujet-id="userType" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/userType/userType.beans.xml" />
+			</sujet>
+			<sujet sujet-id="userDisplayFields" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/dictionary/graphique/userDisplayFields/userDisplayFields.beans.xml" />
+			</sujet>
+		</sub-module>
+	</sub-modules>
+</module>

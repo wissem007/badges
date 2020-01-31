@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="paysIdIndex" property="paysId" />
+	</ext-store>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListSystemModule" model-name="listSystemModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+		<ext-store-field id="symboleMonetaireIndex" property="symboleMonetaire[$i]" />
+	</ext-store>
+	
+	
+	<ext-field-number id="applicationId" property="detailBean.applicationId" allow-blank="false" maxLength="2" width="30" editable="${isEditableApplicationId}" next-element="version" />
+	<ext-field-text id="version" property="detailBean.version" allow-blank="false" maxLength="60" width="200" next-element="module" />
+	<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleBaseId" display-field="libelleIndex" store-id="storeListModule" width="300" next-element="systemModule" />
+	<ext-field-combo id="systemModule" label-exp="$L{systemModule}" property="detailBean.systemModuleId" display-field="libelleIndex" store-id="storeListSystemModule" width="300" next-element="pays" />
+	<ext-field-combo id="pays" property="detailBean.paysId" allow-blank="false" display-field="libelleIndex" store-id="storeListPays" width="400" colspan="2" next-element="devise">
+	</ext-field-combo>
+	<ext-composite-field label-exp="$L{devise}">
+		<ext-field-suggest id="devise" property="detailBean.deviseId" display-field="symboleMonetaireIndex" store-id="storeListDevise" width="100" next-element="deviseLibelle">
+			<linked-field-item field-ref="deviseLibelle" align="left" />
+		</ext-field-suggest>
+		<ext-field-suggest id="deviseLibelle" property="detailBean.deviseId" display-property="detailBean.deviseBase.libelle" display-field="libelleIndex" store-id="storeListDevise" width="150" next-element="valider">
+			<linked-field-item field-ref="devise" align="left" />
+		</ext-field-suggest>
+	</ext-composite-field>
+</root>

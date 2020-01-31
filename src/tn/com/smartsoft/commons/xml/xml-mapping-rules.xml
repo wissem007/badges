@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE digester-rules PUBLIC 
+        "-//Jakarta Apache //DTD digester-rules XML V1.0//EN" 
+        "http://jakarta.apache.org/commons/digester/dtds/digester-rules.dtd">
+<digester-rules>
+  <pattern value="xml-mapping">
+    <set-properties-rule />
+    <pattern value="class">
+      <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlClassBinding" />
+      <set-next-rule methodname="addClassBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlClassBinding" />
+      <set-properties-rule />
+      <pattern value="dynamic-node">
+        <call-method-rule methodname="addDynamicNode" paramcount="1" />
+        <call-param-rule paramnumber="0" attrname="dynamicNode" />
+      </pattern>
+      <pattern value="one-ref">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlOneRefBinding" />
+        <set-next-rule methodname="addOneRefBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlOneRefBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="many-ref">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlManyRefBinding" />
+        <set-next-rule methodname="addManyRefBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlManyRefBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="property">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlPropertyBinding" />
+        <set-next-rule methodname="addPropertyBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlPropertyBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="property-node">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlNodePropertyBinding" />
+        <set-next-rule methodname="addNodePropertyBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlNodePropertyBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="mapped-property-node">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlMappedPropertyNodeBinding" />
+        <set-next-rule methodname="addMappedPropertyNodeBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlMappedPropertyNodeBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="list-property-node">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlListPropertyNodeBinding" />
+        <set-next-rule methodname="addListPropertyNodeBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlListPropertyNodeBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="systeme-property-node">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlMappedPropertyNodeBinding" />
+        <set-next-rule methodname="addSystemePropertyNodeBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlMappedPropertyNodeBinding" />
+        <set-properties-rule />
+      </pattern>
+      <pattern value="include">
+        <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlIncludeBinding" />
+        <set-next-rule methodname="addIncludeBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlIncludeBinding" />
+        <set-properties-rule />
+        <pattern value="setter-property">
+          <object-create-rule classname="tn.com.smartsoft.commons.xml.binding.XmlPropertyBinding" />
+          <set-next-rule methodname="addPropertyBinding" paramtype="tn.com.smartsoft.commons.xml.binding.XmlPropertyBinding" />
+          <set-properties-rule />
+        </pattern>
+      </pattern>
+    </pattern>
+  </pattern>
+</digester-rules>

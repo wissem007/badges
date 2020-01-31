@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.configGenerale.organisationSociete.organisation.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.configGenerale.organisationSociete.organisation.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.configGenerale.organisationSociete.organisation.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.configGenerale.organisationSociete.organisation.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/configGenerale/organisationSociete/organisation/presentation/view" />
+	<bean name="organismeControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$LV{listOrganisme}" />
+	</bean>
+	<bean name="organismeBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-parse-bean id="organismeParse">
+		<dao-parse-bean property="parentSociete" />
+		<dao-parse-bean property="localite">
+			<dao-parse-bean property="gouvernorat">
+				<dao-parse-bean property="pays" />
+			</dao-parse-bean>
+		</dao-parse-bean>
+	</dao-parse-bean>
+	<dao-bean name="organismeDao" interface="${daoPack}.OrganismeDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.OrganismeBean AS bean left join fetch bean.parentSociete WHERE 1=1
+            <#if arg3.organismeId?exists>
+              AND bean.id.organismeId=:arg3.organismeId
+            </#if>
+            <#if arg3.libelle?exists && arg3.libelle!="">
+              AND trim(upper(bean.libelle)) like trim(upper(:arg3.libelle))||'%'
+            </#if>
+            <#if arg3.societeId?exists >
+              AND bean.id.societeId=:arg3.societeId
+            </#if>            
+            <#if arg2>
+         	AND bean.createdById=:arg1
+            </#if>
+            <#if arg3.isAll?exists && arg3.isAll==false>
+            AND bean.id.organismeId!=0
+            </#if>
+        ]]>
+			</query>
+		</query-method>
+		<query-method name="getListOrganisme" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.OrganismeBean AS bean left join fetch bean.parentSociete WHERE 1=1
+            <#if arg3.organismeId?exists>
+              AND bean.id.organismeId=:arg3.organismeId
+            </#if>
+            <#if arg3.libelle?exists && arg3.libelle!="">
+              AND trim(upper(bean.libelle)) like trim(upper(:arg3.libelle))||'%'
+            </#if>
+            <#if arg3.societeId?exists >
+              AND bean.id.societeId=:arg3.societeId
+            </#if>            
+            <#if arg2>
+         	AND bean.createdById=:arg1
+            </#if>
+            order by bean.id.organismeId
+        ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="organismeBusiness" class="${businessPack}.OrganismeBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="entiteDao" ref="organismeDao" />
+		<set-dao-parse-bean name="parseBean" ref="organismeParse" />
+		<set-dao-parse-bean name="menuParser" ref="organismeParse" />
+		<set-property name="businessParams" ref="organismeBusinessParams" />
+	</business-bean>
+	<controler-bean name="organismeControler" class="${controlerPack}.OrganismeControler">
+		<set-business-bean name="entiteBusiness" ref="organismeBusiness" />
+		<set-business-bean name="parentSocieteBusiness" ref="societeBusiness" sujet="societe" sub-module="organisationSociete" />
+		<set-business-bean name="gouvernoratBusiness" ref="gouvernoratBusiness" sujet="gouvernorat" sub-module="organisationSociete" />
+		<set-business-bean name="paysBusiness" ref="paysBusiness" sujet="pays" sub-module="organisationSociete" />
+		<set-business-bean name="localiteBusiness" ref="localiteBusiness" sujet="localite" sub-module="organisationSociete" />
+		<set-property name="controlerParams" ref="organismeControlerParams" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.OrganismeModel" controler-bean="organismeControler">
+		<binding-model name="detailBean" property="detailBean" mode="r" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+			<binding-model name="localite" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean">
+				<binding-model name="governorat" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean">
+					<binding-model name="pays" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+				</binding-model>
+			</binding-model>
+		</binding-model>
+		<binding-model name="searcheBean" property="searcheBean" mode="f" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+			<binding-model name="localite" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean">
+				<binding-model name="governorat" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean">
+					<binding-model name="pays" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+				</binding-model>
+			</binding-model>
+		</binding-model>
+		<binding-model name="listBean" property="listBean" mode="r" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+		</binding-model>
+		<binding-model name="listLocalite" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+		<binding-model name="listGovernorat" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+		<binding-model name="listPays" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+		<binding-model name="listParentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow">
+			<parameter name="titleList" value="$LV{listOrganisme}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitListView">
+			<parameter name="title" value="$LV{organisme}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isEditableOrganismeId" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" property="detailBean" mode="u" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+			<binding-model name="localite" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean">
+				<binding-model name="governorat" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean">
+					<binding-model name="pays" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+				</binding-model>
+			</binding-model>
+		</binding-model>
+		<binding-model name="listLocalite" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+		<binding-model name="listGovernorat" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+		<binding-model name="listPays" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitListUpd">
+			<parameter name="title" value="$LV{organisme}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableOrganismeId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<binding-model name="detailBean" property="detailBean" mode="d" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" mode="d" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+			<binding-model name="localite" mode="d" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean">
+				<binding-model name="governorat" mode="d" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean">
+					<binding-model name="pays" mode="d" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+				</binding-model>
+			</binding-model>
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitListView">
+			<parameter name="title" value="$LV{organisme}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableOrganismeId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.OrganismeModel" controler-bean="organismeControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.OrganismeBean">
+			<binding-model name="parentSociete" property="parentSociete" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+			<binding-model name="localite" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean">
+				<binding-model name="governorat" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean">
+					<binding-model name="pays" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+				</binding-model>
+			</binding-model>
+		</binding-model>
+		<binding-model name="listParentSociete" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+		<binding-model name="listLocalite" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+		<binding-model name="listGovernorat" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+		<binding-model name="listPays" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-render-methode="onRenderPage" on-init-methode="onInitList">
+			<parameter name="title" value="$LV{organisme}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableOrganismeId" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+</beans>

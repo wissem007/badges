@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModules" model-name="listModules" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-combo id="moduleId" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModules" width="250" allow-blank="false" next-element="roleIdFilter">
+	</ext-field-combo>
+	<!-- <ext-field-text id="roleIdFilter" property="searcheBean.roleId" width="250" next-element="libelleFilter" /> -->
+	<!-- <ext-field-text id="libelleFilter" property="searcheBean.libelle" width="250" /> -->
+</root>

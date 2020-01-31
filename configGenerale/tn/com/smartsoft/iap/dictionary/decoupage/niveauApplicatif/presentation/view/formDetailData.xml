@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-field-number id="niveauApplicatifId" property="detailBean.niveauApplicatifId" width="250" next-element="libelle" allow-blank="false" />
+	<ext-field-text id="libelle" property="detailBean.libelle" width="250" next-element="abreviation" allow-blank="false"/>
+	<ext-field-text id="abreviation" property="detailBean.abreviation" width="250" next-element="valider" />
+</root>

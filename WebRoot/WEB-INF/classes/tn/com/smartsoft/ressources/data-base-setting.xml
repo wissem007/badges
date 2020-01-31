@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-base-setting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/module.xsd">
+	<custom-sql-error-categorie name="CannotAcquireLockErrorCode" application-error-code="0110003" />
+	<custom-sql-error-categorie name="ConnectionFailureErrorCode" application-error-code="0300002" />
+	<custom-sql-error-categorie name="IntegrityViolationErrorCode" application-error-code="0110001" />
+	<custom-sql-error-categorie name="DuplicateKeyErrorCode" application-error-code="0110002" />
+	<custom-sql-error-categorie name="OptimisticLockingFailureErrorCode" application-error-code="0110003" />
+	<custom-sql-error-categorie name="DataPropertyValueErrorCode" application-error-code="0110001" />
+	<custom-sql-error-categorie name="GeneraleErrorCode" application-error-code="0300003" />
+	<dialect product-name="oracle" use-sql-state-for-translation="false" class="org.hibernate.dialect.Oracle9Dialect">
+		<custom-sql-error sql="00001,01401" application="0110002" exception-class="" />
+		<!--violation du contraint d'intégrite -touche parant introuvable -->
+		<custom-sql-error sql="01401" application="200" exception-class="" />
+		<!--valeur inserer trop grand pour colonne -->
+		<custom-sql-error sql="01403" application="300" exception-class="" />
+		<!--donnee non existant -->
+		<custom-sql-error sql="02292" application="400" exception-class="" />
+		<!--violation du contraint d'intégrite fils déja existant -->
+		<custom-sql-error sql="01407" application="500" exception-class="" />
+		<custom-sql-error sql="17002,1017" application="0300002" exception-class="tn.com.smartsoft.framework.dao.exception.ConnectionFailureDbException" />
+	</dialect>
+	<dialect product-name="postgres" use-sql-state-for-translation="true" class="org.hibernate.dialect.PostgreSQLDialect">
+		<custom-sql-error sql="23505" application="0110002" exception-class="" />
+		<!--violation du contraint d'intégrite -touche parant introuvable -->
+		<custom-sql-error sql="01401" application="0110001" exception-class="" />
+		<custom-sql-error sql="23503" application="0110001" exception-class="" />
+		<!--valeur inserer trop grand pour colonne -->
+		<custom-sql-error sql="22001" application="300" exception-class="" />
+		<!--donnee non existant -->
+		<custom-sql-error sql="02292" application="400" exception-class="" />
+		<!--violation du contraint d'intégrite fils déja existant -->
+		<custom-sql-error sql="01407" application="500" exception-class="" />
+		<custom-sql-error sql="17002,1017" application="0300002" exception-class="tn.com.smartsoft.framework.dao.exception.ConnectionFailureDbException" />
+	</dialect>
+	<dialect product-name="mysql" use-sql-state-for-translation="true" class="tn.com.smartsoft.framework.dao.utils.MySQLDialectExtended">
+		<custom-sql-error sql="23505" application="0110002" exception-class="" />
+		<!--violation du contraint d'intégrite -touche parant introuvable -->
+		<custom-sql-error sql="01401" application="0110001" exception-class="" />
+		<custom-sql-error sql="23503" application="0110001" exception-class="" />
+		<!--valeur inserer trop grand pour colonne -->
+		<custom-sql-error sql="22001" application="300" exception-class="" />
+		<!--donnee non existant -->
+		<custom-sql-error sql="02292" application="400" exception-class="" />
+		<!--violation du contraint d'intégrite fils déja existant -->
+		<custom-sql-error sql="01407" application="500" exception-class="" />
+		<custom-sql-error sql="17002,1017" application="0300002" exception-class="tn.com.smartsoft.framework.dao.exception.ConnectionFailureDbException" />
+	</dialect>
+	<dialect product-name="ctree" use-sql-state-for-translation="false" class="tn.com.smartsoft.framework.dao.dialect.CtreeDialect">
+		<custom-sql-error sql="00001,01401" application="0110002" exception-class="" />
+		<!--violation du contraint d'intégrite -touche parant introuvable -->
+		<custom-sql-error sql="01401" application="200" exception-class="" />
+		<!--valeur inserer trop grand pour colonne -->
+		<custom-sql-error sql="01403" application="300" exception-class="" />
+		<!--donnee non existant -->
+		<custom-sql-error sql="02292" application="400" exception-class="" />
+		<!--violation du contraint d'intégrite fils déja existant -->
+		<custom-sql-error sql="01407" application="500" exception-class="" />
+		<custom-sql-error sql="17002,1017" application="100" exception-class="tn.com.smartsoft.framework.dao.exception.ConnectionFailureDbException" />
+	</dialect>
+</data-base-setting>

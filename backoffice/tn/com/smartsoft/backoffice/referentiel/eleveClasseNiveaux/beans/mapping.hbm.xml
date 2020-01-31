@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_backoffice_db" package="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans">
+	<class name="EleveClasseNiveauxBean" table="tr_eleve_classe_niveaux">
+		<meta attribute="entite-id">eleveClasseNiveaux</meta>
+		<id name="eleveClasseNiveauId" column="tr_eleve_classe_niveau_id">
+			<generator class="assigned" />
+		</id>
+		<property name="nom" column="libelle" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListGouvernorat" model-name="listGouvernorat" id-property="governoratIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="governoratIdIndex" property="governoratId[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="paysIdIndex" property="paysId" />
+	</ext-store>
+	
+	<!--ext-field-text id="localiteId" property="searcheBean.localiteId" width="100" next-element="libelle" / -->
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="255" next-element="governorat" />
+	<ext-field-combo id="pays" label-exp="$L{pays}" width="255" property="searcheBean.governorat.paysId" display-field="libelleIndex" store-id="storeListPays" next-element="governorat" />
+	<ext-field-combo id="governorat" label-exp="$LV{gouvernorat}" width="255" property="searcheBean.governoratId" display-field="libelleIndex" store-id="storeListGouvernorat" next-element="searche" />
+
+
+</root>

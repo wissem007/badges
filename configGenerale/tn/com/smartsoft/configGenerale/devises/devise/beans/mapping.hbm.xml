@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db" package="tn.com.smartsoft.configGenerale.devises.devise.beans">
+	<class name="DeviseBean" table="CR_DEVISES">
+		<id name="deviseId" column="CR_DEVISE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="symboleMonetaire" column="SYMBOLE_MONETAIRE" />
+		<property name="nombreDecimales" column="NOMBRE_DECIMALES" />
+		<property name="arrondissementMode" column="ARRONDISSEMENT_MODE" />
+		<property name="arrondissementMontant" column="ARRONDISSEMENT_MONTANT" />
+		<property name="createdById" column="MAT_PERS_CRE" />
+		<property name="createdDate" column="DATECREATION" />
+		<property name="updatedById" column="MAT_PERS_MOD" />
+		<property name="updatedDate" column="DATEMODIFICATION" />
+		<property name="isoNumeric" column="ISO_NUMERIC" />
+		<property name="sousUnite" column="SOUS_UNITE" />
+		<property name="isoAlpha" column="ISO_ALPHA" />
+	</class>
+</hibernate-mapping>

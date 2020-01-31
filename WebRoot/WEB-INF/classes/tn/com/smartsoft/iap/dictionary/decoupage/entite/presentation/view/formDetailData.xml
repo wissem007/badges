@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModule" model-name="listSubModule" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSujet" model-name="listSujet" id-property="sujetIdIndex">
+		<ext-store-field id="sujetIdIndex" property="sujetId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListFieldRoles" model-name="listFieldRoles" id-property="roleIdIndex">
+		<ext-store-field id="roleIdIndex" property="roleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListRefEntites" model-name="listRefEntites" id-property="hashIdIndex">
+		<ext-store-field id="hashIdIndex" property="hashId" />
+		<ext-store-field id="libelleIndex" property="dispalayLabel" />
+	</ext-store>
+	<ext-store id="storeListSequence" model-name="listSequence" id-property="sequenceIdIndex">
+		<ext-store-field id="sequenceIdIndex" property="sequenceId" />
+	</ext-store>
+	<ext-store id="storeListUserType" model-name="listUserType" id-property="userTypeIdIndex">
+		<ext-store-field id="userTypeIdIndex" property="userTypeId" />
+	</ext-store>
+	<ext-store id="storeTypeEntites" model-name="listTypeEntites" id-property="typeEntitesIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="typeEntitesIdIndex" property="typeEntiteId" />
+	</ext-store>
+	<ext-store id="storeNiveauApplicatif" model-name="listNiveauApplicatif" id-property="niveauApplicatifIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+	</ext-store>
+	<ext-panel id="p1" layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="entiteId" property="detailBean.entiteId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableEntiteId}" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="50" width="200" next-element="module" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" maxLength="50" width="200" editable="${isEditableModule}">
+			<ajax-event name="change" action-listener="getSubModule" handle-params="el,e" is-wait="false" maxLength="50" width="200">
+				<request-field field="module" />
+				<success>
+					<![CDATA[
+  					var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('subModule').clearValue();
+         			desktop.getCmp('role').clearValue();
+           			desktop.getCmp('subModule').getStore().removeAll();
+           			desktop.getCmp('role').getStore().removeAll();
+           			   
+					desktop.getCmp('subModule').getStore().load();
+					desktop.getCmp('role').getStore().load();
+                  
+                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="subModule" label-exp="$L{subbmodule}" property="detailBean.subModuleId" display-field="libelleIndex" store-id="storeListSubModule" maxLength="50" width="200" editable="${isEditableSubModule}">
+			<ajax-event name="change" action-listener="getSujet" handle-params="el,e" is-wait="false">
+				<request-field field="subModule" />
+				<success>
+					<![CDATA[
+ 					var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('sujet').clearValue();
+           			desktop.getCmp('sujet').getStore().removeAll();
+           			   
+					desktop.getCmp('sujet').getStore().load();
+                  
+                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="sujet" label-exp="$L{susujet}" property="detailBean.sujetId" display-field="libelleIndex" display-field-id="sujetIdIndex" store-id="storeListSujet" maxLength="50" width="200" editable="${isEditableSujet}" />
+		<ext-field-combo id="typeEntiteId" label-exp="$L{typeEntite}" property="detailBean.typeEntiteId" display-field="libelleIndex" display-field-id="typeEntitesIdIndex" store-id="storeTypeEntites" maxLength="50" width="200" next-element="niveauApplicatifId"/>
+		<ext-field-combo id="niveauApplicatifId" property="detailBean.niveauApplicatifId" display-field="libelleIndex" display-field-id="niveauApplicatifIdIndex" store-id="storeNiveauApplicatif" maxLength="50" width="200" />
+		<ext-field-text id="dbTable" property="detailBean.dbTable" allow-blank="false" maxLength="60" width="200" next-element="rang" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" maxLength="2" width="40" next-element="javaClass" min-value="0" />
+		<ext-field-text id="javaClass" property="detailBean.javaClass" allow-blank="false" maxLength="255" width="350" next-element="isAuditable" />
+		<ext-field-checkbox id="isAuditable" property="detailBean.isAuditable" checked-value="true" unchecked-value="false" next-element="isPersistant" />
+		<ext-field-checkbox id="isPersistant" property="detailBean.isPersistant" checked-value="true" unchecked-value="false" />
+	</ext-panel>
+	<ext-grid id="listProprietes" title-exp="$L{listProprietes}" height="250" editable="${isEditableProprietes}">
+		<ext-store id="listProprietesStore" model-name="detailBean.listProprietes">
+			<ext-store-field id="propertyNameIndex" property="propertyName" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+			<ext-store-field id="rangIndex" property="rang" />
+			<ext-store-field id="sequenceIdIndex" property="sequenceId" />
+			<ext-store-field id="userTypeIdIndex" property="userTypeId" />
+			<ext-store-field id="roleIdIndex" property="roleId" />
+			<ext-store-field id="isPersistantIndex" property="persistant" />
+			<ext-store-field id="isAuditableIndex" property="auditable" />
+			<ext-store-field id="isEncryptedIndex" property="encrypted" />
+			<ext-store-field id="isCherchableIndex" property="cherchable" />
+			<ext-store-field id="isDynamiqueIndex" property="dynamique" />
+			<ext-store-field id="defaultValueIndex" property="defaultValue" />
+			<ext-store-field id="hashRefEntiteIdIndex" property="hashRefEntiteId" />
+		</ext-store>
+		<ext-grid-column data-index="propertyNameIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="libelleIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="rangIndex" maxLength="2" width="80">
+			<ext-field-number />
+		</ext-grid-column>
+		<ext-grid-column data-index="sequenceIdIndex" label-exp="$L{ssequences}" width="150">
+			<ext-field-combo display-field="sequenceIdIndex" store-id="storeListSequence" />
+		</ext-grid-column>
+		<ext-grid-column data-index="userTypeIdIndex" label-exp="$L{uuserType}" width="150">
+			<ext-field-combo display-field="userTypeIdIndex" store-id="storeListUserType" />
+		</ext-grid-column>
+		<ext-grid-column data-index="roleIdIndex" label-exp="$L{role}" width="150">
+			<ext-field-combo id="role" display-field="libelleIndex" store-id="storeListFieldRoles" />
+		</ext-grid-column>
+		<ext-grid-column data-index="isPersistantIndex" width="80">
+			<ext-field-checkbox checked-value="true" unchecked-value="false" hideable="true" />
+		</ext-grid-column>
+		<ext-grid-column data-index="isAuditableIndex" width="80">
+			<ext-field-checkbox checked-value="true" unchecked-value="false"  hideable="true"/>
+		</ext-grid-column>
+		<ext-grid-column data-index="isEncryptedIndex" width="80">
+			<ext-field-checkbox checked-value="true" unchecked-value="false"  hideable="true"/>
+		</ext-grid-column>
+		<ext-grid-column data-index="isCherchableIndex" width="80" >
+			<ext-field-checkbox checked-value="true" unchecked-value="false" hideable="true"/>
+		</ext-grid-column>
+		<ext-grid-column data-index="isDynamiqueIndex" width="80">
+			<ext-field-checkbox checked-value="true" unchecked-value="false"  hideable="true"/>
+		</ext-grid-column>
+		<ext-grid-column data-index="defaultValueIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="hashRefEntiteIdIndex" width="400">
+			<ext-field-combo display-field="libelleIndex" store-id="storeListRefEntites" />
+		</ext-grid-column>
+	</ext-grid>
+</root>

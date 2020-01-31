@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true" >
+		<ext-store-field id="actionTemplateIdIndex" property="actionTemplateId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="iconUrlIndex" property="iconUrl" />
+		<ext-store-field id="shortCutValueIndex" property="shortCutValue" />
+	</ext-store>
+	<ext-grid-column data-index="actionTemplateIdIndex" width="80" locked="true" />
+	<ext-grid-column data-index="libelleIndex" width="250" />
+	<ext-grid-column data-index="iconUrlIndex" width="150" />
+	<ext-grid-column data-index="shortCutValueIndex" width="150" />
+</root>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_dictionary_db" package="tn.com.smartsoft.iap.dictionary.decoupage.typeEntites.beans">
+	<class name="TypeEntitesBean" table="ad_type_entites">
+		<meta attribute="entite-id">typeEntites</meta>
+		<id name="typeEntiteId" column="ad_type_entite_id">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="libelle" />
+	</class>
+</hibernate-mapping>

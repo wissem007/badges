@@ -1,0 +1,59 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.presentation.view.tags">
+  <class name="UIAbstractTagManager" node="tags">
+    <property-node name="encoding" node="encoding" />
+    <property-node name="locale" node="locale" />
+    <property-node name="windowResponseView" node="window-response-view" />
+    <include addedMethode="addTags" classRef="UITags" node="tags" includeAttribute="location" />
+  </class>
+  <class name="UITags" node="tags">
+    <many-ref addedMethode="addTag" classRef="UITag" />
+  </class>
+  <class name="UITag" node="tag">
+    <property name="tag" attribute="name" />
+    <property name="tagClass" attribute="tag-class" />
+    <property name="extendsTag" attribute="extends-tag" />
+    <property name="contentProperty" attribute="content-property" />
+    <many-ref addedMethode="addAttribute" classRef="UIAttributeTag" />
+    <many-ref addedMethode="addParamter" classRef="UIParameterTag" />
+    <many-ref addedMethode="addProperty" classRef="UIPropertyTag" />
+    <many-ref addedMethode="addProperties" classRef="UIPropertiesTag" />
+    <many-ref addedMethode="addChild" classRef="UIChildTag" />
+  </class>
+  <class name="UIParameterTag" node="parameter">
+    <property name="property" attribute="property" />
+    <property name="value" attribute="value" />
+  </class>
+  <class name="UIAttributeTag" node="attribute">
+    <property name="attribute" attribute="name" />
+    <property name="property" attribute="property" />
+    <property name="required" attribute="required" />
+    <property name="description" attribute="description" />
+    <property name="html" attribute="html" />
+    <property name="defaultValue" attribute="default-value" />
+  </class>
+  <class name="UIChildTag" node="child">
+    <property name="tag" attribute="tag" />
+    <property name="ref" attribute="ref" />
+    <property name="addedMethode" attribute="added-method" />
+    <property name="parmeterTypeMethode" attribute="parmeter-type-method" />
+  </class>
+  <class name="UIPropertyTag" node="property">
+    <property name="tag" attribute="tag" />
+    <property name="attribute" attribute="attribute" />
+    <property name="property" attribute="property" />
+    <property name="required" attribute="required" />
+    <property name="defaultValue" attribute="default-value" />
+    <property name="description" attribute="description" />
+    <property name="html" attribute="html" />
+  </class>
+  <class name="UIPropertiesParamTag" node="method-param">
+    <property name="attribute" attribute="attribute" />
+    <property name="type" attribute="type" />
+    <property name="defaultValue" attribute="default-value" />
+  </class>
+  <class name="UIPropertiesTag" node="properties">
+    <property name="tag" attribute="tag" />
+    <property name="methodeName" attribute="added-method" />
+    <many-ref addedMethode="addParam" classRef="UIPropertiesParamTag" />
+  </class>
+</xml-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="tn.com.smartsoft.iap.administration.referentiel.file.beans">
+	<class name="FileBean" table="CR_FILES">
+		<id name="fileId" column="CR_FILE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="NAME" />
+		<property name="contentType" column="CONTENT_TYPE" />
+		<property name="sizeData" column="SIZE_DATA" />
+		<property name="binaryData" column="BINARY_DATA" />
+		<property name="titre" column="TITRE" />
+	</class>
+</hibernate-mapping>

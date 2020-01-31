@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="$L{criteresRecherche}" layout="column" collapsible="true" body-style="padding:15px;" border="false">
+				<ext-panel layout="form" border="false" columnWidth=".90">
+					<include path="${formFilter}" />
+				</ext-panel>
+			</ext-panel>
+			<ext-grid id="listBean" title-exp="${titleList}" store-id="storeListBean" height="${gridHeight||364}" is-tree="true" type-tree="2">
+				<linked-event name="rowdblclick" action-listener="doSelectedBean" handle-params="grid,rowIndex,e">
+					<request-field field="getSelectedGrid" expected="false" />
+				</linked-event>
+				<include path="${displayColumn}" />
+				<ext-panel-tool id="doExporterPdf" tpl-id="33" is-label="false">
+					<open-media-event name="click" ext="PDF" action-listener="doExporterPdf" handle-params="el,e" />
+				</ext-panel-tool>
+				<ext-panel-tool id="doExporterXl" tpl-id="17" is-label="false">
+					<export-file-event name="click" action-listener="doExporterXl" handle-params="el,e" />
+				</ext-panel-tool>
+			</ext-grid>
+		</ext-panel>
+		<js-function name="getSelectedGrid" list-param="grid,rowIndex,e">
+		<![CDATA[
+		    var index= grid.getSelectedServerIndex();
+		    return {"listBean:selectedRow":index};
+ 	 	]]>
+		</js-function>
+		<ext-tbutton id="searche" tpl-id="16">
+			<ajax-event name="click" action-listener="doFilter" handle-params="el,e" is-wait="true" is-all-request-field="true">
+				<success>
+								<![CDATA[
+				              Ext.sss.Utils.reloadGrid(response,desktop,'listBean');
+				             ]]>
+				</success>
+			</ajax-event>
+		</ext-tbutton>
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="doHomePage" handle-params="el,e" />
+		</ext-tbutton>
+	</root>
+</window>

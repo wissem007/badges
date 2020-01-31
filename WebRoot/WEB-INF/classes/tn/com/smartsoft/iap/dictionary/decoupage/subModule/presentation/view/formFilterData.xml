@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="subModuleId" property="searcheBean.subModuleId" width="100" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="250" next-element="module" />
+	<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModule" next-element="searche"/>
+</root>

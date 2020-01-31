@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModule" model-name="listSubModule" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListActionTemplate" model-name="listActionTemplate" id-property="actionTemplateIdIndex">
+		<ext-store-field id="actionTemplateIdIndex" property="actionTemplateId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListType" model-name="listActionType" id-property="actionTypeIdIndex">
+		<ext-store-field id="actionTypeIdIndex" property="actionTypeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListActionRoles" model-name="listActionRoles" id-property="roleIdIndex">
+		<ext-store-field id="roleIdIndex" property="roleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel id="p1" layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="sujetId" property="detailBean.sujetId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableSujetId}" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="60" width="300" next-element="rang" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" maxLength="2" width="40" next-element="help" min-value="0" />
+		<ext-field-text id="help" property="detailBean.help" allow-blank="false" maxLength="255" width="300" next-element="module" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" next-element="subModule" editable="${isEditableModule}">
+		<ajax-event name="change" action-listener="getSubModule" handle-params="el,e" is-wait="false" maxLength="50" width="200">
+			<request-field field="module" />
+			<success>
+					<![CDATA[
+ 					var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('subModule').clearValue();
+         			desktop.getCmp('role').clearValue();
+           			desktop.getCmp('subModule').getStore().removeAll();
+           			desktop.getCmp('role').getStore().removeAll();
+           			   
+					desktop.getCmp('subModule').getStore().load();
+					desktop.getCmp('role').getStore().load();
+                  
+                 ]]>
+			</success>
+		</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="subModule" label-exp="$L{subbmodule}" property="detailBean.subModuleId" display-field="libelleIndex" display-field-id="subModuleIdIndex" store-id="storeListSubModule"
+			editable="${isEditableSubModule}"  />
+	</ext-panel>
+
+	<!--	-->
+	<ext-grid id="listAction" title-exp="$L{listAction}" border="false" height="300" editable="${isEditableAction}">
+		<ext-store root="data" model-name="detailBean.listActions">
+			<ext-store-field id="actionIdIndex" property="actionId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+			<ext-store-field id="actionTemplateIdIndex" property="actionTemplateId" />
+			<ext-store-field id="actionTypeIdIndex" property="actionTypeId" />
+			<ext-store-field id="roleIdIndex" property="roleId" />
+			<ext-store-field id="isAuditableIndex" property="isAuditable" />
+			<ext-store-field id="auditValueExpressionIndex" property="auditValueExpression" />
+			<ext-store-field id="helpIndex" property="help" />
+		</ext-store>
+		<ext-grid-column data-index="actionIdIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="libelleIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="actionTemplateIdIndex" label-exp="$L{atactionTemplate}" width="150">
+			<ext-field-combo display-field="libelleIndex" store-id="storeListActionTemplate" />
+		</ext-grid-column>
+		<ext-grid-column data-index="actionTypeIdIndex" label-exp="$L{atactionType}" width="150">
+			<ext-field-combo display-field="libelleIndex" store-id="storeListType" />
+		</ext-grid-column>
+		<ext-grid-column data-index="roleIdIndex" label-exp="$L{role}" width="150">
+			<ext-field-combo id="role" display-field="libelleIndex" store-id="storeListActionRoles" />
+		</ext-grid-column>
+		<ext-grid-column data-index="isAuditableIndex" width="50" hideable="true">
+			<ext-field-checkbox checked-value="true" unchecked-value="false" />
+		</ext-grid-column>
+		<ext-grid-column data-index="auditValueExpressionIndex" width="50" hideable="true">
+			<ext-field-checkbox checked-value="true" unchecked-value="false" />
+		</ext-grid-column>
+		<ext-grid-column data-index="helpIndex" width="150">
+			<ext-field-text />
+		</ext-grid-column>
+	</ext-grid>
+
+
+
+
+
+
+
+	<!--	-->
+</root>

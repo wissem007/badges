@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tags>
+	<tag name="ext-org" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtOrganigramme" />
+	<tag name="window" tag-class="tn.com.smartsoft.framework.presentation.view.window.UIDefaultWindow">
+		<child tag="script-lib" added-method="setWindowScript" />
+		<child tag="root" added-method="setWindowRoot" />
+	</tag>
+	<tag name="js" tag-class="tn.com.smartsoft.framework.presentation.view.script.UIJavaScript">
+		<attribute name="group" property="groupName" />
+	</tag>
+	<tag name="script-group" tag-class="tn.com.smartsoft.framework.presentation.view.script.UIGroupScript">
+		<attribute name="name" property="groupName" />
+	</tag>
+	<tag name="css" tag-class="tn.com.smartsoft.framework.presentation.view.script.UICssScript">
+		<attribute name="group" property="groupName" />
+	</tag>
+	<tag name="script-lib" tag-class="tn.com.smartsoft.framework.presentation.view.window.UIWindowScript">
+		<child tag="js" added-method="addScript" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.script.UIScript" />
+		<child tag="css" added-method="addScript" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.script.UIScript" />
+		<child tag="script-group" added-method="addScript" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.script.UIScript" />
+	</tag>
+	<tag name="root" tag-class="tn.com.smartsoft.framework.presentation.view.window.UIWindowRoot">
+		<attribute name="layout" property="layout" />
+		<attribute name="first-focus" property="firstFocus" />
+		<child tag="ext-tbutton" ref="ext-button" added-method="addToolItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtComponent" />
+		<child tag="ext-tbspacer" added-method="addToolItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtComponent" />
+		<child tag="ext-tbseparator" added-method="addToolItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtComponent" />
+		<child tag="ext-tbfill" added-method="addToolItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtComponent" />
+		<properties tag="ext-layout-config" added-method="addLayoutConfig">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+	</tag>
+	<tag name="module-explorer" tag-class="tn.com.smartsoft.framework.presentation.view.desktop.moduleExplorer.UIModuleExplorer">
+		<paramter property="libelleId" value="moduleExplorer"></paramter>
+	</tag>
+	<tag name="space" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlSpace">
+		<attribute name="repeate" property="repeate" default-value="1" />
+		<attribute name="rendred" property="is-rendred" />
+		<attribute name="id" property="id" />
+	</tag>
+	<tag name="html-table" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlTable"></tag>
+	<tag name="html-row" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlRow"></tag>
+	<tag name="html-col" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlColumn">
+		<attribute name="row-span" property="rowSpan" />
+		<attribute name="col-span" property="colSpan" />
+	</tag>
+	<tag name="text-box" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlTextBox" content-property="contenu">
+		<attribute name="id" property="id" />
+		<attribute name="repeate" property="repeate" default-value="1" />
+		<attribute name="rendred" property="is-rendred" />
+	</tag>
+	<tag name="template-model" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.template.UIModelTemplate">
+		<attribute name="rendred" property="is-rendred" />
+		<attribute name="name" property="name" />
+		<attribute name="value" property="value" />
+	</tag>
+	<tag name="template" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.template.UITemplate">
+		<attribute name="rendred" property="is-rendred" />
+		<attribute name="location" property="location" />
+		<child tag="template-model" added-method="addModel" />
+	</tag>
+	<tag name="js-script" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.js.UIScriptJs" content-property="script"></tag>
+	<tag name="js-function" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.js.UIFunctionJs" content-property="script">
+		<attribute name="name" property="name" />
+		<attribute name="list-param" property="listParam" />
+		<properties tag="js-param" added-method="addParam">
+			<method-param attribute="name" />
+		</properties>
+	</tag>
+	<tag name="event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIEvent">
+		<attribute name="name" property="name" />
+		<attribute name="listener" property="listener" />
+		<attribute name="action-listener" property="actionListener" />
+		<attribute name="is-client-validation" property="clientValidation" />
+		<attribute name="wait-message" property="waitMessage" />
+		<attribute name="is-wait" property="wait" />
+		<attribute name="component-id" property="componentId" />
+		<attribute name="action-pattern" property="actionPattern" />
+		<attribute name="msg-confirm" property="msgConfirm" />
+		<attribute name="msg-container" property="msgContainer" />
+		<attribute name="msg-confirm-title" property="msgConfirmTitle" />
+		<attribute name="is-msg-confirm" property="confirmMsg" />
+		<attribute name="handle-params" property="handleParamValue" />
+		<attribute name="is-start-up" property="startUp" />
+		<child tag="condition" ref="js-script" added-method="setCondition" />
+		<properties tag="handle-param" added-method="addHandleParam">
+			<method-param attribute="name" />
+		</properties>
+		<properties tag="request-param" added-method="addRequestParam">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+	</tag>
+	<tag name="script-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIScriptEvent" extends-tag="event" content-property="script">
+		<child tag="content-script" ref="js-script" added-method="setScriptCmp" />
+	</tag>
+	<tag name="submited-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UISubmitedEvent" extends-tag="event">
+	</tag>
+	<tag name="partial-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIPartialRequestEvent" extends-tag="event">
+		<attribute name="is-all-request-field" property="allField" />
+		<properties tag="request-field" added-method="addRequestField">
+			<method-param attribute="field" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+	</tag>
+	<tag name="linked-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UILinkedEvent" extends-tag="partial-event">
+	</tag>
+	<tag name="export-file-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIOnExportFileEvent" extends-tag="partial-event">
+	</tag>
+	<tag name="open-media-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIOnOpenMediaEvent" extends-tag="partial-event">
+		<attribute name="ext" property="extention" />
+	</tag>
+	<tag name="ajax-event" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.event.UIAjaxEvent" extends-tag="partial-event">
+		<attribute name="success-handle" property="successHandle" />
+		<attribute name="failure-handle" property="failureHandle" />
+		<attribute name="scope" property="scope" />
+		<properties tag="request-header" added-method="addHeader">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+		<child tag="failure" ref="js-script" added-method="setFailure" />
+		<child tag="success" ref="js-script" added-method="setSuccess" />
+	</tag>
+	<tag name="display-label" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.html.UIHtmlDisplayLabel">
+		<attribute name="rendred" property="is-rendred" />
+		<attribute name="exp" property="expression" />
+	</tag>
+	<tag name="ext-html" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtHtml" content-property="content">
+		<attribute name="tag" property="tag" />
+		<attribute name="attrebut" property="extAttrebut" />
+		<attribute name="is-render-begin" property="renderBegin" />
+		<attribute name="is-render-end" property="renderEnd" />
+		<attribute name="is-exp-content" property="experssionContent" />
+	</tag>
+	<tag name="ext-attrebut-exp" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutExpression" content-property="expression">
+		<attribute name="attrebut" property="extAttrebut" />
+		<attribute name="exp" property="expression" />
+		<attribute name="expected" property="expected" />
+	</tag>
+	<tag name="ext-attrebut-script" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutScript">
+		<attribute name="attrebut" property="extAttrebut" />
+		<attribute name="handleName" property="handleName" />
+		<attribute name="handle-params" property="handleParamValue" />
+		<properties tag="handle-param" added-method="addHandleParam">
+			<method-param attribute="name" />
+		</properties>
+		<child tag="script" ref="js-script" added-method="setScript" />
+	</tag>
+	<tag name="ext-store-field" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtFieldStore">
+		<attribute name="id" property="id" />
+		<attribute name="property" property="property" />
+		<attribute name="id-property" property="idProperty" />
+		<attribute name="use-null" property="useNull" />
+		<attribute name="sort-type" property="sortType" />
+		<attribute name="is-asc" property="asc" />
+		<attribute name="js-convert" property="jsConvert" />
+	</tag>
+	<tag name="ext-store" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtJsonStore">
+		<attribute name="id" property="id" />
+		<attribute name="is-auto-load" property="autoLoad" />
+		<attribute name="query-method" property="queryMethod" />
+		<attribute name="query-param" property="queryParam" />
+		<attribute name="group-field" property="groupField" />
+		<attribute name="is-auto-destroy" property="autoDestroy" />
+		<attribute name="is-expand-all" property="expandAll" />
+		<attribute name="is-auto-save" property="autoSave" />
+		<attribute name="is-remote" property="remote" />
+		<attribute name="id-property" property="idProperty" />
+		<attribute name="parent-property" property="parentProperty" />
+		<attribute name="model-name" property="modelName" />
+		<attribute name="children-property" property="childrenProperty" />
+		<attribute name="index-name" property="indexName" />
+		<attribute name="is-formated-value" property="formatedValue" />
+		<attribute name="root" property="root" />
+		<attribute name="success-property" property="successProperty" />
+		<attribute name="total-property" property="totalProperty" />
+		<attribute name="message-property" property="messageProperty" />
+		<attribute name="reload-action-listener" property="reloadMethod" />
+		<attribute name="reload-handler-params" property="reloadHandlerRequestParams" />
+		<attribute name="reload-submit-all-field" property="reloadAllRequestField" />
+		<properties tag="reload-param" added-method="addReloadRequestParam">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+		<properties tag="reload-field-param" added-method="addReloadRequestFieldParam">
+			<method-param attribute="field" />
+		</properties>
+		<child tag="ext-store-field" added-method="addField" />
+	</tag>
+	<tag name="ext-tpl" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtTemplate">
+		<attribute name="id" property="id" />
+		<child tag="ext-tpl-arg" added-method="addArgument" />
+	</tag>
+	<tag name="ext-tpl-arg" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtTemplateArg">
+		<attribute name="id" property="id" />
+	</tag>
+	<tag name="ext-el" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAutoEl">
+		<attribute name="tag" property="tag" />
+	</tag>
+	<tag name="ext-pie-chart" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.charts.UIExtPieChart">
+		<attribute name="store-id" property="storeId" />
+		<attribute name="data-field" property="dataField" />
+		<attribute name="category-field" property="categoryField" />
+		<attribute name="style-colors-property" property="styleColorsProperty" />
+		<attribute name="display-legend" property="displayLegend" />
+		<attribute name="padding-legend" property="paddingLegend" />
+		<attribute name="font-legend" property="fontLegend" />
+		<attribute name="family-legend" property="familyLegend" />
+		<attribute name="size-legend" property="sizeLegend" />
+		<child tag="ext-store" added-method="setStore" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtStore" />
+	</tag>
+	<tag name="ext-column-chart" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.charts.UIExtColumnChart">
+		<attribute name="store-id" property="storeId" />
+		<attribute name="x-field" property="xField" />
+		<attribute name="y-field" property="yField" />
+		<child tag="ext-store" added-method="setStore" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtStore" />
+		<child tag="ext-yfield-chart" added-method="addYField" />
+	</tag>
+	<tag name="ext-yfield-chart" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.charts.UIExtYFieldChart">
+		<attribute name="display-name" property="displayName" />
+		<attribute name="color" property="color" />
+		<attribute name="y-field" property="yField" />
+	</tag>
+	<tag name="ext-box" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtBoxComponent" content-property="html">
+		<attribute name="id" property="id" />
+		<attribute name="tag" property="tag" />
+		<attribute name="is-rendred" property="rendred" />
+		<child tag="ext-el" added-method="setAutoEl" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-legend" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtLegendsComponent">
+		<attribute name="id" property="id" />
+		<attribute name="tag" property="tag" />
+		<attribute name="is-rendred" property="rendred" />
+		<child tag="ext-el" added-method="setAutoEl" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-container" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtContainer" content-property="html">
+		<attribute name="id" property="id" />
+		<attribute name="tag" property="tag" />
+		<attribute name="is-rendred" property="rendred" />
+		<attribute name="layout" property="layout" />
+		<properties tag="layout-config" added-method="addLayoutConfig">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+		</properties>
+		<child tag="ext-el" added-method="setAutoEl" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-use-component" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtUseComponent" content-property="ext-container">
+		<attribute name="xtype" property="xtype" />
+	</tag>
+	<tag name="ext-toolbar" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtToolbar" extends-tag="ext-container">
+		<attribute name="button-align" property="buttonAlign" default-value="center" />
+	</tag>
+	<tag name="ext-navbar" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtNavbar" extends-tag="ext-toolbar">
+		<attribute name="do-first-action" property="doFirstAction" />
+		<attribute name="do-previous-action" property="doPreviousAction" />
+		<attribute name="do-next-action" property="doNextAction" />
+		<attribute name="do-last-action" property="doLastAction" />
+		<attribute name="list-property" property="listProperty" />
+		<attribute name="index-property" property="indexProperty" />
+	</tag>
+	<tag name="ext-tbspacer" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtToolbarSpacer"></tag>
+	<tag name="ext-tbseparator" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtToolbarSeparator"></tag>
+	<tag name="ext-tbfill" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtToolbarFill"></tag>
+	<tag name="ext-panel" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtPanel">
+		<attribute name="id" property="id" />
+		<attribute name="is-rendred" property="rendred" default-value="true" />
+		<attribute name="body-style" property="bodyStyle" />
+		<attribute name="title-exp" property="titleExp" />
+		<attribute name="body-style" property="bodyStyle" />
+		<attribute name="height" property="height" />
+		<attribute name="width" property="width" />
+		<attribute name="button-align" property="buttonAlign" default-value="center" />
+		<attribute name="border" property="border" default-value="true" />
+		<attribute name="frame" property="frame" default-value="frame" />
+		<attribute name="auto-height" property="autoHeight" default-value="true" />
+		<attribute name="auto-width" property="autoWidth" default-value="true" />
+		<attribute name="button-align" property="buttonAlign" default-value="true" />
+		<attribute name="label-align" property="labelAlign" default-value="true" />
+		<attribute name="label-width" property="labelWidth" default-value="true" />
+		<attribute name="layout" property="layout" />
+		<properties tag="ext-layout-config" added-method="addLayoutConfig">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+		<child tag="ext-bbar" ref="ext-toolbar" added-method="setBottomBar" />
+		<child tag="ext-tbar" ref="ext-toolbar" added-method="setTopBar" />
+		<child tag="ext-navbar" ref="ext-navbar" added-method="setNavbar" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.toolbar.UIExtNavbar" />
+		<child tag="ext-panel-tool" ref="ext-button" added-method="addTool" />
+		<child tag="ext-panel-button" ref="ext-button" added-method="addButton" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-dialog" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtDialog" extends-tag="ext-panel">
+		<attribute name="minimizable" property="minimizable" />
+		<attribute name="maximizable" property="maximizable" />
+		<attribute name="dynamique-on-open" property="dynamiqueOnOpen" />
+		<attribute name="callback-on-open-handeler" property="callbackOnOpenHandeler" />
+		<attribute name="before-action-method-on-open" property="beforeActionMethodOnOpen" />
+		<properties tag="request-param-on-open" added-method="addRequestParamOnOpen">
+			<method-param attribute="name" />
+			<method-param attribute="value" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+		<properties tag="request-field-on-open" added-method="addRequestFieldOnOpen">
+			<method-param attribute="field" />
+			<method-param attribute="expected" type="java.lang.Boolean" default-value="true" />
+		</properties>
+		<child tag="callback-on-open" ref="js-script" added-method="setCallbackOnOpenJs" />
+	</tag>
+	<tag name="ext-tab-panel" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtTabPanel" extends-tag="ext-panel">
+		<attribute name="active-tab" property="activeTab" default-value="0" />
+	</tag>
+	<tag name="ext-fieldset" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.UIExtFieldSet" extends-tag="ext-panel"></tag>
+	<tag name="ext-form-panel" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.UIExtFormPanel" extends-tag="ext-panel">
+		<attribute name="monitor-valid" property="monitorValid" default-value="true" />
+		<attribute name="standard-submit" property="standardSubmit" default-value="true" />
+	</tag>
+	<tag name="ext-legend" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtLegendsComponent">
+		<attribute name="label-field" property="labelField" />
+		<attribute name="color-field" property="colorField" />
+		<attribute name="store-id" property="storeId" />
+		<child tag="ext-store" added-method="setStore" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtStore" />
+	</tag>
+	<tag name="ext-grid" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.grid.UIExtGrid" extends-tag="ext-panel">
+		<attribute name="id" property="id" />
+		<attribute name="store-id" property="storeId" />
+		<attribute name="fixed-number-row" property="fixedNumberRow" />
+		<attribute name="max-number-row" property="maxNumberRow" />
+		<attribute name="is-tree" property="tree" />
+		<attribute name="type-tree" property="typeTree" />
+		<attribute name="master-column-id" property="masterColumnId" />
+		<attribute name="auto-expand-column" property="autoExpandColumn" />
+		<attribute name="new-record-handler" property="newRecordHandler" />
+		<attribute name="is-up-and-dow-row-menu" property="isUpAndDowRowMenu" />
+		<attribute name="is-saved-menu" property="isSavedMenu" />
+		<attribute name="is-add-row" property="autoExpandColumn" />
+		<attribute name="is-delete-row" property="deleteRow" />
+		<attribute name="editable-handler" property="editableHandler" />
+		<attribute name="group-text-tpl" property="groupTextTpl" />
+		<attribute name="show-group-name" property="showGroupName" />
+		<attribute name="enable-no-groups" property="enableNoGroups" />
+		<attribute name="enable-grouping-menu" property="enableGroupingMenu" />
+		<attribute name="hide-grouped-column" property="hideGroupedColumn" />
+		<attribute name="row-class" property="rowClass" />
+		<child tag="ext-grid-column" added-method="addColumn" />
+		<child tag="ext-grid-row-header" added-method="addHeaderRow" />
+		<child tag="ext-store" added-method="setStore" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtStore" />
+	</tag>
+	<tag name="ext-grid-row-header" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.grid.UIExtHeaderRowGrid">
+		<child tag="ext-grid-column-header" added-method="addColumn" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-grid-column-header" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.grid.UIExtGridHeaderColumn">
+		<attribute name="id" property="id" />
+		<attribute name="header" property="header" />
+		<attribute name="rowspan" property="rowspan" />
+		<attribute name="colspan" property="colspan" />
+		<attribute name="align" property="align" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-grid-column" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.grid.UIExtGridColumn">
+		<attribute name="id" property="id" />
+		<attribute name="align" property="align" />
+		<attribute name="force-editable" property="forceEditable" />
+		<attribute name="label-exp" property="libelleExp" />
+		<attribute name="is-print" property="print" />
+		<attribute name="data-index" property="dataIndex" />
+		<attribute name="data-index-display" property="dataIndexDisplay" />
+		<attribute name="is-rendred" property="rendred" default-value="true" />
+		<attribute name="width" property="width" />
+		<attribute name="renderer" property="renderer" />
+		<attribute name="summary-type" property="summaryType" />
+		<attribute name="summary-renderer" property="summaryRenderer" />
+		<attribute name="resizable" property="resizable" default-value="true" />
+		<attribute name="sortable" property="sortable" default-value="true" />
+		<attribute name="hideable" property="hideable" />
+		<attribute name="xtype" property="xtype" />
+		<attribute name="is-locked" property="locked" default-value="true" />
+		<child tag="ext-field-spinner" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-color" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-number" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-spinner" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-color" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-text" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-checkbox-gpr" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-checkbox" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-combo" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-suggest" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-textArea" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-time" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-field-date" added-method="setEditor" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtField" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-composite-field" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtCompositeField">
+		<attribute name="id" property="id" />
+		<attribute name="label-exp" property="labelExp" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-text" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTextField">
+		<attribute name="id" property="id" />
+		<attribute name="property" property="property" />
+		<attribute name="label-exp" property="libelleExp" />
+		<attribute name="indicator-icon" property="indicatorIcon" />
+		<attribute name="indicator-tip" property="indicatorTip" />
+		<attribute name="indicator-text" property="indicatorText" />
+		<attribute name="indicator-cls" property="indicatorCls" />
+		<attribute name="note" property="note" />
+		<attribute name="note-align" property="noteAlign" />
+		<attribute name="note-cls" property="noteCls" />
+		<attribute name="display-field" property="displayField" />
+		<attribute name="link-property" property="linkProperty" />
+		<attribute name="hide-label" property="hideLabel" />
+		<attribute name="is-rendred" property="rendred" />
+		<attribute name="is-validate-onblur" property="validateOnBlur" default-value="true" />
+		<attribute name="next-element" property="nextElementId" />
+		<attribute name="allow-blank" property="allowBlank" />
+		<attribute name="editable" property="editable" />
+		<attribute name="form" property="form" />
+		<attribute name="size" property="size" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-color" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTextColorField" extends-tag="ext-field-text"></tag>
+	<tag name="ext-field-file" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtFileField" extends-tag="ext-field-text">
+		<attribute name="empty-text" property="emptyText" />
+		<attribute name="button-text" property="buttonText" />
+		<attribute name="icon-cls" property="iconCls" />
+	</tag>
+	<tag name="ext-trigger-field" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtFieldTrigger">
+		<attribute name="icon-cls" property="iconCls" />
+		<attribute name="qtip" property="qtip" />
+		<attribute name="hide-trigger" property="hideTrigger" />
+	</tag>
+	<tag name="ext-field-trigger" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTriggerField" extends-tag="ext-field-text">
+		<child tag="ext-trigger-field" added-method="addFieldTrigger" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtFieldTrigger" />
+	</tag>
+	<tag name="ext-field-dropdown" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtDropDownField" extends-tag="ext-field-trigger">
+		<attribute name="lazy-Init" property="lazyInit" />
+		<attribute name="component-align" property="componentAlign" />
+		<attribute name="allow-blur" property="allowBlur" />
+		<attribute name="mode" property="mode" />
+		<attribute name="sync-value" property="syncValue" />
+		<child tag="ext-panel" added-method="setComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtComponent" />
+	</tag>
+	<tag name="ext-field-hidden" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtHiddenField">
+		<attribute name="id" property="id" />
+		<attribute name="property" property="property" />
+	</tag>
+	<tag name="ext-field-date" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtDateField" extends-tag="ext-field-text">
+		<attribute name="max-value" property="maxStringValue" />
+		<attribute name="min-value" property="minStringValue" />
+		<attribute name="msg-max-value-key" property="messageMaxValueKey" />
+		<attribute name="msg-min-value-key" property="messageMinValueKey" />
+		<attribute name="format" property="boxLabelExp" />
+	</tag>
+	<tag name="ext-field-checkbox" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtCheckboxField" extends-tag="ext-field-text">
+		<attribute name="box-label-exp" property="boxLabelExp" />
+		<attribute name="checked-value" property="checkedValue" />
+		<attribute name="unchecked-value" property="unCheckedValue" />
+		<attribute name="is-box-label" property="boxLabel" />
+	</tag>
+	<tag name="ext-checkbox-gpr" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.UIExtCheckboxGroup">
+		<attribute name="id" property="id" />
+		<attribute name="libelle-exp" property="libelleExp" />
+		<attribute name="columns" property="columns" />
+		<attribute name="item-cls" property="itemCls" />
+		<attribute name="is-vertical" property="vertical" />
+		<child tag="ext-field-checkbox" ref="ext-field-checkbox" added-method="addItem" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-radio" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtRadioField" extends-tag="ext-field-text">
+		<attribute name="id" property="id" />
+		<attribute name="libelle-exp" property="libelleExp" />
+		<attribute name="columns" property="columns" />
+		<attribute name="item-cls" property="itemCls" />
+		<attribute name="is-vertical" property="vertical" />
+		<child tag="ext-radio" ref="ext-radio" added-method="addItem" />
+	</tag>
+	<tag name="ext-radio" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtRadio" extends-tag="ext-field-text">
+		<attribute name="id" property="id" />
+		<attribute name="input-value" property="inputValue" />
+		<attribute name="box-label-exp" property="boxLabelExp" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-combo" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtComboBoxField" extends-tag="ext-field-text">
+		<attribute name="store-id" property="storeId" />
+		<attribute name="mode" property="mode" />
+		<attribute name="key-property" property="keyProperty" />
+		<attribute name="key-field-index" property="keyFieldIndex" />
+		<attribute name="childrenProperty" property="children-property" />
+		<attribute name="display-field" property="displayField" />
+		<attribute name="force-selection" property="forceSelection" />
+		<attribute name="display-property" property="displayProperty" />
+		<attribute name="display-row-condition" property="displayRowCondition" />
+		<attribute name="tpl" property="tpl" />
+		<attribute name="suggest-option" property="suggestOption" />
+		<attribute name="filter-field" property="filterField" />
+		<attribute name="match-char" property="matchChar" />
+		<child tag="ext-store" added-method="setStore" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.store.UIExtStore" />
+		<child tag="linked-field-item" added-method="addItem" ref="ext-combo-linked-field-item" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtComboBoxItem" />
+		<child tag="dispaly-item" added-method="addItem" ref="ext-combo-dispaly-item" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtComboBoxItem" />
+		<child tag="handler-item" added-method="addItem" ref="ext-combo-handler-item" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtComboBoxItem" />
+	</tag>
+	<tag name="ext-field-suggest" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtSuggestField" extends-tag="ext-field-combo"></tag>
+	<tag name="ext-combo-linked-field-item" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtLinkedFieldItem">
+		<attribute name="field-ref" property="fieldRef" />
+		<attribute name="column-ref" property="columnRef" />
+		<attribute name="align" property="align" />
+		<attribute name="width" property="width" />
+		<attribute name="dispaly" property="dispaly" />
+		<attribute name="libelle-exp" property="libelleExp" />
+		<attribute name="handler-value" property="handlerValue" />
+	</tag>
+	<tag name="ext-combo-dispaly-item" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtDispalyItem">
+		<attribute name="data-index" property="dataIndex" />
+		<attribute name="align" property="align" />
+		<attribute name="width" property="width" />
+		<attribute name="libelle-exp" property="libelleExp" />
+		<attribute name="handler-value" property="handlerValue" />
+	</tag>
+	<tag name="ext-combo-handler-item" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.comboBox.UIExtComboBoxItem">
+		<attribute name="handler-value" property="handlerValue" />
+	</tag>
+	<tag name="ext-field-number" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtNumberField" extends-tag="ext-field-text">
+		<attribute name="allow-decimals" property="allowDecimals" />
+		<attribute name="decimal-sep" property="decimalSeparator" />
+		<attribute name="decimal-prec" property="decimalPrecision" />
+		<attribute name="allow-negative" property="allowNegative" />
+		<attribute name="max-value" property="maxStringValue" />
+		<attribute name="min-value" property="minStringValue" />
+		<attribute name="msg-max-value-key" property="messageMaxValueKey" />
+		<attribute name="msg-min-value-key" property="messageMinValueKey" />
+	</tag>
+	<tag name="ext-field-spinner" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtSpinnerField" extends-tag="ext-field-number">
+		<attribute name="increment" property="incrementValue" />
+		<attribute name="alternate-increment" property="alternateIncrementValue" />
+		<attribute name="accelerate" property="accelerate" />
+	</tag>
+	<tag name="ext-field-textArea" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTextAreaField" extends-tag="ext-field-text">
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-textEditor" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTextEditorField" extends-tag="ext-field-text">
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-field-time" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.field.UIExtTimeField" extends-tag="ext-field-text">
+		<attribute name="increment" property="increment" />
+		<attribute name="format" property="format" />
+		<attribute name="max-value" property="maxStringValue" />
+		<attribute name="min-value" property="minStringValue" />
+		<attribute name="msg-max-value-key" property="messageMaxValueKey" />
+		<attribute name="msg-min-value-key" property="messageMinValueKey" />
+	</tag>
+	<tag name="ext-button" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.forms.UIExtButton">
+		<attribute name="id" property="id" />
+		<attribute name="is-rendred" property="rendred" />
+		<attribute name="view-action-id" property="viewActionId" />
+		<attribute name="tpl-id" property="actionTemplateId" />
+		<attribute name="is-icon" property="icon" />
+		<attribute name="is-label" property="label" />
+		<attribute name="text" property="text" />
+		<attribute name="icon-path" property="iconPath" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-menu-item" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.menu.UIExtMenuItem">
+		<attribute name="id" property="id" />
+		<attribute name="is-rendred" property="rendred" />
+		<attribute name="libelle" property="libelle" />
+		<attribute name="help" property="help" />
+		<attribute name="icon-url" property="iconUrl" />
+		<child tag="ext-attrebut-exp" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-attrebut-script" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+		<child tag="ext-html" added-method="addAttrebutComponent" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.UIExtAttrebutComponent" />
+	</tag>
+	<tag name="ext-menu" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.menu.UIExtMenu" extends-tag="ext-menu-item">
+		<child tag="ext-menu-action" added-method="addMenuItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.menu.UIExtMenuItem" />
+		<child tag="ext-menu" added-method="addMenuItem" parmeter-type-method="tn.com.smartsoft.framework.presentation.view.window.component.ext.menu.UIExtMenuItem" />
+	</tag>
+	<tag name="ext-menu-action" tag-class="tn.com.smartsoft.framework.presentation.view.window.component.ext.menu.UIExtMenuAction" extends-tag="ext-menu-item"></tag>
+</tags>

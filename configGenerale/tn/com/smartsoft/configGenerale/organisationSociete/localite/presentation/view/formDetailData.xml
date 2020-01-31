@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListGouvernorat" model-name="listGouvernorat" id-property="governoratIdIndex" >
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="governoratIdIndex" property="governoratId[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex" >
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="paysIdIndex" property="paysId[$i]" />
+	</ext-store>
+
+	<!--ext-field-text id="localiteIdIndex" property="detailBean.localiteId" maxLength="4" allow-blank="false" width="100" next-element="libelle" editable="${isEditableLocaliteId}" /-->
+	<ext-field-text id="libelleIndex" property="detailBean.libelle" allow-blank="false" width="255" next-element="codePostalIndex" />
+	<!--ext-field-text id="libelleArabeIndex" property="detailBean.libelleArabe"  width="255" next-element="codePostalIndex" /-->
+    <ext-field-number id="codePostalIndex" label-exp="$L{codePostal}" property="detailBean.codePostal" allow-blank="false" maxLength="10"  width="255" next-element="pays" />	
+  
+   <ext-field-combo id="pays" label-exp="$L{pays}" property="detailBean.governorat.paysId"  allow-blank="false" link-property="detailBean.governorat.paysId"
+    display-field="libelleIndex"  store-id="storeListPays" next-element="governorat" >
+    <ajax-event name="change" action-listener="onInitListGouvernorat" handle-params="el,e" is-wait="false">
+				<request-field field="pays" />
+				
+				<success>
+               <![CDATA[
+                              var object = Ext.util.JSON.decode(response.responseText);                                                            
+                              desktop.getCmp('governorat').clearValue();
+                              desktop.getCmp('governorat').getStore().reload();
+                   ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+    
+    <ext-field-combo id="governorat" label-exp="$LV{gouvernorat}" property="detailBean.governoratId"  allow-blank="false" link-property="detailBean.governorat.governoratId"
+    display-field="libelleIndex"  store-id="storeListGouvernorat" next-element="valider" />
+    
+ 	
+			
+</root>
+
+

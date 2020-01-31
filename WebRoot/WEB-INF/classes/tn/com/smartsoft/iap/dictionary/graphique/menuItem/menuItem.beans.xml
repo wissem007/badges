@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.iap.dictionary.graphique.menuItem.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.iap.dictionary.graphique.menuItem.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.iap.dictionary.graphique.menuItem.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.iap.dictionary.graphique.menuItem.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.iap.dictionary.graphique.menuItem.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/iap/dictionary/graphique/menuItem/presentation/view" />
+	<bean name="menuItemControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$L{listMenuItem}" />
+	</bean>
+	<bean name="menuItemBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-bean name="menuItemDao" interface="${daoPack}.MenuItemDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.MenuItemBean AS bean WHERE 1=1
+          	<#if arg3.menuId?exists >
+              AND bean.id.menuId=:arg3.menuId 
+            </#if>
+             <#if arg3.libelle?exists && arg3.libelle!="">
+              AND UPPER(trim(bean.libelle)) like UPPER(trim(:arg3.libelle))||'%'
+            </#if>
+             <#if arg3.moduleId?exists >
+              AND bean.id.moduleId=:arg3.moduleId
+            </#if>
+             order by bean.id.menuId 
+              ]]>
+			</query>
+		</query-method>
+		<query-method name="getAllByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean AS bean WHERE 1=1
+          	<#if arg3.menuId?exists >
+              AND bean.id.menuId=:arg3.menuId 
+            </#if>
+             <#if arg3.libelle?exists && arg3.libelle!="">
+              AND UPPER(trim(bean.libelle)) like UPPER(trim(:arg3.libelle))||'%'
+            </#if>
+             <#if arg3.moduleId?exists >
+              AND bean.id.moduleId=:arg3.moduleId
+            </#if>
+            order by bean.id.menuId 
+           ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<dao-parse-bean id="parseBean">
+		<dao-parse-bean property="menuActions" />
+	</dao-parse-bean>
+	<business-bean name="menuItemBusiness" class="${businessPack}.MenuItemBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="entiteDao" ref="menuItemDao" />
+		<set-dao-parse-bean name="parseBean" ref="parseBean" />
+		<set-property name="businessParams" ref="menuItemBusinessParams" />
+	</business-bean>
+	<controler-bean name="menuItemControler" class="${controlerPack}.MenuItemControler">
+		<set-business-bean name="entiteBusiness" ref="menuItemBusiness" />
+		<set-business-bean name="moduleBusiness" ref="moduleBusiness" sujet="module" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="subModuleBusiness" ref="subModuleBusiness" sujet="subModule" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="sujetBusiness" ref="sujetBusiness" sujet="sujet" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="actionBusiness" ref="actionBusiness" sujet="action" sub-module="decoupage" module="dictionary" />
+		<set-property name="controlerParams" ref="menuItemControlerParams" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.MenuItemModel" controler-bean="menuItemControler">
+		<binding-model name="searcheBean" mode="f" type="${beanPack}.MenuItemBean" />
+		<binding-model name="detailBean" mode="r" type="${beanPack}.MenuItemBean">
+			<binding-model name="menuActions" mode="r" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</binding-model>
+		<binding-model name="listModules" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listSubModules" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.subModule.beans.SubModuleBean" />
+		<binding-model name="listSujets" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean" />
+		<binding-model name="listActions" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.action.beans.ActionBean" />
+		<binding-model name="listParents" mode="r" type="tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean" />
+		<binding-model name="listBean" mode="r" type="tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean" />
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListTreeWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitList">
+			<parameter name="titleList" value="$L{listMenu}" />
+			<parameter name="gridHeight" value="350" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{menuItem}" />
+			<parameter name="isRendredId" value="true" />
+			<parameter name="isEditableModule" value="false" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" mode="u" type="${beanPack}.MenuItemBean">
+			<binding-model name="menuActions" mode="u" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{menuItem}" />
+			<parameter name="isRendredId" value="true" />
+			<parameter name="isEditableModule" value="false" />
+			<parameter name="isEditableGrid" value="true" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<binding-model name="detailBean" mode="d" type="${beanPack}.MenuItemBean">
+			<binding-model name="menuActions" mode="d" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{menuItem}" />
+			<parameter name="isRendredId" value="true" />
+			<parameter name="isEditableModule" value="false" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.MenuItemModel" controler-bean="menuItemControler">
+		<binding-model name="detailBean" mode="c" type="${beanPack}.MenuItemBean">
+			<binding-model name="menuActions" mode="c" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</binding-model>
+		<binding-model name="listModules" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listSubModules" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.subModule.beans.SubModuleBean" />
+		<binding-model name="listSujets" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean" />
+		<binding-model name="listActions" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.action.beans.ActionBean" />
+		<binding-model name="listParents" mode="r" type="tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitList">
+			<parameter name="title" value="$L{menuItem}" />
+			<parameter name="isRendredId" value="false" />
+			<parameter name="isEditableModule" value="true" />
+			<parameter name="isEditableGrid" value="true" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+		<ext-store-field id="symboleMonetaireIndex" property="symboleMonetaire[$i]" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="100">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-composite-field label-exp="$L{dateCours}" colspan="2">
+			<ext-field-date label-exp="$L{dateCours}" id="dateCours" property="searcheBean.dateCours" width="100" next-element="dateCoursFin" />
+			<ext-box>
+				<ext-html tag="p" attrebut="html">$L{dateCours}</ext-html>
+			</ext-box>
+			<ext-field-date id="dateCoursFin" property="searcheBean.dateCoursFin" width="100" next-element="devise" />
+		</ext-composite-field>
+		<ext-composite-field label-exp="$L{devise}" colspan="2">
+			<ext-field-suggest id="devise" property="searcheBean.deviseId" link-property="searcheBean.devise.deviseId" display-field="symboleMonetaireIndex" store-id="storeListDevise" width="100" next-element="deviseLibelle">
+				<linked-field-item field-ref="deviseLibelle" align="left" />
+			</ext-field-suggest>
+			<ext-field-suggest id="deviseLibelle" property="searcheBean.deviseId" display-property="searcheBean.devise.libelle" display-field="libelleIndex" store-id="storeListDevise" width="150" next-element="valider">
+				<linked-field-item field-ref="devise" align="left" />
+			</ext-field-suggest>
+		</ext-composite-field>
+	</ext-panel>
+</root>

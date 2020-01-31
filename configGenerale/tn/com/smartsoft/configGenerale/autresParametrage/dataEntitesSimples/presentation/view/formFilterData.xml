@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-field-text id="libelleindex" property="searcheBean.libelle" maxLength="20" width="100" />
+	</ext-panel>
+</root>

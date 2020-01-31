@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="paysIdIndex" property="paysId" />
+	</ext-store>
+	<ext-store root="data" id="storeListLocalite" model-name="listLocalite" id-property="localiteIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="localiteIdIndex" property="localiteId" />
+	</ext-store>
+	<ext-store root="data" id="storeListGouvernorat" model-name="listGouvernorat" id-property="governoratIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="governoratIdIndex" property="governoratId" />
+	</ext-store>
+	<ext-field-text id="userName" property="searcheBean.userName" maxLength="30" width="200" next-element="displayName" />
+	<ext-field-text id="displayName" property="searcheBean.displayName" colspan="2" maxLength="255" width="400" next-element="pays" />
+	<ext-panel layout="tform" border="false">
+		<ext-layout-config name="columns" value="3" expected="false" />
+		<ext-field-combo id="pays" label-exp="$L{pays}" width="200" property="detailBean.paysId" display-field="libelleIndex" store-id="storeListPays" next-element="governorat">
+			<ajax-event name="select" action-listener="onInitListeGouvernorat" handle-params="el,e" is-wait="false">
+				<request-field field="pays" />
+				<success>
+					<![CDATA[
+            var object = Ext.util.JSON.decode(response.responseText);
+        	desktop.getCmp('governorat').clearValue();
+    	 	desktop.getCmp('localite').clearValue();
+        	desktop.getCmp('localiteLibelle').clearValue();
+            desktop.getCmp('localite').getStore().removeAll();
+    		desktop.getCmp('governorat').getStore().load();
+	      ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="governorat" label-exp="$L{gouvernorat}" width="200" property="searcheBean.governoratId" display-field="libelleIndex" store-id="storeListGouvernorat" next-element="localite">
+			<ajax-event name="select" action-listener="onInitListeLocalite" handle-params="el,e" is-wait="false">
+				<request-field field="governorat" />
+				<success>
+					<![CDATA[
+			          var object = Ext.util.JSON.decode(response.responseText);
+			          desktop.getCmp('localite').getStore().removeAll();
+					  desktop.getCmp('localite').getStore().load();
+			          ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-composite-field label-exp="$L{localite}" colspan="2" label-width="60">
+			<ext-field-suggest id="localite" property="searcheBean.localiteId" display-field="localiteIdIndex" store-id="storeListLocalite" width="100" next-element="localiteLibelle">
+				<linked-field-item field-ref="localiteLibelle" align="left" />
+			</ext-field-suggest>
+			<ext-field-suggest id="localiteLibelle" property="searcheBean.localiteId" display-property="searcheBean.localite.libelle" display-field="libelleIndex" store-id="storeListLocalite" width="200" next-element="search">
+				<linked-field-item field-ref="localite" align="left" />
+			</ext-field-suggest>
+		</ext-composite-field>
+	</ext-panel>
+	<ext-field-radio id="isActive" label-exp="$L{etat}" property="searcheBean.etatActive" width="300" editable="${isEditableIsActive}">
+		<ext-radio input-value="1" box-label-exp="$L{oui}">
+		</ext-radio>
+		<ext-radio input-value="2" box-label-exp="$L{non}">
+		</ext-radio>
+		<ext-radio input-value="3" box-label-exp="$L{tous}">
+		</ext-radio>
+	</ext-field-radio>
+</root>

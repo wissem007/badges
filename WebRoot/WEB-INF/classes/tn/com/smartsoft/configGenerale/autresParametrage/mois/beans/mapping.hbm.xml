@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db"  package="tn.com.smartsoft.configGenerale.autresParametrage.mois.beans">
+  <class name="MoisBean" table="cr_mois">
+  <meta attribute="entite-id">typePersonnel</meta>
+    <id name="moisId" column="cr_mois_id">
+      <generator class="assigned"/>
+    </id>
+    <property name="libelle" column="libelle"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="140" body-style="padding:0px">
+		<ext-layout-config name="columns" value="4" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'99%'}" expected="false" />
+		<ext-field-text id="libelle" property="searcheBean.nom" width="300" next-element="" colspan="3" />
+	</ext-panel>
+</root>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db"  package="tn.com.smartsoft.configGenerale.autresParametrage.etatCivils.beans">
+  <class name="EtatCivilsBean" table="cr_etat_civils">
+  <meta attribute="entite-id">etatCivil</meta>
+    <id name="etatCivilId" column="cr_etat_civil_id">
+      <generator class="assigned"/>
+    </id>
+    <property name="libelle" column="libelle"/>
+  </class>
+</hibernate-mapping>

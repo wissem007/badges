@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_backoffice_db" package="tn.com.smartsoft.backoffice.referentiel.saison.beans">
+	<class name="SaisonsBean" table="tr_saisons">
+		<meta attribute="entite-id">saisons</meta>
+		<id name="saisonId" column="tr_saison_id">
+			<generator class="assigned" />
+		</id>
+		<property name="opened" column="is_opened" />
+		<property name="nom" column="nom" />
+	</class>
+</hibernate-mapping>

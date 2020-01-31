@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/module.xsd">
+	<module-id value="backoffice" />
+	<default-data-source value="DefaultSession" />
+	<sub-modules>
+		<sub-module sub-module-id="referentiel" default-data-source="DefaultSession">
+			<sujet sujet-id="eleveClasses" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/backoffice/referentiel/eleveClasses/eleveClasses.beans.xml" />
+			</sujet>
+			<sujet sujet-id="eleveClasseNiveaux" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/backoffice/referentiel/eleveClasseNiveaux/eleveClasseNiveaux.beans.xml" />
+			</sujet>
+			<sujet sujet-id="saison" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/backoffice/referentiel/saison/saison.beans.xml" />
+			</sujet>
+		</sub-module>
+		<sub-module sub-module-id="eleves" default-data-source="DefaultSession">
+			<sujet sujet-id="eleves" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/backoffice/eleves/eleves/eleves.beans.xml" />
+			</sujet>
+			<sujet sujet-id="eleveDemandeCarte" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/backoffice/eleves/eleveDemandeCarte/eleveDemandeCarte.beans.xml" />
+			</sujet>
+		</sub-module>
+	</sub-modules>
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/backoffice/referentiel/eleveClasseNiveaux/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/backoffice/referentiel/eleveClasses/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/backoffice/referentiel/saison/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/backoffice/eleves/eleves/beans/mapping.hbm.xml" />
+	<add-mapping data-source-name="DefaultSession" location="tn/com/smartsoft/backoffice/eleves/eleveDemandeCarte/beans/mapping.hbm.xml" />
+</module>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="governoratIdIndex"  reload-submit-all-field="true" reload-action-listener="doFilter" >
+		<!--ext-store-field id="governoratIdIndex" property="governoratId[$i]" /-->
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<!--ext-store-field id="libelleArabeIndex" property="libelleArabe[$i]" /-->
+		<ext-store-field id="paysLibelleIndex" property="pays[$i].libelle" />
+	</ext-store>
+
+	<!--ext-grid-column data-index="governoratIdIndex" width="300" locked="true" /-->
+	<ext-grid-column data-index="libelleIndex" width="300" />
+	<!--ext-grid-column data-index="libelleArabeIndex" width="300" /-->
+	<ext-grid-column data-index="paysLibelleIndex" label-exp="$LV{pays}" width="300" />
+</root>
+ 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListSystemModule" model-name="listSystemModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+		<ext-store-field id="symboleMonetaireIndex" property="symboleMonetaire[$i]" />
+	</ext-store>
+	<ext-panel id="p1" layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+	
+	<ext-field-number id="applicationId" property="searcheBean.applicationId"  maxLength="2" width="30" next-element="version" colspan="2"/>
+	<ext-field-text id="version" property="searcheBean.version" maxLength="60" width="200" colspan="2" next-element="module"/>
+	
+	<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleBaseId"  display-field="libelleIndex" store-id="storeListModule" width="300" next-element="systemModule"/>
+	
+	<ext-field-combo id="systemModule" label-exp="$L{systemModule}" property="searcheBean.systemModuleId" display-field="libelleIndex"
+		store-id="storeListSystemModule" next-element="devise" />
+	
+	<ext-composite-field label-exp="$L{devise}" colspan="2">
+		<ext-field-suggest id="devise" property="searcheBean.deviseId"  display-field="symboleMonetaireIndex" store-id="storeListDevise" width="100"
+			next-element="deviseLibelle">
+			<linked-field-item field-ref="deviseLibelle" align="left" />
+		</ext-field-suggest>
+		<ext-field-suggest id="deviseLibelle" property="searcheBean.deviseId" display-property="searcheBean.deviseBase.libelle" display-field="libelleIndex" store-id="storeListDevise" width="150"
+			next-element="searche">
+			<linked-field-item field-ref="devise" align="left" />
+		</ext-field-suggest>
+	</ext-composite-field>
+	</ext-panel>
+</root>

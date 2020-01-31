@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true" >
+		<ext-store-field id="messageTypeIdIndex" property="messageTypeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-grid-column data-index="messageTypeIdIndex" width="80" locked="true" />
+	<ext-grid-column data-index="libelleIndex" width="250" />
+</root>

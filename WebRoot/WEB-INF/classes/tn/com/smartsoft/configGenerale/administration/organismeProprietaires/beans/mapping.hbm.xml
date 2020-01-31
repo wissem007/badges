@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db" package="tn.com.smartsoft.configGenerale.administration.organismeProprietaires.beans">
+	<class name="OrganismeProprietairesBean" table="cr_organisme_proprietaires">
+		<meta attribute="entite-id">organismeProprietaires</meta>
+		<composite-id name="id" class="OrganismeProprietairesBeanId">
+			<key-property name="organismeId" column="cr_organisme_id" />
+			<key-property name="societeId" column="cr_societe_id" />
+		</composite-id>
+		<property name="displayName" column="display_name" />
+		<many-to-one name="organisme" class="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" fetch="join" update="false" insert="false">
+			<column name="cr_organisme_id" />
+			<column name="cr_societe_id" />
+		</many-to-one>
+		<set name="autModules" cascade="all" table="cr_organisme_proprietaires_modules" >
+			<key>
+				<column name="CR_ORGANISME_ID" />
+				<column name="CR_SOCIETE_ID" />
+			</key>
+			<element column="AD_MODULE_ID" type="string"></element>
+		</set>
+	</class>
+</hibernate-mapping>

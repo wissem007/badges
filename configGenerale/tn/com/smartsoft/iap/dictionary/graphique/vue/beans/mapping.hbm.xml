@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.vue.beans">
+	<class name="ViewBean" table="UI_VIEWS">
+		<meta attribute="entite-id">view</meta>
+		<composite-id name="id" class="ViewBeanId">
+			<key-property name="viewId" column="UI_VIEW_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="help" column="HELP" />
+		<map name="libelles" cascade="all" lazy="true" inverse="true">
+			<key>
+				<column name="UI_VIEW_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<map-key formula="UI_VIEW_LIBELLES_ID" type="string" />
+			<one-to-many class="ViewLibelleBean" />
+		</map>
+		<map name="actions" cascade="all" lazy="true" inverse="true">
+			<key>
+				<column name="UI_VIEW_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<map-key formula="UI_VIEW_ACTION_ID" type="string" />
+			<one-to-many class="ViewActionBean" />
+		</map>
+		<many-to-one name="parentSujet" class="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean" fetch="join" update="false" insert="false">
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+	<class name="ViewLibelleBean" table="UI_VIEW_LIBELLES">
+		<meta attribute="entite-id">viewLibelle</meta>
+		<composite-id name="id" class="ViewLibelleBeanId">
+			<key-property name="viewLibellesId" column="UI_VIEW_LIBELLES_ID" />
+			<key-property name="viewId" column="UI_VIEW_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="help" column="HELP" />
+	</class>
+	<class name="ViewActionBean" table="UI_VIEW_ACTIONS">
+		<meta attribute="entite-id">viewAction</meta>
+		<composite-id name="id" class="ViewActionBeanId">
+			<key-property name="viewActionId" column="UI_VIEW_ACTION_ID" />
+			<key-property name="viewId" column="UI_VIEW_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="actionTemplateId" column="UI_ACTION_TEMPLATE_ID" />
+		<property name="roleId" column="AD_ROLE_ID" />
+		<property name="help" column="HELP" />
+		<many-to-one name="role" class="tn.com.smartsoft.iap.dictionary.securite.groupedRole.beans.ActionRoleBean" fetch="join" update="false" insert="false">
+			<column name="AD_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="template" class="tn.com.smartsoft.iap.dictionary.graphique.actionTemplate.beans.ActionTemplateBean" fetch="join" update="false" insert="false">
+			<column name="UI_ACTION_TEMPLATE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

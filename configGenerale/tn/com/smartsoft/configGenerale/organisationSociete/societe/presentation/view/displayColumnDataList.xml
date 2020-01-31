@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="societeIdIndex" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="societeIdIndex" property="societeId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="abreviationIndex" property="abreviation[$i]" />
+		<ext-store-field id="deviseLibelleIndex" property="devise[$i].libelle" />
+		<ext-store-field id="paysLibelleIndex" property="pays[$i].libelle" />
+		<ext-store-field id="governoratLibelleIndex" property="governorat[$i].libelle" />
+		<ext-store-field id="localiteLibelleIndex" property="localite[$i].libelle" />
+		<ext-store-field id="telephone1Index" property="telephone1[$i]" />
+		<ext-store-field id="telephone2Index" property="telephone2[$i]" />
+		<ext-store-field id="faxIndex" property="fax[$i]" />
+		<ext-store-field id="matriculeFiscalIndex" property="matriculeFiscal[$i]" />
+		<ext-store-field id="registreCommerceIndex" property="registreCommerce[$i]" />
+		<ext-store-field id="matriculeCnssIndex" property="matriculeCnss[$i]" />
+		<ext-store-field id="matriculeCnrpsIndex" property="matriculeCnrps[$i]" />
+		<ext-store-field id="matriculeCavisIndex" property="matriculeCavis[$i]" />
+		<ext-store-field id="numeroCcbIndex" property="numeroCcb[$i]" />
+	</ext-store>
+	<ext-grid-column data-index="societeIdIndex" width="150" locked="true" />
+	<ext-grid-column data-index="libelleIndex" width="150" />
+	<ext-grid-column data-index="abreviationIndex" width="150" />
+	<ext-grid-column data-index="deviseLibelleIndex" label-exp="$LV{devise}" width="150" />
+	<ext-grid-column data-index="paysLibelleIndex" label-exp="$LV{pays}" width="150" />
+	<ext-grid-column data-index="governoratLibelleIndex" label-exp="$LV{gouvernorat}" width="150" />
+	<ext-grid-column data-index="localiteLibelleIndex" label-exp="$LV{localite}" width="150" />
+	<ext-grid-column data-index="telephone1Index" width="150" />
+	<ext-grid-column data-index="telephone2Index" width="150" />
+	<ext-grid-column data-index="faxIndex" width="150" />
+	<ext-grid-column data-index="matriculeFiscalIndex" width="150" />
+	<ext-grid-column data-index="registreCommerceIndex" width="150" />
+	<ext-grid-column data-index="matriculeCnssIndex" width="150" />
+	<ext-grid-column data-index="matriculeCnrpsIndex" width="150" />
+	<ext-grid-column data-index="matriculeCavisIndex" width="150" />
+	<ext-grid-column data-index="numeroCcbIndex" width="150" />
+</root>

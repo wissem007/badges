@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" body-style="padding:15px" label-width="140">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" width="300" next-element="abreviation" />
+		<ext-field-text id="abreviation" property="detailBean.abreviation" allow-blank="false" width="200" next-element="code" />
+		<ext-field-spinner id="code" property="detailBean.jourCode" allow-blank="false" width="100" next-element="rang" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" width="100" next-element="valider" />
+	</ext-panel>
+</root>

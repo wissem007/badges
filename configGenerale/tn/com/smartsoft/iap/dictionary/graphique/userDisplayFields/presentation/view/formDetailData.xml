@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+         <ext-field-text id="userDisplayFieldId" property="detailBean.userDisplayFieldId" width="250" next-element="userTypeId" />
+                <ext-field-text id="userTypeId" property="detailBean.userTypeId" width="250" next-element="libelle" />
+                <ext-field-text id="libelle" property="detailBean.libelle" width="250" next-element="tagValue" />
+                <ext-field-text id="tagValue" property="detailBean.tagValue" width="250" next-element="" />
+        </root>

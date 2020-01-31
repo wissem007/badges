@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="tn.com.smartsoft.iap.administration.securite.profile.beans">
+	<class name="ProfileBean" table="AC_PROFILES">
+		<meta attribute="entite-id">profile</meta>
+		<composite-id name="id" class="ProfileBeanId">
+			<key-property name="profileId" column="AC_PROFILE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="help" column="HELP" />
+		<many-to-one name="module" class="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<map name="permissions" cascade="all" inverse="true">
+			<key>
+				<column name="AC_PROFILE_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<map-key column="AD_ROLE_ID" type="string" />
+			<one-to-many class="PermissionBean" />
+		</map>
+	</class>
+	<class name="PermissionBean" table="AC_PERMISSIONS">
+		<meta attribute="entite-id">permission</meta>
+		<composite-id name="id" class="PermissionBeanId">
+			<key-property name="profileId" column="AC_PROFILE_ID" />
+			<key-property name="roleId" column="AD_ROLE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="permission" column="PERMISSION" />
+		<many-to-one name="role" class="tn.com.smartsoft.iap.dictionary.securite.role.beans.ItemRoleBean" fetch="join" update="false" insert="false">
+			<column name="AD_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

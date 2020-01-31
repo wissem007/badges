@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/iap/administration/securite/utilisateur/presentation/view" />
+	<bean name="userControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$LV{listUtilisateur}" />
+	</bean>
+	<bean name="passwordHashing" class="tn.com.smartsoft.iap.system.business.DefaultPasswordHashing"></bean>
+	<dao-parse-bean id="userParse">
+	</dao-parse-bean>
+	<bean name="userBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-bean name="userDao" interface="${daoPack}.UserDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.UserBean AS bean WHERE bean.userType!=1
+            <#if arg3.userId?exists>
+              AND bean.userId=:arg3.userId
+            </#if>
+            <#if arg3.etatActive?exists && arg3.etatActive==1>
+             AND bean.isActive=true
+            </#if>
+            <#if arg3.etatActive?exists && arg3.etatActive==2>
+             AND bean.isActive=false
+            </#if>
+            <#if arg3.userName?exists && arg3.userName!="">
+              AND trim(upper(bean.userName)) like trim(upper(:arg3.userName))||'%'
+            </#if>
+            <#if arg3.paysId?exists>
+              AND bean.paysId=:arg3.paysId
+            </#if>
+            <#if arg3.governoratId?exists>
+              AND bean.governoratId=:arg3.governoratId
+            </#if>
+            <#if arg3.localiteId?exists>
+              AND bean.localiteId=:arg3.localiteId
+            </#if>
+              <#if arg2>
+              AND bean.createdById=:arg1
+            </#if>
+            AND bean.userId!='1'
+        ]]>
+			</query>
+		</query-method>
+		<query-method name="getByCriteriaNoDetail" class-resultat="${beanPack}.UserBean" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean.userId as userId,bean.passeWord as passeWord,bean.displayName as displayName,bean.isActive as isActive ,bean.userName as userName,bean.gsm as gsm,bean.telephone as telephone ,bean.adresse as adresse,bean.paysId as paysId,bean.governoratId as governoratId ,bean.localiteId as localiteId,bean.mail as mail,bean.userType as userType   FROM ${beanPack}.UserBean AS bean 
+             WHERE bean.userType!=1
+            <#if arg3.userId?exists>
+              AND bean.userId=:arg3.userId
+            </#if>
+            <#if arg3.etatActive?exists && arg3.etatActive==1>
+             AND bean.isActive=true
+            </#if>
+            <#if arg3.etatActive?exists && arg3.etatActive==2>
+             AND bean.isActive=false
+            </#if>
+            <#if arg3.userName?exists && arg3.userName!="">
+              AND trim(upper(bean.userName)) like trim(upper(:arg3.userName))||'%'
+            </#if>
+            <#if arg3.paysId?exists>
+              AND bean.paysId=:arg3.paysId
+            </#if>
+            <#if arg3.governoratId?exists>
+              AND bean.governoratId=:arg3.governoratId
+            </#if>
+            <#if arg3.localiteId?exists>
+              AND bean.localiteId=:arg3.localiteId
+            </#if>
+             <#if arg2>
+              AND bean.createdById=:arg1
+            </#if>
+        ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="userBusiness" class="${businessPack}.UserBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-parse-bean name="parseListBean" ref="userParse" />
+		<set-property name="passwordHashing" ref="passwordHashing" />
+		<set-dao-bean name="entiteDao" ref="userDao" />
+		<set-property name="businessParams" ref="userBusinessParams" />
+	</business-bean>
+	<controler-bean name="userControler" class="${controlerPack}.UserControler">
+		<set-business-bean name="entiteBusiness" ref="userBusiness" />
+		<set-business-bean name="paysBusiness" ref="paysBusiness" sujet="pays" sub-module="organisationSociete" module="configGenerale" />
+		<set-business-bean name="localiteBusiness" ref="localiteBusiness" sujet="localite" sub-module="organisationSociete" module="configGenerale" />
+		<set-business-bean name="gouvernoratBusiness" ref="gouvernoratBusiness" sujet="gouvernorat" sub-module="organisationSociete" module="configGenerale" />
+		<set-business-bean name="societeBusiness" ref="societeBusiness" sujet="societe" sub-module="organisationSociete" module="configGenerale" />
+		<set-business-bean name="organismeBusiness" ref="OrganismeProprietairesBusiness" sujet="organismeProprietaires" sub-module="administration" module="configGenerale" />
+		<set-business-bean name="profileBusiness" ref="profileBusiness" sujet="profile" />
+		<set-business-bean name="moduleBusiness" ref="moduleBusiness" sujet="module" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="fonctionUtilisationBusiness" ref="FonctionUtilisationBusiness" sujet="fonctionUtilisation" sub-module="administration" module="configGenerale" />
+		<set-property name="controlerParams" ref="userControlerParams" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.UserModel" controler-bean="userControler">
+		<binding-model name="detailBean" property="detailBean" mode="r" type="${beanPack}.UserBean">
+			<binding-model name="pays" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+			<binding-model name="localite" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+			<binding-model name="gouvernorat" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+			<binding-model name="fonctionUtilisation" mode="r" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		</binding-model>
+		<binding-model name="searcheBean" property="searcheBean" mode="f" type="${beanPack}.UserBean">
+			<binding-model name="pays" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+			<binding-model name="localite" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+			<binding-model name="gouvernorat" mode="f" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+			<binding-model name="fonctionUtilisation" mode="r" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		</binding-model>
+		<binding-model name="listBean" property="listBean" mode="r" type="${beanPack}.UserBean">
+			<binding-model name="pays" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+			<binding-model name="localite" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+			<binding-model name="gouvernorat" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+			<binding-model name="fonctionUtilisation" mode="r" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		</binding-model>
+		<binding-model name="listPays" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+		<binding-model name="listLocalite" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+		<binding-model name="listGouvernorat" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+		<binding-model name="listFonctionUtil" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListPays">
+			<parameter name="titleList" value="$LV{listUtilisateur}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="isRenderActive" value="true" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isEditableIsActive" value="true" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="activer" extends="consulter">
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListPays">
+			<parameter name="titleList" value="$LV{listUtilisateur}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="isRenderActive" value="false" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderActivate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="desactiver" extends="consulter">
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListPays">
+			<parameter name="titleList" value="$LV{listUtilisateur}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="isRenderActive" value="false" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderDesactivate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" property="detailBean" mode="u" type="${beanPack}.UserBean">
+			<binding-model name="pays" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+			<binding-model name="localite" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+			<binding-model name="gouvernorat" mode="u" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+			<binding-model name="fonctionUtilisation" mode="u" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		</binding-model>
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListPays">
+			<parameter name="titleList" value="$LV{listUtilisateur}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="isRenderActive" value="false" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableGrid" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListPays">
+			<parameter name="titleList" value="$LV{listUtilisateur}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="isRenderActive" value="false" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableGrid" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.UserModel" controler-bean="userControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.UserBean">
+			<binding-model name="pays" property="pays" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+			<binding-model name="localite" property="localite" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+			<binding-model name="gouvernorat" mode="c" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+			<binding-model name="fonctionUtilisation" mode="c" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		</binding-model>
+		<binding-model name="listPays" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" />
+		<binding-model name="listLocalite" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" />
+		<binding-model name="listGouvernorat" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" />
+		<binding-model name="listFonctionUtil" property="listBean" mode="r" type="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitListPays">
+			<parameter name="title" value="$LV{utilisateur}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableGrid" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+</beans>

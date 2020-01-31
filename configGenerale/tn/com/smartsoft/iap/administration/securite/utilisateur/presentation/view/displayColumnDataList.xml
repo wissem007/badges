@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="displayNameIndex" property="displayName" />
+		<ext-store-field id="userNameIndex" property="userName" />
+		<ext-store-field id="gsmIndex" property="gsm" />
+		<ext-store-field id="telephoneIndex" property="telephone" />
+		<ext-store-field id="adresseIndex" property="adresse" />
+	</ext-store>
+	<ext-grid-column data-index="userNameIndex" width="150" locked="true" />
+	<ext-grid-column data-index="displayNameIndex" width="200" locked="true" />
+	<ext-grid-column data-index="gsmIndex" width="80" />
+	<ext-grid-column data-index="telephoneIndex" width="80" />
+	<ext-grid-column data-index="adresseIndex" width="200" />
+</root>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.iap.dictionary.outils.parametrage.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.iap.dictionary.outils.parametrage.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.iap.dictionary.outils.parametrage.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.iap.dictionary.outils.parametrage.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.iap.dictionary.outils.parametrage.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/iap/dictionary/outils/parametrage/presentation/view" />
+	<bean name="parametrageOutilsControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120008" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$L{listParametrage}" />
+	</bean>
+	<controler-bean name="parametrageOutilsControler" class="${controlerPack}.ParametrageOutilsControler">
+		<set-business-bean name="applicationDictionnaireLoader" ref="applicationDictionnaireLoader" sujet="system" sub-module="system" module="system" />
+		<set-business-bean name="menuBusiness" ref="menuItemBusiness" sujet="menuItem" sub-module="graphique" module="dictionary" />
+		<set-business-bean name="entiteBusiness" ref="DataValuesBusiness" sujet="entiteSimple" sub-module="dynamicEntite" module="configGenerale" />
+		<set-business-bean name="moduleBusiness" ref="moduleBusiness" sujet="module" sub-module="decoupage" module="dictionary" />
+		<set-property name="controlerParams" ref="parametrageOutilsControlerParams" />
+	</controler-bean>
+	<user-action-bean name="charger" home-window-id="detailWindow" model-class="tn.com.smartsoft.framework.presentation.model.GenericEntiteModel" controler-bean="parametrageOutilsControler">
+		<binding-model name="detailBean" mode="c" type="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.beans.DataValuesBean" />
+		<binding-model name="listBean" mode="c" type="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.beans.DataValuesBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitList">
+			<parameter name="title" value="$L{parametrageOutils}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="chargerRole" home-window-id="listWindow" model-class="${modelPack}.OutilModel" controler-bean="parametrageOutilsControler">
+		<binding-model name="searcheBean" mode="c" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listBean" mode="r" type="tn.com.smartsoft.iap.dictionary.graphique.menuItem.beans.MenuItemBean" />
+		<window id="listWindow" location="${viewPack}/genericListTreeWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListModule">
+			<parameter name="titleList" value="$L{parametrageOutils}" />
+			<parameter name="formFilter" value="${viewPack}/formDetailRoleData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+			<parameter name="validateMethod" value="doValiderCreateRole" />
+			<parameter name="gridHeight" value="450" />
+		</window>
+	</user-action-bean>
+</beans>

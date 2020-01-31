@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db"  package="tn.com.smartsoft.configGenerale.devises.cours.beans">
+	<class name="CourBean" table="CR_COURS">
+		<id name="coursId" column="CR_COURS_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="deviseId" column="CR_DEVISE_ID" />
+		<property name="dateCours" column="DATE_COURS" />
+		<property name="cours" column="COURS" />
+		<property name="createdById" column="MAT_PERS_CRE" />
+		<property name="createdDate" column="DATECREATION" />
+		<property name="updatedById" column="MAT_PERS_MOD" />
+		<property name="updatedDate" column="DATEMODIFICATION" />
+		<many-to-one name="devise" class="tn.com.smartsoft.configGenerale.devises.devise.beans.DeviseBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_DEVISE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

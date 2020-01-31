@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="sequenceId" property="detailBean.sequenceId" allow-blank="false" maxLength="20" width="200" next-element="startNumber" editable="${isEditableSequenceId}" />
+		<ext-field-number id="startNumber" property="detailBean.startNumber" allow-blank="false" maxLength="10" width="100" next-element="valueExpression" />
+		<ext-field-text id="valueExpression" property="detailBean.valueExpression" allow-blank="false" maxLength="60" width="200" next-element="lengthNumber" />
+		<ext-field-number id="lengthNumber" property="detailBean.lengthNumber" allow-blank="false" maxLength="2" width="30" next-element="valueGroupExpression" />
+		<ext-field-text id="valueGroupExpression" property="detailBean.valueGroupExpression" allow-blank="false" maxLength="100" width="200" next-element="valider" />
+	</ext-panel>
+</root>

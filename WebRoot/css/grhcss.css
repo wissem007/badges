@@ -1,0 +1,68 @@
+.tg-T-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/tranche.png') no-repeat -3px -3px;
+}
+
+.tg-FB-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/fborne.png') no-repeat -3px -3px;
+}
+
+.tg-FS-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/fsimple.png') no-repeat -3px -3px;
+}
+
+.tg-F-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/formule.png') no-repeat -3px -3px;
+}
+
+.tg-GF-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/gfixe.png') no-repeat -3px -3px;
+}
+
+.tg-GV-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/gvariable.png') no-repeat -3px -3px;
+}
+
+.tg-CP-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/pret.png') no-repeat -3px -3px;
+}
+
+.tg-ALL-icon {
+	width: 10px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: -1px;
+	background: url('../images/action/normal.png') no-repeat -3px -3px;
+}
+
+.row-red {
+	background-color: red;
+	width: 400px;
+}

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/configGenerale/dynamicEntite/entiteSimple/presentation/view" />
+	<bean name="DataValuesControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$LV{listDataValues}" />
+	</bean>
+	<bean name="DataValuesBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-parse-bean id="DataValuesParse">
+	</dao-parse-bean>
+	<dao-bean name="DataValuesDao" interface="${daoPack}.DataValuesEntiteDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.DataValuesBean AS bean WHERE 1=1
+        	
+        	<#if arg3.libelle?exists && arg3.libelle!="">
+              AND trim(upper(bean.libelle)) like trim(upper(:arg3.libelle))||'%'
+            </#if>
+            
+            <#if arg3.dataValueId?exists && arg3.dataValueId!="">
+              AND trim(upper(bean.id.dataValueId)) like trim(upper(:arg3.dataValueId))||'%'
+            </#if>
+        
+         	<#if arg3.entiteId?exists && arg3.entiteId!="">
+              AND trim(upper(bean.id.entiteId)) like trim(upper(:arg3.entiteId))||'%'
+            </#if>
+ 
+            <#if arg3.sujetId?exists && arg3.sujetId!="">
+              AND trim(upper(bean.id.sujetId)) like trim(upper(:arg3.sujetId))||'%'
+            </#if>
+
+            <#if arg3.subModuleId?exists && arg3.subModuleId!="">
+              AND trim(upper(bean.id.subModuleId)) like trim(upper(:arg3.subModuleId))||'%'
+            </#if>
+
+            <#if arg3.moduleId?exists && arg3.moduleId!="">
+              AND trim(upper(bean.id.moduleId)) like trim(upper(:arg3.moduleId))||'%'
+            </#if>
+          	 <#if arg3.societeId?exists>
+              AND societeId=:arg3.societeId
+            </#if>
+             <#if arg3.organismeId?exists>
+              AND organismeId=:arg3.organismeId
+            </#if>  		   		   		   		   		   		   		   		   		   		   		   		   		   		   		            ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="DataValuesBusiness" class="${businessPack}.DataValuesBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="entiteDao" ref="DataValuesDao" />
+		<set-dao-parse-bean name="parseBean" ref="DataValuesParse" />
+		<set-dao-parse-bean name="menuParser" ref="DataValuesParse" />
+		<set-property name="businessParams" ref="DataValuesBusinessParams" />
+	</business-bean>
+	<controler-bean name="DataValuesControler" class="${controlerPack}.DataValuesControler">
+		<set-business-bean name="entiteBusiness" ref="DataValuesBusiness" />
+		<set-business-bean name="moduleBusiness" ref="moduleBusiness" sujet="module" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="entiteDbBusiness" ref="entiteBusiness" sujet="entite" sub-module="decoupage" module="dictionary" />
+		<set-business-bean name="societeBusiness" ref="societeBusiness" sujet="societe" sub-module="organisationSociete" module="configGenerale" />
+		<set-business-bean name="organismeBusiness" ref="organismeBusiness" sujet="organisme" sub-module="organisationSociete" module="configGenerale" />
+		<set-property name="controlerParams" ref="DataValuesControlerParams" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.DataValuesModel" controler-bean="DataValuesControler">
+		<binding-model name="detailBean" mode="r" type="${beanPack}.DataValuesBean">
+			<binding-model name="parentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean">
+				<binding-model name="parentOrganisme" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" />
+			</binding-model>
+		</binding-model>
+		<binding-model name="searcheBean" mode="f" type="${beanPack}.DataValuesBean">
+			<binding-model name="parentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean">
+				<binding-model name="parentOrganisme" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" />
+			</binding-model>
+		</binding-model>
+		<binding-model name="listBean" mode="r" type="${beanPack}.DataValuesBean">
+			<binding-model name="parentSujet" property="parentSujet" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean">
+				<binding-model name="parentSubModule" property="parentSubModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.subModule.beans.SubModuleBean">
+					<binding-model name="parentModule" property="parentModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+				</binding-model>
+			</binding-model>
+			<binding-model name="parentSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean">
+				<binding-model name="parentOrganisme" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" />
+			</binding-model>
+		</binding-model>
+		<binding-model name="listModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listEntite" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.entite.beans.EntiteBean" />
+		<binding-model name="listSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+		<binding-model name="listOrganisme" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" />
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitList">
+			<parameter name="titleList" value="$LV{listDataValues}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-render-methode="onRenderDetailWindow">
+			<parameter name="title" value="$LV{DataValues}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isEditableDataValuesId" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" property="detailBean" mode="u" type="${beanPack}.DataValuesBean">
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-render-methode="onRenderDetailWindow">
+			<parameter name="title" value="$LV{DataValues}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableDataValuesId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<binding-model name="detailBean" property="detailBean" mode="d" type="${beanPack}.DataValuesBean">
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-render-methode="onRenderDetailWindow">
+			<parameter name="title" value="$LV{DataValues}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableDataValuesId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.DataValuesModel" controler-bean="DataValuesControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.DataValuesBean">
+		</binding-model>
+		<binding-model name="listModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<binding-model name="listEntite" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.entite.beans.EntiteBean" />
+		<binding-model name="listSociete" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" />
+		<binding-model name="listOrganisme" mode="r" type="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitList">
+			<parameter name="title" value="$LV{DataValues}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableDataValuesId" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+</beans>

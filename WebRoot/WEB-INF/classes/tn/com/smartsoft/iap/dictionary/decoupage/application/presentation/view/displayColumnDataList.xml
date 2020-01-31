@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true" >
+		<ext-store-field id="applicationIdIndex" property="applicationId" />
+		<ext-store-field id="moduleBaseIdIndex" property="moduleBaseId" />
+		<ext-store-field id="deviseIdIndex" property="deviseId" />
+		<ext-store-field id="paysIdIndex" property="paysId" />
+		<ext-store-field id="systemModuleIdIndex" property="systemModuleId" />
+		<ext-store-field id="versionIndex" property="version" />
+	</ext-store>
+	<ext-grid-column data-index="applicationIdIndex" width="80" locked="true" />
+	<ext-grid-column data-index="moduleBaseIdIndex" width="250" />
+	<ext-grid-column data-index="systemModuleIdIndex" width="250" />
+	<ext-grid-column data-index="versionIndex" width="250" />
+</root>

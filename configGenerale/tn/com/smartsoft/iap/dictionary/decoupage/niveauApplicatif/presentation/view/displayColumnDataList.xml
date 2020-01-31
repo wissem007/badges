@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="abreviationIndex" property="abreviation" />
+	</ext-store>
+	<ext-grid-column data-index="niveauApplicatifIdIndex" width="150" />
+	<ext-grid-column data-index="libelleIndex" width="150" />
+	<ext-grid-column data-index="abreviationIndex" width="150" />
+</root>

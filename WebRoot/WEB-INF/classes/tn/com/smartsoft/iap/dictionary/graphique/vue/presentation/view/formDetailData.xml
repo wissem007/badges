@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModule" model-name="listSubModule" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSujet" model-name="listSujet" id-property="sujetIdIndex">
+		<ext-store-field id="sujetIdIndex" property="sujetId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListActionTemplate" model-name="listActionTemplate" id-property="actionTemplateIdIndex">
+		<ext-store-field id="actionTemplateIdIndex" property="actionTemplateId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	
+	
+	<ext-panel id="p1"  layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="viewId" property="detailBean.viewId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableViewId}" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="50" width="200" next-element="module" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" maxLength="50" width="200" editable="${isEditableModule}" next-element="subModule">
+			<ajax-event name="change" action-listener="getSubModule" handle-params="el,e" is-wait="false" >
+				<request-field field="module" />
+				<success>
+					<![CDATA[
+ 					var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('subModule').clearValue();
+           			desktop.getCmp('subModule').getStore().removeAll();
+           			   
+					desktop.getCmp('subModule').getStore().load();
+                  
+                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="subModule" label-exp="$L{subbmodule}" property="detailBean.subModuleId" display-field="libelleIndex" store-id="storeListSubModule" maxLength="50" width="200" editable="${isEditableSubModule}" next-element="sujet" >
+			<ajax-event name="change" action-listener="getSujet" handle-params="el,e" is-wait="false">
+				<request-field field="subModule" />
+				<success>
+					<![CDATA[
+ 					var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('sujet').clearValue();
+           			desktop.getCmp('sujet').getStore().removeAll();
+           			   
+					desktop.getCmp('sujet').getStore().load();
+                  
+                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="sujet" label-exp="$L{susujet}" property="detailBean.sujetId" display-field="libelleIndex" display-field-id="sujetIdIndex" store-id="storeListSujet" maxLength="50"	width="200" editable="${isEditableSujet}" next-element="help"/>
+		<ext-field-text id="help" property="detailBean.help" maxLength="60" width="200" />
+	</ext-panel>
+	<ext-tab-panel id="tabPanel" activeTab="detailVue" >
+		<ext-panel id="detailViewLibelle" title-exp="$L{viewLibelle}" border="false" label-width="120" height="280">
+			<ext-grid id="libelles" height="260" editable="${isEditableviewLibelles}">
+				<ext-store root="data" model-name="detailBean.listLibelles" index-name="i">
+					<ext-store-field id="viewLibellesIndex" property="viewLibellesId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+					<ext-store-field id="helpIndex" property="help" />
+				</ext-store>
+				<ext-grid-column data-index="viewLibellesIndex" width="250">
+					<ext-field-text id="viewLibellesIndex" maxLength="100" width="250" />
+				</ext-grid-column>
+				<ext-grid-column data-index="libelleIndex" width="250">
+					<ext-field-text id="libelleIndex" maxLength="100" width="250" />
+				</ext-grid-column>
+				<ext-grid-column data-index="helpIndex" width="250">
+					<ext-field-text id="helpIndex" maxLength="100" width="250" />
+				</ext-grid-column>
+			</ext-grid>
+		</ext-panel>
+		<ext-panel id="detailviewAction" title-exp="$L{viewAction}" border="false" label-width="120" height="280">
+			<ext-grid id="actions" height="260" editable="${isEditableviewAction}">
+				<ext-store root="data" model-name="detailBean.listActions" index-name="i">
+					<ext-store-field id="viewActionIdIndex" property="viewActionId" />
+					<ext-store-field id="actionTemplateIdIndex" property="actionTemplateId" />
+					<ext-store-field id="helpIndex" property="help" />
+				</ext-store>
+				<ext-grid-column data-index="viewActionIdIndex" width="100">
+					<ext-field-text id="viewActionIdIndex" maxLength="100" width="100" />
+				</ext-grid-column>
+				<ext-grid-column data-index="actionTemplateIdIndex" label-exp="$L{atactionTemplate}" width="150">
+					<ext-field-combo display-field="libelleIndex" store-id="storeListActionTemplate" />
+				</ext-grid-column>
+				<ext-grid-column data-index="helpIndex" width="100">
+					<ext-field-text id="helpIndex" maxLength="100" width="100" />
+				</ext-grid-column>
+			</ext-grid>
+		</ext-panel>
+	</ext-tab-panel>
+</root>

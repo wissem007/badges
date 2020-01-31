@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-setting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/web-setting.xsd">
+	<encoding value="UTF-8" />
+	<locale value="FR" />
+	<window-response-view value="window" />
+	<tags location="tn/com/smartsoft/ressources/xml-tags.xml" />
+	<web-beans location="tn/com/smartsoft/ressources/formater-setting.xml" />
+	<scripts location="tn/com/smartsoft/ressources/scripts-setting.xml" />
+	<images location="tn/com/smartsoft/ressources/web-image-path.xml" />
+	<response-views>
+		<response-view name="file" class="tn.com.smartsoft.framework.presentation.view.response.ResponseFile" content-type="text/file">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+		</response-view>
+		<response-view name="window" class="tn.com.smartsoft.framework.presentation.view.response.WindowResponse" content-type="text/html">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+		</response-view>
+		<response-view name="dialog" class="tn.com.smartsoft.framework.presentation.view.response.DialogResponse" content-type="text/html">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+		</response-view>
+		<response-view name="ajax" class="tn.com.smartsoft.framework.presentation.view.response.AjaxXmlResponse" content-type="text/xml">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+		</response-view>
+		<response-view name="json" class="tn.com.smartsoft.framework.presentation.view.response.AjaxJsonResponse" content-type="application/json">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+		</response-view>
+		<response-view name="csv" class="tn.com.smartsoft.framework.presentation.view.response.JasperResponse" content-type="text/csv">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+			<param name="extension" value="csv" />
+			<param name="jasperExporter" value="net.sf.jasperreports.engine.export.JRCsvExporter" />
+			<param name="size" value="4096" />
+		</response-view>
+		<response-view name="html" class="tn.com.smartsoft.framework.presentation.view.response.JasperResponse" content-type="text/html">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+			<param name="extension" value="html" />
+			<param name="jasperExporter" value="net.sf.jasperreports.engine.export.JRHtmlExporter" />
+			<param name="size" value="4096" />
+		</response-view>
+		<response-view name="pdf" class="tn.com.smartsoft.framework.presentation.view.response.JasperResponse" content-type="application/pdf">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+			<param name="extension" value="pdf" />
+			<param name="jasperExporter" value="net.sf.jasperreports.engine.export.JRPdfExporter" />
+			<param name="size" value="4096" />
+		</response-view>
+		<response-view name="xls" class="tn.com.smartsoft.framework.presentation.view.response.JasperResponse" content-type="application/vnd.ms-excel">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+			<param name="extension" value="xls" />
+			<param name="size" value="4096" />
+			<param name="jasperExporter" value="net.sf.jasperreports.engine.export.JRXlsExporter" />
+		</response-view>
+		<response-view name="pxls" class="tn.com.smartsoft.framework.presentation.view.response.XlResponse" content-type="application/vnd.ms-excel">
+			<header name="Cache-Control" value="max-age=0, must-revalidate, no-cache, no-store, private, post-check=0, pre-check=0" />
+			<header name="Pragma" value="no-cache" />
+			<header name="Expires" value="0" />
+			<param name="extension" value="xls" />
+		</response-view>
+	</response-views>
+</web-setting>

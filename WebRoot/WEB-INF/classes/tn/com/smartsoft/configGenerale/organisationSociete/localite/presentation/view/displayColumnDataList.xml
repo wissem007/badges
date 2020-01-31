@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="localiteIdIndex"  reload-submit-all-field="true" reload-action-listener="doFilter" >
+		<ext-store-field id="localiteIdIndex" property="localiteId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="codePostalIndex" property="codePostal[$i]" />
+		<!--ext-store-field id="libelleArabeIndex" property="libelleArabe[$i]" /-->
+		<ext-store-field id="governoratLibelleIndex" property="governorat[$i].libelle" />
+		<ext-store-field id="paysLibelleIndex" property="governorat[$i].pays.libelle" />
+	</ext-store>
+	<!--ext-grid-column data-index="localiteIdIndex" width="300" locked="true" /-->
+	<ext-grid-column data-index="libelleIndex" width="300" />
+	<ext-grid-column data-index="codePostalIndex" label-exp="$L{codePostal}"  width="100" />
+	<!--ext-grid-column data-index="libelleArabeIndex" width="300" /-->
+	<ext-grid-column data-index="paysLibelleIndex" label-exp="$L{pays}" width="300" />
+	<ext-grid-column data-index="governoratLibelleIndex" label-exp="$LV{gouvernorat}" width="300" />
+	
+</root>

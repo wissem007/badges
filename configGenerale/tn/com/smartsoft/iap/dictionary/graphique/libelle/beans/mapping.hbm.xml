@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.libelle.beans">
+	<class name="LibelleBean" table="UI_LIBELLES">
+		<id name="libelleId" column="UI_LIBELLE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="sujetId" column="AD_SUJET_ID" />
+		<property name="subModuleId" column="AD_SUB_MODULE_ID" />
+		<property name="moduleId" column="AD_MODULE_ID" />
+		<property name="libelle" column="LIBELLE" />
+		<many-to-one name="parentSujet" class="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean" fetch="join" update="false" insert="false">
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

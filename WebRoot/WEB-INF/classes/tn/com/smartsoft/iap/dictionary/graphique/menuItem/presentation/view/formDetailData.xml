@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModules" model-name="listModules" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModules" model-name="listSubModules" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSujets" model-name="listSujets" id-property="sujetIdIndex" query-method="onInitListSujetBySubModule">
+		<ext-store-field id="sujetIdIndex" property="sujetId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListActions" model-name="listActions" id-property="actionIdIndex" query-method="onInitListActionBySujet">
+		<ext-store-field id="actionIdIndex" property="actionId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store root="data" id="storeListParents" model-name="listParents" id-property="menuIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="menuIdIndex" property="menuId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-fieldset layout="tform" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="menuId" property="detailBean.menuId" width="250" editable="false" is-rendred="${isRendredId}" next-element="moduleId" colspan="2" />
+		<ext-field-combo id="moduleId" property="detailBean.moduleId" allow-blank="false" editable="${isEditableModule}" display-field="libelleIndex" store-id="storeListModules" width="250" next-element="libelle" colspan="2">
+			<ajax-event name="change" action-listener="onInitListParentByModule" handle-params="el,e" is-wait="true">
+				<request-field field="moduleId" />
+				<success>
+						<![CDATA[
+					
+									var object = Ext.util.JSON.decode(response.responseText);
+									
+									desktop.getCmp('parentMenuId').getStore().removeAll();
+									desktop.getCmp('subModuleId').getStore().removeAll();
+									desktop.getCmp('sujetId').getStore().removeAll();
+									desktop.getCmp('actionId').getStore().removeAll();
+									
+									desktop.getCmp('menuActions').getStore().removeAll();
+									
+									desktop.getCmp('parentMenuId').getStore().load();
+									desktop.getCmp('subModuleId').getStore().load();
+									
+									desktop.getCmp("parentMenuId").clearValue();
+									desktop.getCmp("subModuleId").clearValue();
+				
+                  ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" width="250" next-element="rang" colspan="2" />
+		<ext-field-spinner id="rang" property="detailBean.rang" min-value="1" max-value="99" allow-blank="false" width="100" next-element="help" colspan="2" />
+		<ext-field-text id="help" property="detailBean.help" allow-blank="false" width="250" next-element="iconUrl" colspan="2" />
+		<ext-field-text id="iconUrl" property="detailBean.iconUrl" width="200" next-element="parentMenuId" colspan="2" />
+		<ext-field-combo id="parentMenuId" property="detailBean.parentMenuId" display-field="libelleIndex" store-id="storeListParents" width="250" next-element="valider" colspan="2">
+		</ext-field-combo>
+	</ext-fieldset>
+	<ext-grid id="menuActions" title-exp="$L{menuAction}" editable="${isEditableGrid}" height="300" border="true" auto-height="false">
+		<ext-store model-name="detailBean.menuActions">
+			<ext-store-field id="menuIdIndex" property="menuId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+			<ext-store-field id="rangIndex" property="rang" />
+			<ext-store-field id="helpIndex" property="help" />
+			<ext-store-field id="iconUrlIndex" property="iconUrl" />
+			<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+			<ext-store-field id="sujetIdIndex" property="sujetId" />
+			<ext-store-field id="actionIdIndex" property="actionId" />
+		</ext-store>
+		<ext-grid-column data-index="menuIdIndex" width="100" is-rendred="${isRendredId}">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="libelleIndex" width="200">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="rangIndex" width="100">
+			<ext-field-spinner min-value="1" max-value="99" />
+		</ext-grid-column>
+		<ext-grid-column data-index="helpIndex" width="200">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="iconUrlIndex" width="100">
+			<ext-field-text />
+		</ext-grid-column>
+		<ext-grid-column data-index="subModuleIdIndex" width="200">
+			<ext-field-combo id="subModuleId" display-field="libelleIndex" store-id="storeListSubModules">
+			</ext-field-combo>
+		</ext-grid-column>
+		<ext-grid-column data-index="sujetIdIndex" width="200">
+			<ext-field-combo id="sujetId" display-field="libelleIndex" store-id="storeListSujets" mode="remote" forceSelection="false">
+				<script-event name="beforequery" handle-params="qe">
+						<![CDATA[
+						      
+					          var moduleId=Ext.getCmp("moduleId").getValue();
+					          var subModuleId=qe.combo.eventColumn.record.get("subModuleIdIndex");
+		                      return Ext.sss.Utils.beforeQueryCombo(qe,{moduleId:moduleId,subModuleId:subModuleId});
+					      ]]>
+				</script-event>
+			</ext-field-combo>
+		</ext-grid-column>
+		<ext-grid-column data-index="actionIdIndex" width="200">
+			<ext-field-combo id="actionId" display-field="libelleIndex" store-id="storeListActions" mode="remote" forceSelection="false">
+				<script-event name="beforequery" handle-params="qe">
+						<![CDATA[
+						      
+					          var moduleId=Ext.getCmp("moduleId").getValue();
+					          var subModuleId=qe.combo.eventColumn.record.get("subModuleIdIndex");
+					          var sujetId=qe.combo.eventColumn.record.get("sujetIdIndex");
+		                      return Ext.sss.Utils.beforeQueryCombo(qe,{moduleId:moduleId,subModuleId:subModuleId,sujetId:sujetId});
+					      ]]>
+				</script-event>
+			</ext-field-combo>
+		</ext-grid-column>
+	</ext-grid>
+</root>

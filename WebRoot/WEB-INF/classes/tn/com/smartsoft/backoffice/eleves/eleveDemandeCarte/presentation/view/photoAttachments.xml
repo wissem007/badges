@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root layout="column">
+	<ext-dialog id="photoWindow" title-exp="Photo" width="340" height="100" layout="fit">
+		<ext-panel columnWidth=".99" label-width="100" layout="form" body-style="padding:8px;">
+			<ext-field-file id="photo" property="detailBean.photo" label-exp="Photo">
+				<script-event name="fileselected" action-listener="onPhotoSelected" handle-params="e,el" is-wait="true">
+						<![CDATA[
+					    	selectFile("photoWindow", "photo", "photoView" );
+		                   	]]>
+				</script-event>
+			</ext-field-file>
+		</ext-panel>
+	</ext-dialog>
+</root>

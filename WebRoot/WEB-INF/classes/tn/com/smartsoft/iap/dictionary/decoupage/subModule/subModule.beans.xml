@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.iap.dictionary.decoupage.subModule.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.iap.dictionary.decoupage.subModule.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.iap.dictionary.decoupage.subModule.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.iap.dictionary.decoupage.subModule.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.iap.dictionary.decoupage.subModule.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/iap/dictionary/decoupage/subModule/presentation/view" />
+	<bean name="subModuleControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$L{listSubModule}" />
+	</bean>
+	<bean name="subModuleBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-parse-bean id="moduleParse">
+		<dao-parse-bean property="parentModule" />
+	</dao-parse-bean>
+	<dao-bean name="subModuleDao" interface="tn.com.smartsoft.framework.dao.GenericEntiteDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  bean FROM ${beanPack}.SubModuleBean AS bean left join fetch bean.parentModule WHERE 1=1
+        
+            <#if arg3.subModuleId?exists && arg3.subModuleId!="">
+              AND trim(upper(bean.id.subModuleId)) like trim(upper(:arg3.subModuleId))||'%'
+            </#if>
+
+            <#if arg3.moduleId?exists && arg3.moduleId!="">
+              AND trim(upper(bean.id.moduleId)) like trim(upper(:arg3.moduleId))||'%'
+            </#if>
+
+            <#if arg3.libelle?exists && arg3.libelle!="">
+              AND trim(upper(bean.libelle)) like trim(upper(:arg3.libelle))||'%'
+            </#if>
+
+			<#if arg3.rang?exists && arg3.rang!="">
+              AND bean.rang=:arg3.rang
+            </#if>
+  
+            <#if arg3.help?exists && arg3.help!="">
+              AND trim(upper(bean.help)) like trim(upper(:arg3.help))||'%'
+            </#if>
+
+            <#if arg2>
+              AND bean.createdById=:arg1
+            </#if>           
+       ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="subModuleBusiness" class="${businessPack}.SubModuleBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="entiteDao" ref="subModuleDao" />
+		<set-dao-parse-bean name="parseListBean" ref="moduleParse" />
+		<set-property name="businessParams" ref="subModuleBusinessParams" />
+	</business-bean>
+	<controler-bean name="subModuleControler" class="${controlerPack}.SubModuleControler">
+		<set-business-bean name="entiteBusiness" ref="subModuleBusiness" />
+		<set-business-bean name="moduleBusiness" ref="moduleBusiness" sujet="module" sub-module="decoupage" module="dictionary" />
+		<set-property name="controlerParams" ref="subModuleControlerParams" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.SubModuleModel" controler-bean="subModuleControler">
+		<binding-model name="detailBean" property="detailBean" mode="r" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" property="parentModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<binding-model name="searcheBean" property="searcheBean" mode="f" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" property="parentModule" mode="f" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<binding-model name="listBean" property="listBean" mode="r" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" property="parentModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<binding-model name="listModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-render-methode="onRendeListWindow" on-init-methode="onInitListModule">
+			<parameter name="titleList" value="$L{listsubModule}" />
+			<parameter name="gridHeight" value="350" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{smodule}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isEditableSubModuleId" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" property="detailBean" mode="u" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" mode="u" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{smodule}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableSubModuleId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<binding-model name="detailBean" property="detailBean" mode="d" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" property="parentModule" mode="d" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{smodule}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableSubModuleId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.SubModuleModel" controler-bean="subModuleControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.SubModuleBean">
+			<binding-model name="parentModule" property="parentModule" mode="c" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		</binding-model>
+		<binding-model name="listModule" mode="r" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitListModule">
+			<parameter name="title" value="$L{smodule}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableSubModuleId" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+</beans>

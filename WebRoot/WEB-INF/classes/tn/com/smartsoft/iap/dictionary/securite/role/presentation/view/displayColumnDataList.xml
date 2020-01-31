@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <ext-store root="data" model-name="listBean" id-property="roleId" parent-property="prentRoleId" reload-submit-all-field="true" reload-action-listener="doFilter">
+           <ext-store-field id="roleIdIndex" property="roleId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+			<ext-store-field id="rangIndex" property="rang" />
+			<ext-store-field id="helpIndex" property="help" />
+			<ext-store-field id="typeRoleIndex" property="typeRole" />
+			<ext-store-field id="natureRoleIndex" property="natureRole" />
+        </ext-store>
+            <ext-grid-column data-index="roleIdIndex" width="100" />
+		<ext-grid-column data-index="typeRoleIndex" width="100" />
+		<ext-grid-column data-index="libelleIndex" width="300" />
+		<ext-grid-column data-index="rangIndex" width="50" />
+		<ext-grid-column data-index="helpIndex" width="400" />
+    </root>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <ext-store root="data" model-name="listBean" id-property=""  reload-submit-all-field="true" reload-action-listener="doFilter">
+           <ext-store-field id="propertyNameIndex" property="propertyName" />
+           <ext-store-field id="userTypeIdIndex" property="userTypeId" />
+           <ext-store-field id="libelleIndex" property="libelle" />
+           <ext-store-field id="rangIndex" property="rang" />
+           <ext-store-field id="isEncryptedIndex" property="encrypted" />
+           <ext-store-field id="isCherchableIndex" property="cherchable" />
+           <ext-store-field id="refEntiteIdIndex" property="refEntiteId" />
+           <ext-store-field id="refModuleIdIndex" property="refModuleId" />
+           <ext-store-field id="libelleEntiteRefIndex" property="libelleEntiteRef" />
+        </ext-store>
+            <ext-grid-column data-index="propertyNameIndex"  width="150" />
+            <ext-grid-column data-index="userTypeIdIndex"  label-exp="$L{uuuserType}"  width="150" />
+            <ext-grid-column data-index="libelleIndex"  width="150" />
+            <ext-grid-column data-index="rangIndex"  width="150" />
+            <ext-grid-column data-index="isEncryptedIndex" xtype="check" hideable="true" width="150"  />
+            <ext-grid-column data-index="isCherchableIndex" xtype="check" hideable="true" width="150" />
+            <ext-grid-column data-index="refEntiteIdIndex"  width="150" />
+            <ext-grid-column data-index="refModuleIdIndex"  width="150" />
+            <ext-grid-column data-index="libelleEntiteRefIndex"  width="150" />
+    </root>

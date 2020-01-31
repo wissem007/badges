@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="40" width="300" next-element="moduleId" />
+	<ext-field-combo id="moduleId" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" width="300" next-element="valider" editable="${isEditableId}" />
+</root>

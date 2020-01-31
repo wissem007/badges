@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-fieldset layout="tform" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="40" width="300" next-element="moduleId" />
+		<ext-field-combo id="moduleId" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" width="300" next-element="valider" />
+	</ext-fieldset>
+	<ext-grid id="listPermissons" title-exp="Liste d'autorisations" height="460" border="true" editable="true" is-tree="true" type-tree="2" editable-handler="editableHandler">
+		<ext-store root="data" model-name="listPermissons" id-property="roleId" parent-property="prentRoleId" is-expand-all="true">
+			<ext-store-field id="profileIdIndex" property="permission" />
+			<ext-store-field id="roleIdIndex" property="roleId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+			<ext-store-field id="typeRoleIndex" property="typeRole" />
+			<ext-store-field id="natureRoleIndex" property="natureRole" />
+			<ext-store-field id="permissionIndex" property="permission" />
+			<ext-store-field id="helpIndex" property="help" />
+		</ext-store>
+		<ext-grid-column data-index="permissionIndex" labelField="libelleIndex" xtype="treeCheck" width="200" preixStyleField="natureRoleIndex">
+			<ext-field-checkbox checked-value="1" unchecked-value="0" />
+		</ext-grid-column>
+		<ext-grid-column data-index="helpIndex" width="200">
+		</ext-grid-column>
+	</ext-grid>
+	<js-function name="editableHandler" list-param="colIndex,rowIndex, grid,store,record, isDefauldCellEditable">
+		<![CDATA[
+			var record = store.getAt(rowIndex);
+			var val=record.get("natureRoleIndex");
+		 		if(val!='A' && val!='F')
+				  if( colIndex==0)
+                     return false; 																 															
+	  		return isDefauldCellEditable();
+		 ]]>
+	</js-function>
+</root>

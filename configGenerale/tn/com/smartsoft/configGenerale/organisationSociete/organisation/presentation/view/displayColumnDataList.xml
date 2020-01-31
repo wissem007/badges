@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="organismeIdIndex"  reload-submit-all-field="true" reload-action-listener="doFilter" >
+		<ext-store-field id="organismeIdIndex" property="organismeId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="abreviationIndex" property="abreviation[$i]" />
+		<ext-store-field id="societeLibelleIndex" property="parentSociete[$i].libelle" />
+	</ext-store>
+	<ext-grid-column data-index="organismeIdIndex" width="300" locked="true" />
+	<ext-grid-column data-index="libelleIndex" width="300" />
+	<ext-grid-column data-index="abreviationIndex" width="300" />
+	<ext-grid-column data-index="societeLibelleIndex" label-exp="Societe" width="300" />
+</root>

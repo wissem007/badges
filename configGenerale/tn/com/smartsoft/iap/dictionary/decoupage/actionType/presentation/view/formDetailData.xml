@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+		<ext-field-text id="actionTypeId" property="detailBean.actionTypeId" allow-blank="false" maxLength="2" width="40" next-element="libelle" editable="${isEditableActionTypeId}"  />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="60" width="200" next-element="valider" />
+</root>

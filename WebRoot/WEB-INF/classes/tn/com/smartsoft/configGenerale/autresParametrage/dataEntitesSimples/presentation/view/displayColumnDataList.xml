@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" index-name="i">
+		<ext-store-field id="libelleindex" property="libelle[$i]" />
+	</ext-store>
+	<ext-grid-column data-index="libelleindex" width="50" locked="true" />
+</root>

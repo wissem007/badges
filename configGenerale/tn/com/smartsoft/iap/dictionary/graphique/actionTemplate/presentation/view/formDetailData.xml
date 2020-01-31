@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+		<ext-field-number id="actionTemplateId" property="detailBean.actionTemplateId" allow-blank="false" maxLength="3" width="40" next-element="libelle" editable="${isEditableActionTemplateId}"  />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="50" width="200" next-element="iconUrl" />
+		<ext-field-text id="iconUrl" property="detailBean.iconUrl" allow-blank="false" maxLength="255" width="200" next-element="shortCutValue" />
+		<ext-field-text id="shortCutValue" property="detailBean.shortCutValue" allow-blank="false" maxLength="10" width="100" next-element="valider" />
+</root>
+
+

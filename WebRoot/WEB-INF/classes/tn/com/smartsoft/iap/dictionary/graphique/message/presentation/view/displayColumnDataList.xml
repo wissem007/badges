@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true">
+		<ext-store-field id="messagesIdIndex" property="messagesId" />
+		<ext-store-field id="messagesTypeIdIndex" property="messageType.libelle" />
+		<ext-store-field id="sujetIdIndex" property="parentSujet.libelle" />
+		<ext-store-field id="subModuleIdIndex" property="parentSubModule.libelle" />
+		<ext-store-field id="moduleIdIndex" property="parentModule.libelle" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="isAlertIndex" property="isAlert" />
+	</ext-store>
+	<ext-grid-column data-index="messagesIdIndex" width="80" />
+	<ext-grid-column data-index="messagesTypeIdIndex" label-exp="Types messages" width="80" />
+	<ext-grid-column data-index="sujetIdIndex" label-exp="Sujet" width="80" />
+	<ext-grid-column data-index="subModuleIdIndex" label-exp="Sous Module" width="80" />
+	<ext-grid-column data-index="moduleIdIndex" label-exp="Module" width="80" />
+	<ext-grid-column data-index="libelleIndex" width="250" />
+	<ext-grid-column data-index="isAlertIndex" label-exp="Alert" width="150" />
+</root>

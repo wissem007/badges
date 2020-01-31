@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.decoupage.entite.beans">
+	<class name="EntiteBean" table="AD_ENTITES">
+		<composite-id name="id" class="EntiteBeanId">
+			<key-property name="entiteId" column="AD_ENTITE_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="persistant" column="IS_PERSISTANT" />
+		<property name="rang" column="RANG" />
+		<property name="displayKeyFormat" column="DISPLAY_KEY_FORMAT" />
+		<property name="auditable" column="IS_AUDITABLE" />
+		<property name="help" column="HELP" />
+		<property name="javaClass" column="JAVA_CLASS" />
+		<property name="niveauApplicatifId" column="AD_NIVEAU_APPLICATIF_ID" />
+		<property name="dbTable" column="DB_TABLE" />
+		<property name="typeEntiteId" column="AD_TYPE_Entite_ID" />
+		<many-to-one name="typeEntite" class="tn.com.smartsoft.iap.dictionary.decoupage.typeEntites.beans.TypeEntitesBean" fetch="join" update="false" insert="false">
+			<column name="AD_TYPE_Entite_ID" />
+		</many-to-one>
+		<map name="propertys" cascade="all" lazy="true" inverse="true">
+			<key>
+				<column name="AD_ENTITE_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<map-key formula="AD_PROPERTY_NAME" type="string" />
+			<one-to-many class="PropertyBean" />
+		</map>
+		<many-to-one name="parentSujet" class="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans.SujetBean" fetch="join" update="false" insert="false">
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+	<class name="PropertyBean" table="AD_PROPERTYS">
+		<composite-id name="id" class="PropertyBeanId">
+			<key-property name="propertyName" column="AD_PROPERTY_NAME" />
+			<key-property name="entiteId" column="AD_ENTITE_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="sequenceId" column="AD_SEQUENCE_ID" />
+		<property name="userTypeId" column="UI_USER_TYPE_ID" />
+		<property name="roleId" column="AD_ROLE_ID" />
+		<property name="libelle" column="LIBELLE" />
+		<property name="rang" column="RANG" />
+		<property name="auditable" column="IS_AUDITABLE" />
+		<property name="encrypted" column="IS_ENCRYPTED" />
+		<property name="cherchable" column="IS_CHERCHABLE" />
+		<property name="persistant" column="IS_PERSISTANT" />
+		<property name="dynamique" column="IS_DYNAMIQUE" />
+		<property name="defaultValue" column="DEFAULT_VALUE" />
+		<property name="refEntiteId" column="AD_REF_ENTITE_ID" />
+		<property name="refSujetId" column="AD_REF_SUJET_ID" />
+		<property name="refSubModuleId" column="AD_REF_SUB_MODULE_ID" />
+		<property name="refModuleId" column="AD_REF_MODULE_ID" />
+		<property name="help" column="HELP" />
+		<many-to-one name="sequence" class="tn.com.smartsoft.iap.dictionary.decoupage.sequences.beans.SequenceBean" fetch="join" update="false" insert="false">
+			<column name="AD_SEQUENCE_ID" />
+		</many-to-one>
+		<many-to-one name="role" class="tn.com.smartsoft.iap.dictionary.securite.groupedRole.beans.FieldRoleBean" fetch="join" update="false" insert="false">
+			<column name="AD_ROLE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="userType" class="tn.com.smartsoft.iap.dictionary.graphique.userType.beans.UserTypeBean" fetch="join" update="false" insert="false">
+			<column name="UI_USER_TYPE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

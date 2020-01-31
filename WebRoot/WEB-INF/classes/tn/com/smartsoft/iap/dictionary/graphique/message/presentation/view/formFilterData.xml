@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListMessagesType" model-name="listMessagesType" id-property="messageTypeIdIndex">
+		<ext-store-field id="messageTypeIdIndex" property="messageTypeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="messagesId" property="searcheBean.messagesId" maxLength="30" width="200" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" maxLength="255" width="200" next-element="messagesType" />
+	<ext-field-combo id="messagesType" label-exp="$L{mtmessageType}" property="searcheBean.messagesTypeId" display-field="libelleIndex"
+		display-field-id="messageTypeIdIndex" store-id="storeListMessagesType" next-element="searche" />
+<!--	<ext-field-checkbox id="isAlert" property="searcheBean.isAlert" checked-value="true" unchecked-value="false" />-->
+</root>

@@ -1,0 +1,414 @@
+.wax-legend .legend-scale ul {
+	margin: 0;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	padding: 0;
+	float: left;
+	list-style: none;
+}
+
+.wax-legend .legend-scale ul li {
+	font-size: 80%;
+	list-style: none;
+	margin-left: 0;
+	line-height: 18px;
+	margin-bottom: 2px;
+}
+
+.wax-legend ul.legend-labels li span {
+	display: block;
+	float: left;
+	height: 16px;
+	width: 30px;
+	margin-right: 5px;
+	margin-left: 0;
+	border: 1px solid #999;
+	text-align: left;
+	font-weight: bold;
+}
+
+.west-panel .x-layout-collapsed-west {
+	background: url( ../images/default/collapsed-west.png) no-repeat center;
+}
+
+.west-panel .x-layout-collapsed-east {
+	background: url( ../images/default/collapsed-east.png) no-repeat center;
+}
+
+.x-form-indicator {
+	background-color: transparent;
+	background-position: 0 3px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 18px;
+	left: 0;
+	padding-top: 3px;
+	position: absolute;
+	top: 0;
+}
+
+.ext-ux-grid-gridviewmenuplugin-menuBtn.x-grid3-hd-btn {
+	display: block;
+}
+
+.icon-info-bar {
+	background-image: url( ../images/action/icon_info.png ) !important;
+	background-repeat: no-repeat;
+}
+
+.icon-add {
+	background-image: url( ../images/action/iconPdf.png ) !important;
+	background-repeat: no-repeat;
+}
+
+.media-PDF {
+	background-image: url( ../images/action/iconPdf.png ) !important;
+}
+
+.media-Xl {
+	background-image: url( ../images/action/iconXl.png ) !important;
+}
+
+.x-form-item-label {
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+}
+
+.x-btn button {
+	color: #333333;
+	font: bold 11px arial, tahoma, verdana, helvetica;
+}
+
+.info-Bar {
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.label-number-row {
+	font-weight: bold;
+	font-size: 11px;
+	font-family: tahoma, arial, verdana, sans-serif;
+	vertical-align: middle;
+	text-align: right;
+	width: 100%;
+}
+
+.label-Action {
+	font-weight: bold;
+	font-size: 11px;
+	font-family: tahoma, arial, verdana, sans-serif;
+	vertical-align: middle;
+	align: left;
+}
+
+.label-user {
+	background-image: url(  ../images/action/user.png ) !important;
+}
+
+.label-societe {
+	background-image: url(  ../images/action/societe.png ) !important;
+}
+
+.tool-bar-menu {
+	height: 20px;
+	border: 0;
+	color: black;
+	background-image: url("../images/menus-bg.gif");
+	background-repeat: repeat-x;
+}
+
+.customtbar {
+	background-image: url("../images/menu-bg.gif");
+	width: 100%;
+}
+
+.module-label {
+	border: 1px solid #fff;
+	margin-top: 4px;
+	height: 26px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.module-label .x-tree-ec-icon {
+	display: none;
+}
+
+.login-app-label {
+	font-weight: bold;
+	font-size: 11px;
+	vertical-align: middle;
+}
+
+.feeds-node .x-tree-node-icon {
+	display: none;
+}
+
+.x-table-form-layout-ct .x-table-layout-cell .x-form-field {
+	/* fix for form elements with no border clipping */
+	margin-top: 0;
+}
+
+.ext-ie .x-table-form-layout-ct .x-table-layout-cell .x-form-trigger {
+	/* ie fix for trigger field positioning */
+	margin-top: 2px;
+}
+
+.upload-icon {
+	background: url('../images/default/form/image_add.png') no-repeat 0 0 !important;
+}
+
+.x-form-field-wrap .x-form-color-trigger {
+	background-image: url(../images/default/form/color-trigger.png);
+}
+
+.ie6 .x-form-field-wrap .x-form-color-trigger {
+	background-image: url(../images/default/form/color-trigger.gif);
+}
+
+.field-3s {
+	
+}
+
+.field-disabled-3s {
+	font-weight: bold;
+}
+
+.x-grid3-summary-row {
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	color: #333;
+	background: #f1f2f4;
+}
+
+.x-grid3-summary-row .x-grid3-cell-inner {
+	font-weight: bold;
+	padding-bottom: 4px;
+}
+
+.x-grid3-cell-first .x-grid3-cell-inner {
+	padding-left: 6px;
+}
+
+.x-grid-hide-summary .x-grid3-summary-row {
+	display: none;
+}
+
+.x-grid3-summary-msg {
+	padding: 4px 16px;
+	font-weight: bold;
+}
+
+.x-grid3-gridsummary-row-inner {
+	overflow: hidden;
+	width: 100%;
+} /* IE6 requires width:100% for hori. scroll to work */
+.x-grid3-gridsummary-row-offset {
+	width: 10000px;
+}
+
+.x-grid-hide-gridsummary .x-grid3-gridsummary-row-inner {
+	display: none;
+}
+
+.sss-panel .x-grid3-scroller { /*overflow: scroll !important;*/
+	
+}
+
+div.sss-mastercell-wrap {
+	border: 0px none !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.sss-uiwrap {
+	float: left;
+	position: relative;
+	height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.sss-elbow-empty {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+}
+
+.sss-elbow-line {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-line.gif) repeat-x;
+}
+
+.sss-elbow {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow.gif) no-repeat;
+}
+
+.sss-elbow-end {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-end.gif) no-repeat;
+}
+
+.sss-elbow-active {
+	cursor: pointer;
+}
+
+.sss-elbow-minus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-minus.gif) no-repeat;
+}
+
+.sss-elbow-end-minus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-end-minus.gif) no-repeat;
+}
+
+.sss-nl-minus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-minus-nl.gif) no-repeat;
+}
+
+.sss-elbow-plus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-plus.gif) no-repeat;
+}
+
+.sss-elbow-end-plus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-end-plus.gif) no-repeat;
+}
+
+.sss-nl-plus {
+	position: absolute;
+	height: 18px;
+	width: 16px;
+	overflow: hidden;
+	background: url(../images/default/treeGrid/elbow-plus-nl.gif) no-repeat;
+}
+
+x-form-trigger-sss {
+	cursor: pointer;
+	background-image: url(../images/default/form/date-trigger.gif);
+}
+
+.linkButton {
+	background-image: none;
+	background-color: transparent;
+	border-style: none;
+}
+
+.linkButton.over {
+	background-color: white;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(48%, #f9f9f9), color-stop(52%, #e2e2e2), color-stop(100%, #e7e7e7));
+	background-image: -webkit-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+	background-image: -moz-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+	background-image: -o-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+	background-image: -ms-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+	background-image: linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+	border-style: solid;
+	padding: 0px;
+}
+/** vim: ts=4:sw=4:nu:fdc=4:nospell
+ * @version   $Id: gridsearch.css 754 2009-10-29 01:44:18Z jozo $
+ */
+#west-content a {
+	text-decoration: none;
+}
+
+#west-content a:hover {
+	text-decoration: underline;
+}
+
+#west {
+	width: 280px;
+}
+
+#center {
+	width: 640px;
+}
+
+#adsense-top {
+	margin: 10px 0 10px 0;
+}
+
+#west-content {
+	font-family: arial, sans-serif;
+}
+
+#center-content {
+	font-family: arial, sans-serif;
+	margin: 0 0 0 10px;
+	color: #777777;
+}
+
+#center-content h2 {
+	font-size: 16px;
+	text-align: center;
+}
+
+#description {
+	color: #777777;
+	text-align: justify;
+}
+
+#description em {
+	font-style: italic;
+	font-weight: bold;
+}
+
+#description p {
+	margin: 2px 0 8px 0;
+}
+
+#change-log {
+	padding: 20px 0 0 20px;
+}
+
+#change-log ul {
+	margin: 8px 0 0 1em;
+	list-style: disc outside;
+	text-align: justify;
+}
+
+.x-small-editor .x-form-text {
+	height: 14px !important;
+}
+
+.icon-zoom {
+	background-image: url(../images/action/search.gif) ! important;
+}
+
+.x-edit-removeFormat {
+	background: url(../images/action/exclamation.png) 0 0 no-repeat !important;
+}
+
+.x-edit-imprimer {
+	background: url(../images/action/imprimer.png) 0 0 no-repeat !important;
+}

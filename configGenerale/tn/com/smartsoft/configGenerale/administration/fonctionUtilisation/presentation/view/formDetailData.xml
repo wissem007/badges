@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListProfils" model-name="listProfils" id-property="profileIdIndex" query-method="getProfils" is-auto-load="false">
+		<ext-store-field id="profileIdIndex" property="profileId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="200">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="libelle" property="detailBean.libelle" width="250" next-element="profils" />
+	</ext-panel>
+	<ext-grid id="profils" title-exp="$L{module}" fixed-number-row="true" height="450" editable="${isEditableGrid}">
+		<ext-store model-name="detailBean.profils">
+			<ext-store-field id="moduleIdIndex" property="moduleId" />
+			<ext-store-field id="libelleIndex" property="moduleBean.libelle" />
+			<ext-store-field id="profileIdIndex" property="profileId" />
+			<ext-store-field id="profileIndex" property="profil.libelle" />
+		</ext-store>
+		<ext-grid-column data-index="libelleIndex" label-exp="$L{module}" width="400" />
+		<ext-grid-column data-index="profileIdIndex" label-exp="Profile" width="250" data-index-display="profileIndex">
+			<ext-field-combo label-exp="$L{profileId}" display-field="libelleIndex" store-id="storeListProfils">
+				<script-event name="beforequery" handle-params="qe">
+					      <![CDATA[
+					      	  return loadProfile(qe);
+					      ]]>
+				</script-event>
+			</ext-field-combo>
+		</ext-grid-column>
+	</ext-grid>
+	<js-function name="loadProfile" list-param="qe">
+		 <![CDATA[
+			var moduleId=qe.combo.eventColumn.record.get("moduleIdIndex");
+		    if(Ext.sss.StringUtils.isBlank(moduleId))
+	 	    {
+	 	    	desktop.getCmp('profils').startEditing(qe.combo.eventColumn.row ,0);
+	 	    	return;
+	 	    }
+		    return Ext.sss.Utils.beforeQueryCombo(qe,{moduleId:moduleId});
+           ]]>
+	</js-function>
+</root>

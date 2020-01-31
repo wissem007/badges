@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:noNamespaceSchemaLocation="../../ressources/xsd/beans.xsd">
+	<variable-system name="beanDecoupagePack" value="tn.com.smartsoft.iap.dictionary.decoupage" />
+	<variable-system name="beanSecuritePack" value="tn.com.smartsoft.iap.dictionary.securite.role.beans" />
+	<variable-system name="beanGraphiquePack" value="tn.com.smartsoft.iap.dictionary.graphique" />
+	<variable-system name="beanDevisePack" value="tn.com.smartsoft.configGenerale.devises.devise.beans" />
+	<variable-system name="beanUserPack" value="tn.com.smartsoft.iap.administration.securite.utilisateur.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.iap.system.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.iap.system.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.iap.system.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.iap.system.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/iap/system/presentation/view" />
+	<bean name="passwordHashing" class="${businessPack}.DefaultPasswordHashing"></bean>
+	<dao-parse-bean id="menu"></dao-parse-bean>
+	<dao-parse-bean id="view"></dao-parse-bean>
+	<dao-parse-bean id="entite"></dao-parse-bean>
+	<dao-parse-bean id="actionToolbar">
+		<dao-parse-bean property="action">
+			<dao-parse-bean property="actionTemplate"></dao-parse-bean>
+		</dao-parse-bean>
+	</dao-parse-bean>
+	<dao-parse-bean id="userParser">
+		<dao-parse-bean property="preferences"></dao-parse-bean>
+		<dao-parse-bean property="autorisationOrg"></dao-parse-bean>
+	</dao-parse-bean>
+	<dao-bean name="applicationDictionnaireDao" interface="${daoPack}.ApplicationDictionnaireDao">
+		<query-method name="getEntiteDictionary">
+			<query>
+        <![CDATA[
+        SELECT  entite FROM ${beanDecoupagePack}.entite.beans.EntiteBean AS entite left join fetch entite.parentSujet
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getPropertyDictionary">
+			<query>
+        <![CDATA[
+        SELECT  property FROM ${beanDecoupagePack}.entite.beans.PropertyBean AS property  left join fetch property.sequence
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getActionDictionary">
+			<query>
+        <![CDATA[
+        SELECT  action FROM ${beanDecoupagePack}.action.beans.ActionBean AS action
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getModuleDictionary">
+			<query>
+        <![CDATA[
+        SELECT  module FROM ${beanDecoupagePack}.module.beans.ModuleBean AS module where module.activate=true 
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getSubModuleDictionary">
+			<query>
+        <![CDATA[
+        SELECT  subModule FROM ${beanDecoupagePack}.subModule.beans.SubModuleBean AS subModule
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getViewDictionary">
+			<query>
+        <![CDATA[
+        SELECT  view FROM ${beanGraphiquePack}.vue.beans.ViewBean AS view
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getViewLibelleDictionary">
+			<query>
+        <![CDATA[
+        SELECT  viewLibelle FROM ${beanGraphiquePack}.vue.beans.ViewLibelleBean AS viewLibelle
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getViewActionDictionary">
+			<query>
+        <![CDATA[
+        SELECT  viewAction FROM ${beanGraphiquePack}.vue.beans.ViewActionBean AS viewAction
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getLibelleDictionary">
+			<query>
+        <![CDATA[
+        SELECT  applicationLibelle FROM ${beanGraphiquePack}.libelle.beans.LibelleBean AS applicationLibelle
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getRoleDictionary">
+			<query>
+        <![CDATA[
+        SELECT  role FROM ${beanSecuritePack}.RoleBean AS role
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getApplicationDictionary">
+			<query>
+        <![CDATA[
+        SELECT  application FROM ${beanDecoupagePack}.application.beans.ApplicationBean AS application 
+        left join fetch application.logoFile 
+        left join fetch application.payBean  
+        WHERE application.id=1
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getDeviseDictionary">
+			<query>
+        <![CDATA[
+        SELECT  devise FROM ${beanDevisePack}.DeviseBean AS devise
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getUserTypeDictionary">
+			<query>
+        <![CDATA[
+        SELECT  userType FROM ${beanGraphiquePack}.userType.beans.UserTypeBean AS userType
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getToolActionDictionary">
+			<query>
+        <![CDATA[
+        SELECT  toolAction FROM ${beanGraphiquePack}.toolAction.beans.ToolActionBean AS toolAction
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getListMenus">
+			<query>
+        <![CDATA[
+        SELECT  menu FROM ${beanGraphiquePack}.menu.beans.MenuBean AS menu
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getActionTemplateDictionary">
+			<query>
+        <![CDATA[
+        SELECT  actionTemplate FROM ${beanGraphiquePack}.actionTemplate.beans.ActionTemplateBean AS actionTemplate
+       ]]>
+			</query>
+		</query-method>
+		<query-method name="getMessageDictionary">
+			<query>
+        <![CDATA[
+        SELECT  message FROM ${beanGraphiquePack}.message.beans.MessageBean AS message
+       ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<dao-bean name="userDao" interface="${daoPack}.UserDao">
+		<query-method name="getUserBean" prefix-arg-name="arg">
+			<query>
+		        <![CDATA[
+		        SELECT  userBean FROM ${beanUserPack}.UserBean AS userBean 
+		          WHERE userBean.userName=:arg1.userName
+		       ]]>
+			</query>
+		</query-method>
+		<query-method name="getDisplayUser" class-resultat="${beanUserPack}.UserBean" prefix-arg-name="arg">
+			<query>
+		        <![CDATA[ 
+		        SELECT  userBean.userId as userId,userBean.displayName as displayName,userBean.isActive as isActive FROM ${beanUserPack}.UserBean AS userBean WHERE userBean.userName=:arg1.userName
+		        ]]>
+			</query>
+		</query-method>
+		<query-method name="getOrganisation" prefix-arg-name="arg">
+			<query>
+		        <![CDATA[ 
+		        SELECT bean   FROM tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean AS bean 
+		         left join fetch bean.parentSociete 
+		        WHERE bean.id.organismeId=1 and  bean.id.societeId=1
+		        ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<dao-bean name="userMenuPreferenceDao" interface="${daoPack}.UserMenuPreferenceDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  userMenu FROM  ${beanUserPack}.UserMenuBean AS userMenu left join fetch userMenu.menuAction  AS menuAction WHERE 1=1
+         <#if arg3.moduleId?exists >
+             AND userMenu.id.moduleId=:arg3.moduleId
+         </#if>
+         <#if arg3.userId?exists >
+             AND userMenu.id.userId=:arg3.userId
+         </#if>
+         ]]>
+			</query>
+		</query-method>
+		<query-method name="getMenuAction" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+        <![CDATA[
+        SELECT  menuAction FROM  tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean AS menuAction left join fetch menuAction.parentMenu WHERE 1=1
+         <#if arg3.moduleId?exists >
+             AND menuAction.id.moduleId=:arg3.moduleId
+         </#if>
+         ]]>
+			</query>
+		</query-method>
+		<query-method name="deleteUserMenu" session-arg-rang="0" prefix-arg-name="arg" is-updater="true">
+			<query>
+        <![CDATA[
+            DELETE  FROM ${beanUserPack}.UserMenuBean AS bean WHERE bean.id.userId=:arg2.userId AND bean.id.moduleId=:arg2.moduleId
+          ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="applicationDictionnaireLoader" class="${businessPack}.ApplicationDictionnaireLoader">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="applicationDictionnaireDao" ref="applicationDictionnaireDao" />
+		<set-dao-parse-bean name="entiteParser" ref="entite" />
+		<set-dao-parse-bean name="menuParser" ref="menu" />
+		<set-dao-parse-bean name="viewParser" ref="view" />
+	</business-bean>
+	<business-bean name="userBusiness" class="${businessPack}.UserBusiness">
+		<set-property name="passwordHashing" ref="passwordHashing" />
+		<set-dao-bean name="userDao" ref="userDao" />
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+	</business-bean>
+	<business-bean name="userMenuPreferenceBusiness" class="${businessPack}.UserMenuPreferenceBusiness">
+		<set-dao-bean name="entiteDao" ref="userMenuPreferenceDao" />
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+	</business-bean>
+	<controler-bean name="defaultControler" class="${controlerPack}.DefaultControler"></controler-bean>
+	<controler-bean name="userAccesControler" class="${controlerPack}.UserAccesControler">
+		<set-business-bean name="userBusiness" ref="userBusiness" />
+	</controler-bean>
+	<controler-bean name="userMenuPreferenceControler" class="${controlerPack}.UserMenuPreferenceControler">
+		<set-business-bean name="userMenuPreferenceBusiness" ref="userMenuPreferenceBusiness" />
+	</controler-bean>
+	<controler-bean name="updatePassWordControler" class="${controlerPack}.UpdatePassWordControler">
+		<set-business-bean name="userBusiness" ref="userBusiness" />
+	</controler-bean>
+	<user-action-bean name="DefaultAction" home-window-id="homeWindow" model-class="${modelPack}.LoginModel" controler-bean="defaultControler">
+		<binding-model name="userBean" mode="f" entite-id="User" type="${beanUserPack}.UserBean" />
+		<window id="homeWindow" location="${viewPack}/defaultWindow.xml" view-id="Login"></window>
+	</user-action-bean>
+	<user-action-bean name="changeOrgAction" on-home-methode="changeOrganisme" model-class="${modelPack}.LoginModel" controler-bean="userAccesControler">
+		<binding-model name="userBean" mode="f" entite-id="User" type="${beanUserPack}.UserBean" />
+		<window id="homeWindow" location="${viewPack}/defaultWindow.xml" view-id="Login"></window>
+	</user-action-bean>
+	<user-action-bean name="changeSociteAction" on-home-methode="changeSociete" model-class="${modelPack}.LoginModel" controler-bean="userAccesControler">
+		<binding-model name="userBean" mode="f" entite-id="User" type="${beanUserPack}.UserBean" />
+		<window id="homeWindow" location="${viewPack}/defaultWindow.xml" view-id="Login"></window>
+	</user-action-bean>
+	<user-action-bean name="ChangerMotDePasse" on-home-methode="initUpadte" model-class="${modelPack}.LoginModel" controler-bean="updatePassWordControler">
+		<binding-model name="userBean" mode="f" entite-id="User" type="${beanUserPack}.UserBean" />
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$L{updatePassword}" />
+			<parameter name="formDetail" value="${viewPack}/userUpdatePassword.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableGrid" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValider" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="userMenu" home-window-id="userMenuPreferenceView" model-class="${modelPack}.UserMenuPreferenceModel" controler-bean="userMenuPreferenceControler">
+		<binding-model name="userMenus" mode="u" type="${beanUserPack}.UserMenuBean">
+			<binding-model name="menuAction" mode="c" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</binding-model>
+		<binding-model name="listMenusAction" mode="c" type="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		<binding-model name="searcheBean" mode="f" type="${beanUserPack}.UserMenuBean" />
+		<binding-model name="listModules" mode="c" type="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" />
+		<window id="userMenuPreferenceView" location="${viewPack}/userMenuPreferenceView.xml" view-id="detailWindow" on-init-methode="onInitMenuPreferenceView" on-render-methodex="on-render-methode">
+		</window>
+	</user-action-bean>
+	<user-action-bean name="LoginAction" home-window-id="loginWindow" model-class="${modelPack}.LoginModel" controler-bean="userAccesControler">
+		<binding-model name="userBean" mode="f" entite-id="User" type="${beanUserPack}.UserBean" />
+		<window id="loginWindow" location="${viewPack}/loginWindow.xml" view-id="Login"></window>
+	</user-action-bean>
+	<user-action-bean name="LogoutAction" home-window-id="loginWindow" model-class="${modelPack}.LoginModel" controler-bean="userAccesControler">
+		<binding-model name="userBean" mode="f" entite-id="User" property="userBean" type="${beanUserPack}.UserBean" />
+		<window id="loginWindow" location="${viewPack}/loginWindow.xml" view-id="Login" on-init-methode="logout"></window>
+	</user-action-bean>
+</beans>

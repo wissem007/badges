@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storelistSaisons" model-name="listSaisons" id-property="idIndex">
+		<ext-store-field id="idIndex" property="saisonId" />
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-store id="storelistClasses" model-name="listClasses" id-property="idIndex">
+		<ext-store-field id="idIndex" property="eleveClasseId" />
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-store id="storelistStatus" model-name="listStatus" id-property="idIndex">
+		<ext-store-field id="idIndex" property="statuDemandesId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="120" body-style="padding:0px">
+		<ext-layout-config name="columns" value="3" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'99%'}" expected="false" />
+		<ext-field-combo id="eleveSaisonId" property="searcheBean.eleveSaisonId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistSaisons" maxLength="50" width="100" label-exp="Saison" colspan="1" />
+		<ext-field-combo id="statuDemandesId" property="searcheBean.statuDemandesId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistStatus" maxLength="50" width="250" label-exp="Status" colspan="2" />
+		<ext-field-text id="codePermanent" property="searcheBean.codePermanent" width="100" next-element="" colspan="1" />
+		<ext-field-combo id="eleveClasseId" property="searcheBean.eleveClasseId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistClasses" maxLength="50" width="250" label-exp="Classs" colspan="2" />
+	</ext-panel>
+</root>

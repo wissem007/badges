@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="paysIdIndex" property="paysId[$i]" />
+	</ext-store>
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="256" next-element="pays" />
+	<ext-field-combo id="pays" label-exp="$L{pays}" property="searcheBean.paysId" link-property="searcheBean.pays.paysId" display-field="libelleIndex" store-id="storeListPays" next-element="searche" />
+</root>

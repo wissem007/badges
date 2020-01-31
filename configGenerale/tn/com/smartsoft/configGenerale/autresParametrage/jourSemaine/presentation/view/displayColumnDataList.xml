@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean">
+		<ext-store-field id="codeIndex" property="jourCode" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="abreviationIndex" property="abreviation" />
+		<ext-store-field id="rangIndex" property="rang" />
+	</ext-store>
+	<ext-grid-column data-index="codeIndex" width="100" />
+	<ext-grid-column data-index="libelleIndex" width="200" />
+	<ext-grid-column data-index="abreviationIndex" width="200" />
+	<ext-grid-column data-index="rangIndex" width="100" />
+</root>

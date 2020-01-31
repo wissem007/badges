@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_backoffice_db" package="tn.com.smartsoft.backoffice.eleves.eleves.beans">
+	<class name="ElevesBean" table="tr_eleves">
+		<meta attribute="entite-id">eleves</meta>
+		<id name="codePermanent" column="tr_code_permanent">
+			<generator class="assigned" />
+		</id>
+		<property name="dateNaisance" column="date_naisance" />
+		<property name="nom" column="nom" />
+		<property name="prenom" column="prenom" />
+	</class>
+	<class name="EleveSaisonsBean" table="tr_eleve_saisons">
+		<meta attribute="entite-id">eleveSaisons</meta>
+		<composite-id name="id" class="EleveSaisonsBeanId">
+			<key-property name="codePermanent" column="tr_code_permanent" />
+			<key-property name="eleveSaisonId" column="tr_eleve_saison_id" />
+		</composite-id>
+		<property name="nomResponsable1" column="nom_responsable_1" />
+		<property name="nomResponsable2" column="nom_responsable_2" />
+		<property name="photoBdata" column="photo_bdata" />
+		<property name="photoCtype" column="photo_ctype" />
+		<property name="photoSdata" column="photo_sdata" />
+		<property name="prenomResponsable1" column="prenom_responsable_1" />
+		<property name="prenomResponsable2" column="prenom_responsable_2" />
+		<property name="serviceCantine" column="service_cantine" />
+		<property name="serviceGarde" column="service_garde" />
+		<property name="telResponsable1" column="tel_responsable_1" />
+		<property name="telResponsable2" column="tel_responsable_2" />
+		<property name="eleveClasseId" column="tr_eleve_classe_id" />
+		<property name="servicePanier" column="service_panier" />
+		<property name="email" column="email" />
+		<many-to-one name="classe" class="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean" fetch="join" update="false" insert="false">
+			<column name="tr_eleve_classe_id" />
+		</many-to-one>
+		<many-to-one name="saison" class="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" fetch="join" update="false" insert="false">
+			<column name="tr_eleve_saison_id" />
+		</many-to-one>
+		<many-to-one name="eleve" class="ElevesBean" fetch="join" update="false" insert="false">
+			<column name="tr_code_permanent" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeNiveauApplicatif" model-name="listNiveauApplicatif" id-property="niveauApplicatifIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+	</ext-store>
+	<ext-panel id="p1" layout="tform" border="false" label-width="150">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="entiteId" property="detailBean.entiteId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableEntitesId}" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="50" width="200" next-element="module" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" maxLength="50" width="200" editable="${isEditableEntitesId}"/>
+		<ext-field-combo id="niveauApplicatifId" property="detailBean.niveauApplicatifId" display-field="libelleIndex" display-field-id="niveauApplicatifIdIndex" store-id="storeNiveauApplicatif" maxLength="50" width="200" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" maxLength="2" width="40" next-element="javaClass" min-value="0" />
+	</ext-panel>
+</root>

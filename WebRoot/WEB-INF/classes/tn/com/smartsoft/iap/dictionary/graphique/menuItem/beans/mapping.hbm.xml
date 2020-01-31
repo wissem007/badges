@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.menuItem.beans">
+	<joined-subclass name="MenuItemBean" table="UI_MENU_ITEMS" extends="tn.com.smartsoft.iap.dictionary.graphique.menu.beans.MenuBean">
+		<meta attribute="entite-id">menuItem</meta>
+		<key>
+			<column name="UI_MENU_ID" />
+			<column name="AD_MODULE_ID" />
+		</key>
+		<property name="parentMenuId" column="UI_PARENT_MENU_ID" />
+		<bag name="menus" cascade="all" lazy="true" inverse="true">
+			<key>
+				<column name="UI_PARENT_MENU_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<one-to-many class="MenuItemBean" />
+		</bag>
+		<bag name="menuActions" cascade="all" lazy="true" inverse="true">
+			<key>
+				<column name="UI_PARENT_MENU_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<one-to-many class="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" />
+		</bag>
+	</joined-subclass>
+</hibernate-mapping>

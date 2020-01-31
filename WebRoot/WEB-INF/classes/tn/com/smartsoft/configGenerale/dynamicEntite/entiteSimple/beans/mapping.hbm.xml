@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="tn.com.smartsoft.configGenerale.dynamicEntite.entiteSimple.beans" schema="sss_config_general_db">
+	<class name="DataValuesBean" table="cr_data_values">
+		<meta attribute="entite-id">dataValues</meta>
+		<composite-id class="DataValuesBeanId" mapped="false" name="id" unsaved-value="undefined">
+			<key-property column="cr_data_value_id" name="dataValueId" />
+			<key-property column="ad_entite_id" name="entiteId" />
+			<key-property column="ad_module_id" name="moduleId" />
+			<key-property column="ad_sub_module_id" name="subModuleId" />
+			<key-property column="ad_sujet_id" name="sujetId" />
+		</composite-id>
+		<property column="libelle" generated="never" lazy="false" name="libelle" />
+		<property column="abreviation" generated="never" lazy="false" name="abreviation" />
+		<property name="organismeId" column="cr_organisme_id" />
+		<property name="societeId" column="cr_societe_id" />
+		<property column="ordre" generated="never" lazy="false" name="ordre" />
+	</class>
+</hibernate-mapping>

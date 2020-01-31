@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/setting.xsd">
+	<group name="extjs-base">
+		<js>js/libs/ext-base.js</js>
+		<js>js/libs/ext-all.js</js>
+		<js>js/libs/ext-ux-all.js</js>
+		<js>js/libs/ext-3s.js</js>
+		<css>css/ext-all.css</css>
+		<css>css/ext-ux-all.css</css>
+		<css>css/xtheme-gray.css</css>
+	</group>
+	<group name="cometd-base">
+		<js>js/cometd/cometd.js</js>
+		<js>js/cometd/AckExtension.js</js>
+		<js>js/cometd/jquery-1.3.2.js</js>
+		<js>js/cometd/jquery.json-2.2.js</js>
+		<js>js/cometd/jquery.cometd.js</js>
+		<js>js/cometd/cometd.js</js>
+	</group>
+	<group name="org">
+		<js>js/libs/jit-yc.js</js>
+	</group>
+	<group name="extjs-livegrid">
+		<js>js/libs/ext-livegrid-all.js</js>
+		<css>css/ext-ux-livegrid.css</css>
+	</group>
+	<group name="grh-3s">
+		<js>js/libs/grhUtils.js</js>
+		<css>css/grhcss.css</css>
+	</group>
+	<group name="extjs-3s">
+		<js>js/libs/typeUtils.js</js>
+		<js>js/libs/ext-desktop.js</js>
+		<js>js/libs/ext-suggest.js</js>
+		<js>js/libs/ext-3s-grid.js</js>
+		<css>css/ext-3s.css</css>
+		<css>css/ext-suggest.css</css>
+	</group>
+	<group name="all">
+		<group-ref>grh-3s</group-ref>
+		<group-ref>extjs-base</group-ref>
+		<group-ref>extjs-livegrid</group-ref>
+		<group-ref>extjs-3s</group-ref>
+		<js>js/libs/ext-lang-fr.js</js>
+	</group>
+</scripts>

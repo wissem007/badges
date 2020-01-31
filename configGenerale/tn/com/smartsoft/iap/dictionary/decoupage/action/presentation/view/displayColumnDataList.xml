@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true">
+		<ext-store-field id="actionIdIndex" property="actionId" />
+		<ext-store-field id="sujetIdIndex" property="parentSujet.libelle" />
+		<ext-store-field id="subModuleIdIndex" property="parentSujet.parentSubModule.libelle" />
+		<ext-store-field id="moduleIdIndex" property="parentSujet.parentSubModule.parentModule.libelle" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="actionTypeIdIndex" property="type.libelle" />
+		<ext-store-field id="actionTemplateIdIndex" property="actionTemplate.libelle" />
+		<ext-store-field id="roleIdIndex" property="role.roleId" />
+		<ext-store-field id="isAuditableIndex" property="isAuditable" />
+		<ext-store-field id="auditValueExpressionIndex" property="auditValueExpression" />
+		<ext-store-field id="helpIndex" property="help" />
+	</ext-store>
+	<ext-grid-column data-index="actionIdIndex" width="80" />
+	<ext-grid-column data-index="sujetIdIndex" label-exp="Sujet" width="150" />
+	<ext-grid-column data-index="subModuleIdIndex" label-exp="Sous Module" width="150" />
+	<ext-grid-column data-index="moduleIdIndex" label-exp="Module" width="150" />
+	<ext-grid-column data-index="libelleIndex" width="250" />
+	<ext-grid-column data-index="actionTypeIdIndex" label-exp="Type Action" width="150" />
+	<ext-grid-column data-index="actionTemplateIdIndex" label-exp="Template Action" width="150" />
+	<ext-grid-column data-index="roleIdIndex" label-exp="Role" width="150" />
+	<ext-grid-column data-index="isAuditableIndex" label-exp="Auditable" width="150" />
+	<ext-grid-column data-index="auditValueExpressionIndex" width="150" />
+	<ext-grid-column data-index="helpIndex" width="150" />
+</root>

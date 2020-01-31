@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ 	<ext-panel layout="tform" border="false" label-width="250">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+ 
+  <ext-field-text id="libelle" property="searcheBean.libelle" width="250" next-element="sousUnite" />
+  <ext-field-text id="sousUnite" property="searcheBean.sousUnite" width="250" next-element="isoNumeric" />
+  <ext-field-number id="isoNumeric" property="searcheBean.isoNumeric" width="250" next-element="isoAlpha" />
+  <ext-field-text id="isoAlpha" property="searcheBean.isoAlpha" width="250" next-element="searche" />
+</ext-panel>
+</root>

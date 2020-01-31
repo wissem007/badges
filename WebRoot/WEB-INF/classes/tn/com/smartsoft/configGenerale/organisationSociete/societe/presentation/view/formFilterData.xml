@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="140">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+		<ext-field-number id="societeId" property="searcheBean.societeId" maxLength="4" width="100" next-element="libelle" colspan="2" />
+		<ext-field-text id="libelle" property="searcheBean.libelle" width="255" next-element="abreviation" />
+		<ext-field-text id="abreviation" property="searcheBean.abreviation" width="150" next-element="matriculeFiscal" />
+		<ext-field-text id="matriculeFiscal" property="searcheBean.matriculeFiscal" maxLength="20" width="150" next-element="registreCommerce" />
+		<ext-field-text id="registreCommerce" property="searcheBean.registreCommerce" maxLength="20" width="150" next-element="searche" />
+	</ext-panel>
+</root>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="eleveDemandeCarteIdIndex" property="eleveDemandeCarteId" />
+		<ext-store-field id="dateNaisanceIndex" property="eleveSaison.eleve.dateNaisance" />
+		<ext-store-field id="nomIndex" property="eleveSaison.eleve.nom" />
+		<ext-store-field id="prenomIndex" property="eleveSaison.eleve.prenom" />
+		<ext-store-field id="codePermanentIndex" property="codePermanent" />
+		<ext-store-field id="eleveSaisonIdIndex" property="eleveSaisonId" />
+		<ext-store-field id="seasonIndex" property="eleveSaison.saison.nom" />
+		<ext-store-field id="classeIndex" property="eleveSaison.classe.nom" />
+		<ext-store-field id="dateDemandeIndex" property="dateDemande" />
+		<ext-store-field id="dateImpresionIndex" property="dateImpresion" />
+		<ext-store-field id="statuDemandeIndex" property="statuDemande.libelle" />
+	</ext-store>
+	<ext-grid-column data-index="eleveDemandeCarteIdIndex" width="85" label-exp="Photo" renderer="photoRender">
+	</ext-grid-column>
+	<ext-grid-column data-index="codePermanentIndex" width="120" />
+	<ext-grid-column data-index="nomIndex" width="200" />
+	<ext-grid-column data-index="prenomIndex" width="200" />
+	<ext-grid-column data-index="dateNaisanceIndex" width="100" />
+
+	<ext-grid-column data-index="eleveSaisonIdIndex" width="100" />
+	<ext-grid-column data-index="classeIndex" width="100" />
+	<ext-grid-column data-index="dateDemandeIndex" width="100" />
+
+	<ext-grid-column data-index="dateDemandeIndex" width="100" />
+	<ext-grid-column data-index="dateImpresionIndex" width="100" />
+	<ext-grid-column data-index="statuDemandeIndex" width="100" />
+	<js-function name="photoRender" list-param="value, metaData, record, rowIndex, colIndex, store,handler">
+		<![CDATA[
+		    var src='detailWindow.res?expression=$PV[listBean*s'+rowIndex+'*e.photo]&rand='+Math.random();
+		    value='<img  height="80" width="70" src="'+src+'" />';
+		    return value;
+ 	 	]]>
+	</js-function>
+</root> 

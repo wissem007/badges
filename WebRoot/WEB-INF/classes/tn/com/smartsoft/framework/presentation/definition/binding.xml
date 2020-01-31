@@ -1,0 +1,105 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.presentation.definition">
+	<class name="WebDefinition" node="web-setting" extendsClass="tn.com.smartsoft.framework.presentation.view.tags.UIAbstractTagManager">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<include addedMethode="addWebBeansDefinition" setterParentName="webDefinition" classRef="WebBeansDefinition" node="web-beans" includeAttribute="location" />
+		<include addedMethode="addGroupScriptsDefinition" setterParentName="webDefinition" classRef="GroupScriptsDefinition" node="scripts" includeAttribute="location" />
+		<include addedMethode="addImagesDefinition" setterParentName="webDefinition" classRef="ImagesDefinition" node="images" includeAttribute="location" />
+		<many-ref addedMethode="addResponseViewDefinition" classRef="ResponseViewDefinition" manyNode="response-views" />
+	</class>
+	<class name="ResponseViewDefinition" node="response-view">
+		<property name="name" attribute="name" />
+		<property name="className" attribute="class" />
+		<property name="contentType" attribute="content-type" />
+		<mapped-property-node node="header" addedMethode="setHeader" attributeKey="name" attributeValue="value" />
+		<mapped-property-node node="param" addedMethode="setParameter" attributeKey="name" attributeValue="value" />
+	</class>
+	<class name="WebBeansDefinition" node="web-beans">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<many-ref addedMethode="addBeanDefinition" classRef="tn.com.smartsoft.framework.beans.definition.BeanDefinition" />
+	</class>
+	<class name="GroupScriptsDefinition" node="scripts">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<many-ref addedMethode="addGroupScriptDefinition" classRef="GroupScriptDefinition" />
+	</class>
+	<!-- Action Definition -->
+	<class name="UserActionDefinition" node="user-action-bean">
+		<property name="name" attribute="name" />
+		<property name="name" attribute="name" />
+		<property name="extendsName" attribute="extends" />
+		<property name="modelClass" attribute="model-class" />
+		<property name="controlerBean" attribute="controler-bean" />
+		<property name="homeWindowId" attribute="home-window-id" />
+		<property name="onHomeMethode" attribute="on-home-methode" />
+		<many-ref addedMethode="addBindingModel" classRef="BindingModelDefinition" />
+		<many-ref addedMethode="addBindingRefModel" classRef="BindingRefModelDefinition" />
+		<many-ref addedMethode="addBindingPropertyModel" classRef="BindingPropertyModelDefinition" />
+		<many-ref addedMethode="addWindowBeanDefinition" classRef="WindowDefinition" />
+		<many-ref addedMethode="addWindowBeanRefDefinition" classRef="WindowRefDefinition" />
+		<many-ref addedMethode="addReportfinition" classRef="ReportDefinition" />
+		<mapped-property-node node="parameter" addedMethode="addParameter" attributeKey="name" attributeValue="value" />
+	</class>
+	<class name="BindingRefModelDefinition" node="binding-model-ref">
+		<property name="name" attribute="name" />
+		<property name="ref" attribute="ref" />
+	</class>
+	<class name="BindingPropertyModelDefinition" node="binding-property-model">
+		<property name="name" attribute="name" />
+		<property name="type" attribute="type" />
+		<property name="mode" attribute="mode" />
+		<property name="libelleExp" attribute="libelle-exp" />
+		<property name="userType" attribute="user-type" />
+	</class>
+	<class name="BindingModelDefinition" node="binding-model">
+		<property name="name" attribute="name" />
+		<property name="type" attribute="type" />
+		<property name="mode" attribute="mode" />
+		<many-ref addedMethode="addBindingModel" classRef="BindingModelDefinition" />
+		<many-ref addedMethode="addBindingPropertyModel" classRef="BindingPropertyModelDefinition" />
+	</class>
+	<!-- window Definition -->
+	<class name="WindowDefinition" node="window">
+		<property name="id" attribute="id" />
+		<property name="location" attribute="location" />
+		<property name="viewId" attribute="view-id" />
+		<property name="onInit" attribute="on-init-methode" />
+		<property name="onRender" attribute="on-render-methode" />
+		<property name="onSecurityCheck" attribute="on-security-check-methode" />
+		<property name="onDestroy" attribute="on-destroy-methode" />
+		<mapped-property-node node="parameter" addedMethode="addParameter" attributeKey="name" attributeValue="value" />
+	</class>
+	<class name="WindowRefDefinition" node="window-ref">
+		<property name="id" attribute="id" />
+		<property name="ref" attribute="ref" />
+	</class>
+	<class name="ReportDefinition" node="report">
+		<property name="id" attribute="id" />
+		<property name="location" attribute="location" />
+		<property name="dataSourceProperty" attribute="ds-property" />
+		<property name="type" attribute="type" />
+	</class>
+	<!-- Controle Bean Definition -->
+	<class name="ControleBeanDefinition" node="controler-bean" extendsClass="tn.com.smartsoft.framework.beans.definition.BeanDefinition">
+		<property name="extendsName" attribute="extends" />
+		<many-ref addedMethode="addBusinessBeanRef" classRef="tn.com.smartsoft.framework.business.definition.BusinessBeanRefDefinition" />
+	</class>
+	<class name="GroupScriptDefinition" node="group">
+		<property name="name" attribute="name" />
+		<property name="minimize" attribute="minimize" defaultValue="true" />
+		<property name="minimizeCss" attribute="minimizeCss" defaultValue="false" />
+		<property name="retention" attribute="retention" defaultValue="false" />
+		<list-property-node node="js" addedMethode="addJsName" />
+		<list-property-node node="css" addedMethode="addCssName" />
+		<list-property-node node="group-ref" addedMethode="addSubgroup" />
+	</class>
+	<!-- images Definition -->
+	<class name="ImagesDefinition" node="web-image-path">
+		<systeme-property-node node="variable-system" attributeKey="name" attributeValue="value" />
+		<many-ref addedMethode="addImageDefinition" classRef="ImageDefinition" />
+	</class>
+	<class name="ImageDefinition" node="image">
+		<property name="id" attribute="id" />
+		<property name="height" attribute="height" />
+		<property name="width" attribute="width" />
+		<property name="path" attribute="path" />
+	</class>
+</xml-mapping>

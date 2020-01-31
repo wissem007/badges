@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xtpl>
+	<xtpl-set name="seasons">
+			  <![CDATA[
+			    ["winter", "spring", "summer", "autumn"]
+			  ]]>
+	</xtpl-set>
+	<xtpl-if>
+		<xtpl-condition><![CDATA[x == 1]]></xtpl-condition>
+		<xtpl-elseif>
+			<xtpl-condition><![CDATA[x == 1]]></xtpl-condition>
+		</xtpl-elseif>
+		<xtpl-else>
+		</xtpl-else>
+	</xtpl-if>
+	<xtpl-foreach exp="sequence as item">
+		<!-- item_index, item_has_next -->
+	</xtpl-foreach>
+</xtpl>

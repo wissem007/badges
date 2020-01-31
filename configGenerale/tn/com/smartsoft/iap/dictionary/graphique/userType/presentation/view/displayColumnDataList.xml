@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true">
+		<ext-store-field id="userTypeIdIndex" property="userTypeId" />
+		<ext-store-field id="messagesIdIndex" property="message.libelle" />
+		<ext-store-field id="isLtrIndex" property="isLtr" />
+		<ext-store-field id="isComparableIndex" property="isComparable" />
+		<ext-store-field id="paternIndex" property="patern" />
+	</ext-store>
+	<ext-grid-column data-index="userTypeIdIndex" width="200" />
+	<ext-grid-column data-index="messagesIdIndex" label-exp="Module" width="200" />
+	<ext-grid-column data-index="isLtrIndex" width="50" />
+	<ext-grid-column data-index="isComparableIndex" width="50" />
+	<ext-grid-column data-index="paternIndex" width="200" />
+</root>
+

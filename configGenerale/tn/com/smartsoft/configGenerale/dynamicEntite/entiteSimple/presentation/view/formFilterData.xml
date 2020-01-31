@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListEntite" model-name="listEntite" id-property="entiteIdIndex">
+		<ext-store-field id="entiteIdIndex" property="entiteId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="niveauApplicatifIdIndex" property="niveauApplicatifId" />
+	</ext-store>
+	<ext-store id="storeListSociete" model-name="listSociete" id-property="societeIdIndex">
+		<ext-store-field id="societeIdIndex" property="societeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store root="data" id="storeListOrganisme" model-name="listOrganisme" id-property="organismeIdIndex">
+		<ext-store-field id="organismeIdIndex" property="organismeId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModule" allow-blank="false" maxLength="50" width="250" editable="${isEditableModule}" next-element="subModule">
+		<ajax-event name="change" action-listener="getEntiteFilter" handle-params="el,e" is-wait="false" maxLength="50" width="250">
+			<request-field field="module" />
+			<success>
+					<![CDATA[
+  					var object = Ext.util.JSON.decode(response.responseText);
+	         		desktop.getCmp('entiteId').clearValue();
+	           		desktop.getCmp('entiteId').getStore().removeAll();
+					desktop.getCmp('entiteId').getStore().load();
+					
+                 ]]>
+			</success>
+		</ajax-event>
+	</ext-field-combo>
+	<ext-field-combo id="entiteId" property="searcheBean.entiteId" display-field="libelleIndex" display-field-id="entiteIdIndex" allow-blank="false" store-id="storeListEntite" maxLength="50" width="250" next-element="dataValueId">
+			<script-event name="select" handle-params="el,e" is-wait="false" >
+				       <![CDATA[
+                           	var index=desktop.getCmp('entiteId').selectedIndex;
+			 				var record = desktop.getCmp('entiteId').getStore().getAt(index);
+			 				getSelectedGrid(record.get("niveauApplicatifIdIndex"));
+			 				
+                        ]]>
+			</script-event>
+		</ext-field-combo>
+		<ext-field-combo id="societeId" property="searcheBean.societeId" width="250" display-field="libelleIndex" store-id="storeListSociete" next-element="organismeId">
+			<ajax-event name="change" action-listener="getOrganismeFilter" handle-params="el,e" is-wait="false" maxLength="50">
+				<request-field field="societeId" />
+				<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('organismeId').clearValue();	         			
+	           			desktop.getCmp('organismeId').getStore().removeAll();
+	           			desktop.getCmp('organismeId').getStore().load();
+						
+	                 ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+	<ext-field-combo id="organismeId" property="searcheBean.organismeId" width="250" display-field="libelleIndex" store-id="storeListOrganisme" next-element="dataValueId" />
+	<ext-field-text id="dataValueId" property="searcheBean.dataValueId" width="250" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="250" next-element="searche"/>
+	</ext-panel>
+		<js-function name="getSelectedGrid" list-param="value">
+		<![CDATA[
+				if( value && value==1)
+				{
+				   desktop.getCmp('organismeId').hide();
+				   desktop.getCmp('societeId').hide();
+				   desktop.getCmp('organismeId').clearValue();	         
+	           	   desktop.getCmp('societeId').clearValue();	         	
+				   desktop.getCmp('organismeId').setValue("");
+				   desktop.getCmp('societeId').setValue("")
+				} 
+				   
+				else if( value && value==2)
+				{
+				   desktop.getCmp('societeId').show();
+				   desktop.getCmp('organismeId').hide();
+				   desktop.getCmp('organismeId').clearValue();	       
+				   desktop.getCmp('organismeId').setValue("");
+				}
+				
+				else if( value && value==3)
+				{
+				   desktop.getCmp('societeId').show();
+				   desktop.getCmp('organismeId').show();
+				}
+   	 	]]>
+	</js-function>
+</root>

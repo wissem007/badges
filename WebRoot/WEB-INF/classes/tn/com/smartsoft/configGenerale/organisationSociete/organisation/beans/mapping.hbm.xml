@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans">
+	<class name="OrganismeBean" table="CR_ORGANISMES">
+		<composite-id name="id" class="OrganismeBeanId">
+			<key-property name="organismeId" column="CR_ORGANISME_ID" />
+			<key-property name="societeId" column="CR_SOCIETE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="abreviation" column="ABREVIATION" />
+		<property name="siteWeb" column="SITE_WEB" />
+		<property name="email" column="EMAIL" />
+		<property name="adresse" column="ADRESSE" />
+		<property name="localiteId" column="cr_localite_id" />
+		<property name="telephone1" column="TELEPHONE1" />
+		<property name="telephone2" column="TELEPHONE2" />
+		<property name="fax" column="FAX" />
+		<many-to-one name="localite" class="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_LOCALITE_ID" />
+		</many-to-one>
+		<many-to-one name="parentSociete" class="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans.SocieteBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_SOCIETE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

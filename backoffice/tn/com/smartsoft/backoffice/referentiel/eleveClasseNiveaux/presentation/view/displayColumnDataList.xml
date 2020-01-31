@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-grid-column data-index="libelleIndex" width="350" />
+</root>

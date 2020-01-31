@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ext-panel layout="tform" border="false" label-width="140">
+	<ext-layout-config name="columns" value="2" expected="false" />
+	<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+	<ext-field-text id="userName" property="detailBean.userName" colspan="2" allow-blank="false" editable="false" maxLength="30" width="200" next-element="passeWord" />
+	<ext-field-text id="passeWord" inputType="password" property="detailBean.passeWord" allow-blank="false" maxLength="30" width="200" next-element="confPasseWord" />
+	<ext-field-text id="confPasseWord" inputType="password" property="detailBean.confPasseWord" allow-blank="false" maxLength="30" width="200" next-element="valider">
+		<script-event name="blur" handle-params="e">
+                <![CDATA[
+                var passeWord = desktop.getCmp('passeWord').getValue();
+                var confPasseWord = desktop.getCmp('confPasseWord').getValue();
+                if(passeWord!=confPasseWord){
+                	alert("Le mot de passe est invalide");
+                	desktop.getCmp('confPasseWord').reset();
+                }
+                ]]>
+		</script-event>
+	</ext-field-text>
+</ext-panel>

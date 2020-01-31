@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListPays" model-name="listPays" id-property="paysIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="paysIdIndex" property="paysId" />
+	</ext-store>
+	<ext-store root="data" id="storeListLocalite" model-name="listLocalite" id-property="localiteIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="localiteIdIndex" property="localiteId" />
+	</ext-store>
+	<ext-store root="data" id="storeListGouvernorat" model-name="listGouvernorat" id-property="governoratIdIndex">
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="governoratIdIndex" property="governoratId" />
+	</ext-store>
+	<ext-store root="data" id="storeListFonctionUtil" model-name="listFonctionUtil" id-property="fonctionUtilisationIdIndex">
+		<ext-store-field id="fonctionUtilisationIdIndex" property="fonctionUtilisationId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-panel layout="tform" border="false" label-width="160">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+		<ext-field-text id="userName" property="detailBean.userName" colspan="2" allow-blank="false" maxLength="30" width="200" next-element="passeWord" />
+		<ext-field-text id="passeWord" inputType="password" property="detailBean.passeWord" allow-blank="false" maxLength="30" width="200" next-element="confPasseWord" />
+		<ext-field-text id="confPasseWord" inputType="password" property="detailBean.confPasseWord" allow-blank="false" maxLength="30" width="200" next-element="displayName">
+			<script-event name="blur" handle-params="e">
+                <![CDATA[
+                var passeWord = desktop.getCmp('passeWord').getValue();
+                var confPasseWord = desktop.getCmp('confPasseWord').getValue();
+                if(passeWord!=confPasseWord){
+                	alert("Le mot de passe est invalide");
+                	desktop.getCmp('confPasseWord').reset();
+                }
+                ]]>
+			</script-event>
+		</ext-field-text>
+		<ext-field-text id="displayName" property="detailBean.displayName" colspan="2" allow-blank="false" maxLength="255" width="400" next-element="adresse" />
+		<ext-field-text id="adresse" property="detailBean.adresse" colspan="2" maxLength="150" width="400" />
+		<ext-field-combo id="pays" label-exp="$L{pays}" width="200" property="detailBean.paysId" display-field="libelleIndex" store-id="storeListPays" next-element="governorat">
+			<ajax-event name="select" action-listener="onInitListeGouvernorat" handle-params="el,e" is-wait="false">
+				<request-field field="pays" />
+				<success>
+					<![CDATA[
+            var object = Ext.util.JSON.decode(response.responseText);
+        	desktop.getCmp('governorat').clearValue();
+    	 	desktop.getCmp('localite').clearValue();
+        	desktop.getCmp('localiteLibelle').clearValue();
+            desktop.getCmp('localite').getStore().removeAll();
+    		desktop.getCmp('governorat').getStore().load();
+	      ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-field-combo id="governorat" label-exp="$L{gouvernorat}" property="detailBean.governoratId" display-field="libelleIndex" store-id="storeListGouvernorat" next-element="localite">
+			<ajax-event name="select" action-listener="onInitListeLocalite" handle-params="el,e" is-wait="false">
+				<request-field field="governorat" />
+				<success>
+					<![CDATA[
+          var object = Ext.util.JSON.decode(response.responseText);
+          desktop.getCmp('localite').getStore().removeAll();
+		  desktop.getCmp('localite').getStore().load();
+          ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+		<ext-composite-field label-exp="$L{localite}" colspan="2">
+			<ext-field-suggest id="localite" property="detailBean.localiteId" display-field="localiteIdIndex" store-id="storeListLocalite" width="100" next-element="localiteLibelle">
+				<linked-field-item field-ref="localiteLibelle" align="left" />
+			</ext-field-suggest>
+			<ext-field-suggest id="localiteLibelle" property="detailBean.localiteId" display-property="detailBean.localite.libelle" display-field="libelleIndex" store-id="storeListLocalite"
+				width="150" next-element="telephone">
+				<linked-field-item field-ref="localite" align="left" />
+			</ext-field-suggest>
+		</ext-composite-field>
+		<ext-field-text id="telephone" property="detailBean.telephone" maxLength="14" width="200" next-element="gsm" />
+		<ext-field-text id="gsm" property="detailBean.gsm" maxLength="14" width="200" next-element="mail" />
+		<ext-field-text id="mail" property="detailBean.mail" maxLength="150" width="200" next-element="" />
+		<ext-field-combo id="fonctionUtilisationId" label-exp="Fonction Utilisation" property="detailBean.fonctionUtilisationId" width="250" allow-blank="false" display-field="libelleIndex"
+			store-id="storeListFonctionUtil" />
+	</ext-panel>
+</root>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+		<ext-field-text id="subModuleId" property="detailBean.subModuleId" allow-blank="false" maxLength="50" width="200" next-element="libelle" editable="${isEditableSubModuleId}" />
+		<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" maxLength="60" width="300" next-element="rang" />
+		<ext-field-spinner id="rang" property="detailBean.rang" allow-blank="false" maxLength="2" width="40" next-element="help" min-value="0"/>
+		<ext-field-text id="help" property="detailBean.help" allow-blank="false" maxLength="255" width="300" next-element="module" />
+		<ext-field-combo id="module" label-exp="$L{module}" property="detailBean.moduleId" display-field="libelleIndex" store-id="storeListModule" next-element="valider" />
+</root>

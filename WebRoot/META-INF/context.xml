@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/WebSmart" privileged="true">
+	<Resource auth="Container" name="jdbc/smartDS" type="javax.sql.DataSource" username="postgres" password="postgres" driverClassName="org.postgresql.Driver" maxIdle="50" maxWait="-1" maxActive="8" url="jdbc:postgresql://127.0.0.1/can_db" validationQuery="select now()" />
+</Context>

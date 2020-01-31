@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListMessage" model-name="listMessage" id-property="messagesIdIndex">
+		<ext-store-field id="messagesIdIndex" property="messagesId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-field-text id="userTypeId" property="detailBean.userTypeId" allow-blank="false" maxLength="50" width="200" next-element="message" editable="${isEditableuserTypeId}" />
+	<ext-field-combo id="message" label-exp="$L{smessage}" property="detailBean.messagesId" link-property="detailBean.message.messagesId" display-field="libelleIndex" store-id="storeListMessage" next-element="isLtr" />
+	<ext-field-checkbox id="isLtr" property="detailBean.isLtr" checked-value="true" unchecked-value="false" next-element="isComparable" />
+	<ext-field-checkbox id="isComparable" property="detailBean.isComparable" checked-value="true" unchecked-value="false" next-element="patern" />
+	<ext-field-text id="patern" property="detailBean.patern" allow-blank="false" maxLength="60" width="300" next-element="valider" />
+</root>

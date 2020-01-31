@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListNatureRoles" model-name="listNatureRoles" id-property="idIndex">
+		<ext-store-field id="idIndex" property="dataEntitesSimplesId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-fieldset layout="tform" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<include path="${formRole}" />
+	</ext-fieldset>
+	<ext-tab-panel id="entiteTabPanel" active-tab="0">
+		<ext-panel id="actionRolePanel" title-exp="$L{ActionRole}" columnWidth=".95">
+			<ext-grid id="itemActionRoles" editable="${isEditableGrid}" height="200" border="false" auto-height="false">
+				<script-event name="afteredit" handle-params="e">
+					
+				<![CDATA[
+					 var nature = e.record.get("natureRoleIndex"); 
+					 var col = e.column;
+					 var count = e.grid.store.getCount();
+					 
+					 
+					 if( col ==  4){
+					 
+					    if( e.value > count)
+					        e.record.set("depIdIndex",e.originalValue);
+					 }  
+					        
+                 ]]>
+				</script-event>
+				<ext-store model-name="detailBean.itemActionRoles">
+					<ext-store-field id="roleIdIndex" property="roleId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+					<ext-store-field id="rangIndex" property="rang" />
+					<ext-store-field id="helpIndex" property="help" />
+					<ext-store-field id="prentRoleIdIndex" property="prentRoleId" />
+					<ext-store-field id="dependenceRoleIdIndex" property="dependenceRoleId" />
+					<ext-store-field id="natureRoleIndex" property="natureDepRole" />
+					<ext-store-field id="depIdIndex" property="depId" />
+				</ext-store>
+				<ext-grid-column data-index="libelleIndex" width="200">
+					<ext-field-text />
+				</ext-grid-column>
+				<ext-grid-column data-index="rangIndex" width="100">
+					<ext-field-spinner min-value="1" max-value="99" />
+				</ext-grid-column>
+				<ext-grid-column data-index="helpIndex" width="200">
+					<ext-field-text />
+				</ext-grid-column>
+				<ext-grid-column data-index="depIdIndex" width="100">
+					<ext-field-number />
+				</ext-grid-column>
+			</ext-grid>
+		</ext-panel>
+		<ext-panel id="fieldRolePanel" title-exp="$L{FieldRole}" columnWidth=".95">
+			<ext-grid id="itemFieldRoles" editable="${isEditableGrid}" height="200" border="false" auto-height="false">
+				<script-event name="afteredit" handle-params="e">
+					
+				<![CDATA[
+					 var nature = e.record.get("natureRoleIndex"); 
+					 var col = e.column;
+					 var count = 0;
+					 
+					 if( col ==  3){
+					 
+					    if(e.value=="" || e.value != e.originalValue)
+					        e.record.set("depIdIndex","");
+					 }   
+					 
+					 if( col ==  4){
+					 
+					  if( nature==null || nature==""){
+					     e.record.set("depIdIndex","");
+					  }else{
+					  
+					      if( nature=="A" )
+					        count = e.grid.store.getCount();
+					        
+					    if( nature=="F" )
+					       count = desktop.getCmp('itemActionRoles').store.getCount();
+					         
+					    if( e.value > count)
+					        e.record.set("depIdIndex",e.originalValue);
+					        
+					  }
+					    
+					 }  
+					        
+                 ]]>
+				</script-event>
+				<ext-store model-name="detailBean.itemFieldRoles">
+					<ext-store-field id="roleIdIndex" property="roleId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+					<ext-store-field id="rangIndex" property="rang" />
+					<ext-store-field id="helpIndex" property="help" />
+					<ext-store-field id="prentRoleIdIndex" property="prentRoleId" />
+					<ext-store-field id="dependenceRoleIdIndex" property="dependenceRoleId" />
+					<ext-store-field id="isSearchebleIndex" property="isSearcheble" />
+					<ext-store-field id="isReadableIndex" property="isReadable" />
+					<ext-store-field id="isInsertableIndex" property="isInsertable" />
+					<ext-store-field id="isUpdatableIndex" property="isUpdatable" />
+					<ext-store-field id="natureRoleIndex" property="natureDepRole" />
+					<ext-store-field id="depIdIndex" property="depId" />
+				</ext-store>
+				<ext-grid-column data-index="libelleIndex" width="200">
+					<ext-field-text />
+				</ext-grid-column>
+				<ext-grid-column data-index="rangIndex" width="100">
+					<ext-field-spinner min-value="1" max-value="99" />
+				</ext-grid-column>
+				<ext-grid-column data-index="helpIndex" width="200">
+					<ext-field-text />
+				</ext-grid-column>
+				<ext-grid-column data-index="natureRoleIndex" width="200">
+					<ext-field-combo display-field="libelleIndex" store-id="storeListNatureRoles" />
+				</ext-grid-column>
+				<ext-grid-column data-index="depIdIndex" width="100">
+					<ext-field-number />
+				</ext-grid-column>
+				<ext-grid-column data-index="isSearchebleIndex" hideable="true" width="100">
+					<ext-field-checkbox />
+				</ext-grid-column>
+				<ext-grid-column data-index="isReadableIndex" hideable="true" width="100">
+					<ext-field-checkbox />
+				</ext-grid-column>
+				<ext-grid-column data-index="isInsertableIndex" hideable="true" width="100">
+					<ext-field-checkbox />
+				</ext-grid-column>
+				<ext-grid-column data-index="isUpdatableIndex" hideable="true" width="100">
+					<ext-field-checkbox />
+				</ext-grid-column>
+			</ext-grid>
+		</ext-panel>
+	</ext-tab-panel>
+</root>

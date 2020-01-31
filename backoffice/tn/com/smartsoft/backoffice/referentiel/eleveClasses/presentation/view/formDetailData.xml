@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storelistClasseNiveau" model-name="listClasseNiveau" id-property="idIndex">
+		<ext-store-field id="idIndex" property="eleveClasseNiveauId" />
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-fieldset title-exp="$L{identification}" layout="tform" label-width="130" border="true">
+		<ext-layout-config name="columns" value="4" expected="false" />
+		<ext-field-text id="libelle" property="detailBean.nom" width="350" next-element="deviseId" colspan="4" allow-blank="false" />
+		<ext-field-combo id="eleveClasseNiveauId" property="detailBean.eleveClasseNiveauId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistClasseNiveau" maxLength="50" width="250" label-exp="Niveau" colspan="1" />
+	</ext-fieldset>
+</root>

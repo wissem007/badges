@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex" >
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+		<ext-store-field id="symboleMonetaireIndex" property="symboleMonetaire[$i]" />
+	</ext-store>
+	
+	<ext-field-date id="dateCoursIndex" property="detailBean.dateCours" allow-blank="false" width="100" next-element="coursIndex" />
+	<ext-field-number id="coursIndex" property="detailBean.cours" allow-blank="false" width="100" next-element="devise" />
+	
+	<ext-composite-field label-exp="$LV{devise}">
+		<ext-field-suggest id="devise" property="detailBean.deviseId" link-property="detailBean.devise.deviseId" display-field="symboleMonetaireIndex"  store-id="storeListDevise" width="100"
+			next-element="deviseLibelle">
+			<linked-field-item field-ref="deviseLibelle" align="left" />
+		</ext-field-suggest>
+		<ext-field-suggest id="deviseLibelle" property="detailBean.deviseId" display-property="detailBean.devise.libelle"  display-field="libelleIndex" store-id="storeListDevise" width="150" next-element="valider">
+			<linked-field-item field-ref="devise" align="left" />
+		</ext-field-suggest>
+	</ext-composite-field>
+	
+</root>

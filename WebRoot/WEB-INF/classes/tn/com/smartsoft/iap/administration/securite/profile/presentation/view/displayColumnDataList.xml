@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="profileIdIndex" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="profileIdIndex" property="profileId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="moduleIdIndex" property="module.libelle" />
+	</ext-store>
+	<ext-grid-column data-index="libelleIndex" width="300" />
+	<ext-grid-column data-index="moduleIdIndex" label-exp="Module" width="300" />
+</root>

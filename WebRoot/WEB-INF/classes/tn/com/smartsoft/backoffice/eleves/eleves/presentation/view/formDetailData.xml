@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storelistSaisons" model-name="listSaisons" id-property="idIndex">
+		<ext-store-field id="idIndex" property="saisonId" />
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-store id="storelistClasses" model-name="listClasses" id-property="idIndex">
+		<ext-store-field id="idIndex" property="eleveClasseId" />
+		<ext-store-field id="libelleIndex" property="nom" />
+	</ext-store>
+	<ext-fieldset title-exp="$L{identification}" layout="tform" label-width="120" border="true">
+		<ext-layout-config name="columns" value="8" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'99%'}" expected="false" />
+		<ext-panel id="panelPhoto" colspan="1" border="false">
+			<ext-panel colspan="1" border="false" style="margin-top:-10px">
+				<ext-html tag="table" attrebut="html" height="50">
+					<ext-html tag="tr">
+						<ext-html tag="td" class="login-app-label" width="100">
+							<ext-html id="imageView" class="photoView" tag="img" src="detailWindow.res?expression=$PV[detailBean.eleveSaison.photo]" width="120" height="120" />
+						</ext-html>
+					</ext-html>
+				</ext-html>
+			</ext-panel>
+			<ext-button tpl-id="104" text="Photo" colspan="1" style="padding-left:10px;" is-rendred="${isCreate}">
+				<script-event name="handler" handle-params="grid,rowIndex,columnIndex,e">
+					<content-script>
+									 <![CDATA[
+									    windowAttachments=Ext.getCmp("photoWindow");
+									    windowAttachments.show();
+								 	 ]]>
+					</content-script>
+				</script-event>
+			</ext-button>
+		</ext-panel>
+		<ext-panel layout="tform" border="false" label-width="140" colspan="7">
+			<ext-layout-config name="columns" value="3" expected="false" />
+			<ext-layout-config name="tableAttrs" value="{width:'99%'}" expected="false" />
+			<ext-field-text id="codePermanent" property="detailBean.codePermanent" width="100" next-element="" colspan="1" />
+			<ext-field-text id="email" property="detailBean.eleveSaison.email" width="300" next-element="nom" colspan="2" />
+			<ext-field-text id="nom" property="detailBean.nom" width="200" next-element="prenom" colspan="1" />
+			<ext-field-text id="prenom" property="detailBean.prenom" width="200" next-element="codePermanent" colspan="1" />
+			<ext-field-date id="dateNaisance" property="detailBean.dateNaisance" width="80" next-element="nom" colspan="1" />
+
+			<ext-field-combo id="eleveSaisonId" property="detailBean.eleveSaison.eleveSaisonId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistSaisons" maxLength="50" width="100" colspan="1" />
+			<ext-field-combo id="eleveClasseId" property="detailBean.eleveSaison.eleveClasseId" display-field="libelleIndex" display-field-id="idIndex" store-id="storelistClasses" maxLength="50" width="200" colspan="2" />
+
+			<ext-field-text id="nomResponsable1" property="detailBean.eleveSaison.nomResponsable1" width="200" next-element="codePermanent" colspan="1" />
+			<ext-field-text id="prenomResponsable1" property="detailBean.eleveSaison.prenomResponsable1" width="200" next-element="codePermanent" colspan="1" />
+			<ext-field-text id="telResponsable1" property="detailBean.eleveSaison.telResponsable1" width="100" next-element="codePermanent" colspan="1" />
+			<ext-field-text id="nomResponsable2" property="detailBean.eleveSaison.nomResponsable2" width="200" next-element="codePermanent" colspan="1" />
+			<ext-field-text id="prenomResponsable2" property="detailBean.eleveSaison.prenomResponsable2" width="200" next-element="codePermanent" colspan="1" />
+			<ext-field-text id="telResponsable2" property="detailBean.eleveSaison.telResponsable2" width="100" next-element="codePermanent" colspan="1" />
+
+			<ext-field-checkbox id="servicePanier" property="detailBean.eleveSaison.servicePanier" width="100" colspan="1" allow-blank="false" />
+			<ext-field-checkbox id="serviceCantine" property="detailBean.eleveSaison.serviceCantine" width="100" colspan="1" allow-blank="false" />
+			<ext-field-checkbox id="serviceGarde" property="detailBean.eleveSaison.serviceGarde" width="100" colspan="1" allow-blank="false" />
+
+		</ext-panel>
+	</ext-fieldset>
+	<ext-grid id="historys" title-exp="Historique" height="240" liveGrid="true" is-rendred="${isRenderCreate}">
+		<ext-store model-name="detailBean.historys">
+			<ext-store-field id="eleveSaisonIdIndex" property="eleveSaisonId" />
+			<ext-store-field id="seasonIndex" property="saison.nom" />
+			<ext-store-field id="classeIndex" property="classe.nom" />
+			<ext-store-field id="nomResponsable1Index" property="nomResponsable1" />
+			<ext-store-field id="prenomResponsable1Index" property="prenomResponsable1" />
+			<ext-store-field id="telResponsable1Index" property="telResponsable1" />
+			<ext-store-field id="nomResponsable2Index" property="nomResponsable2" />
+			<ext-store-field id="prenomResponsable2Index" property="prenomResponsable2" />
+			<ext-store-field id="telResponsable2Index" property="telResponsable2" />
+			<ext-store-field id="serviceCantineIndex" property="serviceCantine" />
+			<ext-store-field id="serviceGardeIndex" property="serviceGarde" />
+		</ext-store>
+		<ext-grid-column data-index="eleveSaisonIdIndex" width="85" label-exp="Photo" renderer="photoRender">
+		</ext-grid-column>
+		<ext-grid-column data-index="seasonIndex" width="80" label-exp="Saison">
+		</ext-grid-column>
+		<ext-grid-column data-index="nomResponsable1Index" width="180">
+		</ext-grid-column>
+		<ext-grid-column data-index="prenomResponsable1Index" width="180">
+		</ext-grid-column>
+		<ext-grid-column data-index="telResponsable1Index" width="110">
+		</ext-grid-column>
+		<ext-grid-column data-index="nomResponsable2Index" width="180">
+		</ext-grid-column>
+		<ext-grid-column data-index="prenomResponsable2Index" width="180">
+		</ext-grid-column>
+		<ext-grid-column data-index="telResponsable2Index" width="110">
+		</ext-grid-column>
+		<ext-grid-column data-index="serviceCantineIndex" width="90" renderer="booleanRender">
+		</ext-grid-column>
+		<ext-grid-column data-index="serviceGardeIndex" width="90" renderer="booleanRender">
+		</ext-grid-column>
+	</ext-grid>
+	<js-function name="photoRender" list-param="value, metaData, record, rowIndex, colIndex, store,handler">
+		<![CDATA[
+		    var src='detailWindow.res?expression=$PV[detailBean.historys*s'+rowIndex+'*e.photo]&rand='+Math.random();
+		    value='<img  height="80" width="70" src="'+src+'" />';
+		    return value;
+ 	 	]]>
+	</js-function>
+	<js-function name="booleanRender" list-param="value, metaData, record, rowIndex, colIndex, store,handler">
+		<![CDATA[
+		   if(value && value=='true')
+		   return 'Oui';
+		    return 'Non';
+ 	 	]]>
+	</js-function>
+	<include path="./photoAttachments.xml" />
+</root>

@@ -1,0 +1,88 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UITags">
+   <xsd:sequence>
+    <xsd:element name="tag" type="tn.com.smartsoft.framework.presentation.view.tags.UITag" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UITag">
+   <xsd:sequence>
+    <xsd:element name="attribute" type="tn.com.smartsoft.framework.presentation.view.tags.UIAttributeTag" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="parameter" type="tn.com.smartsoft.framework.presentation.view.tags.UIParameterTag" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="property" type="tn.com.smartsoft.framework.presentation.view.tags.UIPropertyTag" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="properties" type="tn.com.smartsoft.framework.presentation.view.tags.UIPropertiesTag" minOccurs="0" maxOccurs="unbounded"/>
+    <xsd:element name="child" type="tn.com.smartsoft.framework.presentation.view.tags.UIChildTag" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="tag-class" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="extends-tag" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="content-property" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIAttributeTag">
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="property" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="required" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="description" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="html" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="default-value" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIParameterTag">
+   <xsd:attribute name="property" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="value" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIPropertyTag">
+   <xsd:attribute name="tag" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="attribute" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="property" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="required" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="default-value" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="description" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="html" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIPropertiesTag">
+   <xsd:sequence>
+    <xsd:element name="method-param" type="tn.com.smartsoft.framework.presentation.view.tags.UIPropertiesParamTag" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="tag" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="added-method" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIPropertiesParamTag">
+   <xsd:attribute name="attribute" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="type" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="default-value" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.view.tags.UIChildTag">
+   <xsd:attribute name="tag" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="ref" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="added-method" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="parmeter-type-method" type="xsd:string" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="tags" type="tn.com.smartsoft.framework.presentation.view.tags.UITags"/>
+ </xsd:schema>

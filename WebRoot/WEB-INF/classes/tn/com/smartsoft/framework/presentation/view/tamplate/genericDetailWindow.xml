@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="${title}" columnWidth=".99" label-width="190" layout="form" body-style="padding:5px;" id="titlePanel">
+				<ext-navbar list-property="listBean" index-property="beanIndex" is-rendred="${isRenderNav}" do-first-action="doFirstBean" do-previous-action="doPreviousBean" do-next-action="doNextBean" do-last-action="doLastBean" />
+				<include path="${formDetail}" />
+			</ext-panel>
+		</ext-panel>
+		<ext-tbutton id="valider" tpl-id="9" is-rendred="${isRenderValid}">
+			<submited-event name="click" action-listener="${validateMethod}" />
+		</ext-tbutton>
+		<ext-tbutton id="refresh" tpl-id="4" is-rendred="${isRenderAnnuler}">
+			<linked-event name="click" action-listener="doRefreshDetail" />
+		</ext-tbutton>
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="${retourListMethod}" />
+		</ext-tbutton>
+	</root>
+</window>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="deviseIdIndex" reload-submit-all-field="true" reload-action-listener="doFilter">
+
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="sousUniteIndex" property="sousUnite[$i]" />
+		<ext-store-field id="symboleMonetaireIndex" property="symboleMonetaire[$i]" />
+		<!--ext-store-field id="arrondissementMontantIndex" property="arrondissementMontant[$i]" /-->
+		<ext-store-field id="isoNumericIndex" property="isoNumeric[$i]" />
+ 		<ext-store-field id="isoAlphaIndex" property="isoAlpha[$i]" />
+		
+		<ext-store-field id="nombreDecimalesIndex" property="nombreDecimales[$i]" />
+		
+	</ext-store>
+
+	<ext-grid-column data-index="libelleIndex" width="250">
+		<ext-field-text />
+	</ext-grid-column>
+	<ext-grid-column data-index="symboleMonetaireIndex">
+		<ext-field-text />
+	</ext-grid-column>
+	<ext-grid-column data-index="sousUniteIndex" label-exp="$L{sousUnite}">
+		<ext-field-text />
+	</ext-grid-column>
+	<ext-grid-column data-index="isoAlphaIndex" label-exp="$L{isoAlpha}">
+		<ext-field-text />
+	</ext-grid-column>
+	
+	<ext-grid-column data-index="isoNumericIndex" width="150" label-exp="$L{isoNumeric}">
+		<ext-field-number />
+	</ext-grid-column>
+	<ext-grid-column data-index="nombreDecimalesIndex" width="150">
+		<ext-field-number />
+	</ext-grid-column>
+</root>

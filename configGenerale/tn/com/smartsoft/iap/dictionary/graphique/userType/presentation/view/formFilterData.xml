@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListMessage" model-name="listMessage" id-property="messagesIdIndex">
+		<ext-store-field id="messagesIdIndex" property="messagesId[$i]" />
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+	</ext-store>
+	<ext-field-text id="userTypeId" property="searcheBean.userTypeId" maxLength="50" width="200" next-element="message" />
+	<ext-field-combo id="message" label-exp="$L{smessage}" property="searcheBean.messagesId" display-field="libelleIndex" store-id="storeListMessage" next-element="searche" />
+<!--	<ext-field-text id="patern" property="searcheBean.patern" maxLength="60" width="300" next-element="valider" />-->
+</root>

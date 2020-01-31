@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<xtpl-foreach exp="$item  in  $entiteBean.getPropertys()">
+		<xtpl-if>
+			<xtpl-condition><![CDATA[#{item.getUserTypeId()}=="montant"]]></xtpl-condition>
+			<ext-field-number id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			<xtpl-elseif>
+				<xtpl-condition><![CDATA[#{item.getUserTypeId()}=="boolean"]]></xtpl-condition>
+				<ext-field-checkbox id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			</xtpl-elseif>
+			<xtpl-elseif>
+				<xtpl-condition><![CDATA[#{item.getUserTypeId()}=="date"]]></xtpl-condition>
+				<ext-field-date id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			</xtpl-elseif>
+			<xtpl-elseif>
+				<xtpl-condition><![CDATA[#{item.getUserTypeId()}=="numeric"]]></xtpl-condition>
+				<ext-field-number id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			</xtpl-elseif>
+			<xtpl-elseif>
+				<xtpl-condition><![CDATA[#{item.getUserTypeId()}=="numerickey"]]></xtpl-condition>
+				<ext-field-number id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			</xtpl-elseif>
+			<xtpl-else>
+				<ext-field-text id="#{item.getPropertyName()}" property="detailBean.#{item.getPropertyName()}" width="250" next-element="#{item.getNextProperty()}" />
+			</xtpl-else>
+		</xtpl-if>
+	</xtpl-foreach>
+</root>

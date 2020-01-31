@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-store root="data" id="storeListMenuAction" model-name="listMenusAction" id-property="menuIdIndex">
+			<ext-store-field id="menuIdIndex" property="menuId" />
+			<ext-store-field id="libelleIndex" property="menuLibelle" />
+		</ext-store>
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="$L{criteresRecherche}" layout="column" collapsible="true" body-style="padding:15px;" border="false">
+				<ext-panel layout="form" border="false" columnWidth=".90">
+					<ext-store root="data" id="storeListModules" model-name="listModules" id-property="moduleIdIndex">
+						<ext-store-field id="moduleIdIndex" property="moduleId" />
+						<ext-store-field id="libelleIndex" property="libelle" />
+					</ext-store>
+					<ext-field-combo id="moduleId" label-exp="$L{module}" property="searcheBean.moduleId" display-field="libelleIndex" store-id="storeListModules" width="250" allow-blank="false"
+						next-element="roleIdFilter">
+						<ajax-event name="select" action-listener="doFilter" handle-params="el,e" is-wait="true" is-all-request-field="true">
+							<success>
+							<![CDATA[
+				               Ext.sss.Utils.reloadGrid(response,desktop,'listBean');
+				               desktop.getStore("storeListMenuAction").load();
+				             ]]>
+							</success>
+						</ajax-event>
+					</ext-field-combo>
+				</ext-panel>
+			</ext-panel>
+			<ext-grid id="listBean" title-exp="$L{MenuPreference}" height="364" editable="true">
+				<ext-store root="data" model-name="userMenus">
+					<ext-store-field id="menuIdIndex" property="menuId" />
+					<ext-store-field id="menuLibelleIndex" property="menuAction.menuLibelle" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+				</ext-store>
+				<ext-grid-column data-index="menuIdIndex" width="200">
+					<ext-field-suggest display-field="menuIdIndex" store-id="storeListMenuAction">
+						<linked-field-item column-ref="1" align="left" />
+						<handler-item columnRef="2" handler-value="suggestFieldLibelle" />
+					</ext-field-suggest>
+				</ext-grid-column>
+				<ext-grid-column data-index="menuIdIndex" width="200" label-exp="$L{menuLibelle}">
+					<ext-field-suggest display-field="libelleIndex" store-id="storeListMenuAction">
+						<linked-field-item column-ref="0" align="left" />
+						<handler-item columnRef="2" handler-value="suggestFieldLibelle" />
+					</ext-field-suggest>
+				</ext-grid-column>
+				<ext-grid-column data-index="libelleIndex" width="200">
+					<ext-field-text />
+				</ext-grid-column>
+			</ext-grid>
+			<ext-bbar>
+				<ext-button id="valider" tpl-id="9">
+					<submited-event name="click" action-listener="doValider" />
+				</ext-button>
+				<ext-button id="retour" tpl-id="29">
+					<linked-event name="click" action-listener="doHomePage" handle-params="el,e" />
+				</ext-button>
+			</ext-bbar>
+		</ext-panel>
+		<js-function name="suggestFieldLibelle" list-param="record, option">
+		<![CDATA[
+			 var fieldRef = this.getLinkedField(option);
+			 	if (!fieldRef)
+					return;
+				if (!record)
+					return fieldRef.clearValue();
+				var displayaValue = record.data["libelleIndex"];
+			 	var stor=desktop.getCmp('listBean').getStore();
+				var rec=stor.getAt(this.eventColumn.row) ;
+				rec.set('libelleIndex',displayaValue);
+	 	]]>
+		</js-function>
+	</root>
+</window>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-panel layout="tform" border="false" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-field-text id="sequenceId" property="searcheBean.sequenceId"  maxLength="20" width="200" next-element="startNumber"  />
+		<ext-field-number id="startNumber" property="searcheBean.startNumber" maxLength="10" width="100" next-element="valueExpression" />
+		<ext-field-text id="valueExpression" property="searcheBean.valueExpression"  maxLength="60" width="200" next-element="lengthNumber" />
+		<ext-field-number id="lengthNumber" property="searcheBean.lengthNumber"  maxLength="2" width="30" next-element="valueGroupExpression" />
+		<ext-field-text id="valueGroupExpression" property="searcheBean.valueGroupExpression" maxLength="100" width="200" next-element="searche" />
+	</ext-panel>
+</root>

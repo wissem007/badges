@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.menu.beans">
+	<class name="MenuBean" table="UI_MENUS">
+		<composite-id name="id" class="MenuBeanId">
+			<key-property name="menuId" column="UI_MENU_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="help" column="HELP" />
+		<property name="rang" column="RANG" />
+		<property name="iconUrl" column="ICON_URL" />
+		<many-to-one name="parentModule" class="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

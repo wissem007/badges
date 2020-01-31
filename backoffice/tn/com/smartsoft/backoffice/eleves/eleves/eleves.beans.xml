@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+	<variable-system name="beanPack" value="tn.com.smartsoft.backoffice.eleves.eleves.beans" />
+	<variable-system name="businessPack" value="tn.com.smartsoft.backoffice.eleves.eleves.business" />
+	<variable-system name="daoPack" value="tn.com.smartsoft.backoffice.eleves.eleves.dao" />
+	<variable-system name="modelPack" value="tn.com.smartsoft.backoffice.eleves.eleves.presentation.model" />
+	<variable-system name="controlerPack" value="tn.com.smartsoft.backoffice.eleves.eleves.presentation.controler" />
+	<variable-system name="viewPack" value="tn/com/smartsoft/backoffice/eleves/eleves/presentation/view" />
+	<bean name="ElevesControlerParams" class="tn.com.smartsoft.framework.presentation.contoler.GenericEntiteControlerParams">
+		<set-property name="messageCreateValid" value="0120009" />
+		<set-property name="messageDeleteValid" value="0120010" />
+		<set-property name="messageUpdateValid" value="0120008" />
+		<set-property name="messageEmptyRow" value="0300004" />
+		<set-property name="listWindowId" value="listWindow" />
+		<set-property name="filterWindowId" value="filterWindow" />
+		<set-property name="detailWindowId" value="detailWindow" />
+		<set-property name="displayGridId" value="listBean" />
+		<set-property name="listLibelleId" value="$LV{listEleves}" />
+	</bean>
+	<bean name="ElevesBusinessParams" class="tn.com.smartsoft.framework.business.GenericEntiteBusinessParams">
+		<set-component-id name="createActionId" id="creer" />
+		<set-component-id name="updateActionId" id="modifier" />
+		<set-component-id name="deleteActionId" id="supprimer" />
+		<set-component-id name="getByCriteriaActionId" id="consulter" />
+	</bean>
+	<dao-parse-bean id="ElevesParse">
+	</dao-parse-bean>
+	<dao-parse-bean id="ElevesListParse">
+	</dao-parse-bean>
+	<dao-bean name="ElevesDao" interface="${daoPack}.ElevesDao">
+		<query-method name="getByCriteria" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+	        <![CDATA[
+	        SELECT  bean FROM ${beanPack}.ElevesBean AS bean WHERE 1=1
+	        <#if arg3.nom?exists && arg3.nom!="">
+			   AND trim(upper(bean.nom)) like trim(upper(:arg3.nom))||'%'
+		     </#if>
+	         <#if arg3.prenom?exists && arg3.prenom!="">
+			   AND trim(upper(bean.prenom)) like trim(upper(:arg3.prenom))||'%'
+		     </#if>            
+	         <#if arg3.codePermanent?exists && arg3.codePermanent!="">
+			   AND trim(upper(bean.codePermanent)) like trim(upper(:arg3.codePermanent))||'%'
+		     </#if>            
+	         <#if arg3.eleveSaisonId?exists>
+	            <#if arg3.eleveClasseId?exists>
+				      AND bean.codePermanent in(
+				       SELECT eleveSaison.id.codePermanent FROM ${beanPack}.EleveSaisonsBean AS eleveSaison  
+				       WHERE eleveSaison.id.eleveSaisonId=:arg3.eleveSaisonId AND  eleveSaison.eleveClasseId=:arg3.eleveClasseId
+				      )	            
+	               <#else>
+				      AND bean.codePermanent in(
+				       SELECT eleveSaison.id.codePermanent FROM ${beanPack}.EleveSaisonsBean AS eleveSaison  
+				       WHERE eleveSaison.id.eleveSaisonId=:arg3.eleveSaisonId
+				      )
+			    </#if>
+			    <#elseif arg3.eleveClasseId?exists>
+			  	  AND bean.codePermanent in(
+			        SELECT eleveSaison.id.codePermanent FROM ${beanPack}.EleveSaisonsBean AS eleveSaison  
+			        WHERE eleveSaison.eleveClasseId=:arg3.eleveClasseId
+			       )  
+		     </#if>
+	        ]]>
+			</query>
+		</query-method>
+		<query-method name="getHistorys" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+	          <![CDATA[
+	             SELECT  bean FROM ${beanPack}.EleveSaisonsBean AS bean 
+	             LEFT JOIN FETCH bean.classe 
+	             LEFT JOIN FETCH bean.classe.eleveClasseNiveau 
+                 LEFT JOIN FETCH bean.saison 
+	             WHERE bean.id.codePermanent=:arg3.codePermanent
+	  		  ]]>
+			</query>
+		</query-method>
+		<query-method name="getOpenSaison" session-arg-rang="0" prefix-arg-name="arg">
+			<query>
+	          <![CDATA[
+	             SELECT  bean FROM tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean AS bean 
+	              WHERE bean.opened=true
+	  		  ]]>
+			</query>
+		</query-method>
+		<query-method name="deleteHistorys" session-arg-rang="0" prefix-arg-name="arg" is-updater="true">
+			<query>
+				<![CDATA[
+					  DELETE ${beanPack}.EleveSaisonsBean AS bean
+					  WHERE bean.id.codePermanent=:arg3.codePermanent
+ 			     ]]>
+			</query>
+		</query-method>
+	</dao-bean>
+	<business-bean name="ElevesBusiness" class="${businessPack}.ElevesBusiness">
+		<set-dao-session name="daoSession" data-source-name="DefaultSession" />
+		<set-dao-bean name="entiteDao" ref="ElevesDao" />
+		<set-dao-parse-bean name="parseBean" ref="ElevesParse" />
+		<set-dao-parse-bean name="parseListBean" ref="ElevesListParse" />
+		<set-property name="businessParams" ref="ElevesBusinessParams" />
+	</business-bean>
+	<controler-bean name="ElevesControler" class="${controlerPack}.ElevesControler">
+		<set-business-bean name="entiteBusiness" ref="ElevesBusiness" />
+		<set-property name="controlerParams" ref="ElevesControlerParams" />
+		<set-business-bean name="eleveClasseNiveauxBusiness" ref="EleveClasseNiveauxBusiness" sujet="eleveClasseNiveaux" sub-module="referentiel" />
+		<set-business-bean name="eleveClassesBusiness" ref="EleveClassesBusiness" sujet="eleveClasses" sub-module="referentiel" />
+		<set-business-bean name="saisonsBusiness" ref="SaisonsBusiness" sujet="saison" sub-module="referentiel" />
+	</controler-bean>
+	<user-action-bean name="consulter" home-window-id="listWindow" model-class="${modelPack}.ElevesModel" controler-bean="ElevesControler">
+		<binding-model name="detailBean" mode="r" type="${beanPack}.ElevesBean">
+			<binding-model name="eleveSaison" mode="r" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="r" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="r" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+			<binding-model name="historys" mode="r" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="r" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="r" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+		</binding-model>
+		<binding-model name="searcheBean" mode="f" type="${beanPack}.ElevesBean">
+		</binding-model>
+		<binding-model name="listBean" mode="r" type="${beanPack}.ElevesBean">
+		</binding-model>
+		<binding-model name="listClasses" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+		</binding-model>
+		<binding-model name="listSaisons" mode="r" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean">
+		</binding-model>
+		<window id="listWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericListWindow.xml" view-id="listWindow" on-init-methode="onInitList" on-render-methode="onRendeListWindow">
+			<parameter name="titleList" value="$LV{listEleves}" />
+			<parameter name="formFilter" value="${viewPack}/formFilterData.xml" />
+			<parameter name="displayColumn" value="${viewPack}/displayColumnDataList.xml" />
+		</window>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{Eleves}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="false" />
+			<parameter name="isEditableElevesId" value="false" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="retourListMethod" value="doRetourList" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="modifier" extends="consulter">
+		<binding-model name="detailBean" property="detailBean" mode="u" type="${beanPack}.ElevesBean">
+			<binding-model name="eleveSaison" mode="u" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="u" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="u" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+			<binding-model name="historys" mode="u" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="u" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="u" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{Eleves}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableElevesId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="validateMethod" value="doValiderUpdate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="supprimer" extends="modifier">
+		<binding-model name="detailBean" property="detailBean" mode="d" type="${beanPack}.ElevesBean">
+			<binding-model name="eleveSaison" mode="d" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="d" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="d" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+			<binding-model name="historys" mode="d" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="d" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="d" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow">
+			<parameter name="title" value="$LV{Eleves}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="isEditableElevesId" value="false" />
+			<parameter name="retourListMethod" value="doRetourList" />
+			<parameter name="isRenderNav" value="true" />
+			<parameter name="isRenderAnnuler" value="false" />
+			<parameter name="validateMethod" value="doValiderDelete" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="creer" home-window-id="detailWindow" model-class="${modelPack}.ElevesModel" controler-bean="ElevesControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.ElevesBean">
+			<binding-model name="eleveSaison" mode="c" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="c" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="c" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+			<binding-model name="historys" mode="c" type="${beanPack}.EleveSaisonsBean">
+				<binding-model name="classe" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+					<binding-model name="eleveClasseNiveau" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" />
+				</binding-model>
+				<binding-model name="saison" mode="c" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean" />
+				<binding-model name="photo" mode="c" type="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" />
+			</binding-model>
+		</binding-model>
+		<binding-model name="listClasses" mode="r" type="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans.EleveClassesBean">
+		</binding-model>
+		<binding-model name="listSaisons" mode="r" type="tn.com.smartsoft.backoffice.referentiel.saison.beans.SaisonsBean">
+		</binding-model>
+		<window id="detailWindow" location="tn/com/smartsoft/framework/presentation/view/tamplate/genericDetailWindow.xml" view-id="detailWindow" on-init-methode="onInitList">
+			<parameter name="title" value="$LV{Eleves}" />
+			<parameter name="formDetail" value="${viewPack}/formDetailData.xml" />
+			<parameter name="isRenderValid" value="true" />
+			<parameter name="retourListMethod" value="doHomePage" />
+			<parameter name="isEditableElevesId" value="true" />
+			<parameter name="isRenderNav" value="false" />
+			<parameter name="isRenderAnnuler" value="true" />
+			<parameter name="validateMethod" value="doValiderCreate" />
+		</window>
+	</user-action-bean>
+	<user-action-bean name="importer" home-window-id="detailWindow" model-class="${modelPack}.ElevesModel" controler-bean="ElevesControler">
+		<binding-model name="detailBean" property="detailBean" mode="c" type="${beanPack}.ElevesBean">
+		</binding-model>
+	</user-action-bean>
+</beans>

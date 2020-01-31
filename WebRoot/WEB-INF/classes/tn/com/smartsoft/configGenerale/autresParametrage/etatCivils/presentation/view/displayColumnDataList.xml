@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" >
+		<ext-store-field id="idIndex" property="etatCivilId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		
+	</ext-store>
+	<ext-grid-column data-index="idIndex" width="300" />
+	<ext-grid-column data-index="libelleIndex" width="400" />
+	
+</root>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/setting.xsd">
+  <variable-system name="formaterPack" value="tn.com.smartsoft.framework.presentation.formater" />
+  <bean name="Alpha" class="${formaterPack}.AlphaFormater">
+    <set-property name="userTypeId" value="alpha" />
+    <set-property name="jsClassFormater" value="AlphaFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="AlphaNumeric" class="${formaterPack}.AlphaNumericFormater">
+    <set-property name="userTypeId" value="alphanumeric" />
+    <set-property name="jsClassFormater" value="AlphaNumericFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="Boolean" class="${formaterPack}.BooleanFormater">
+    <set-property name="userTypeId" value="boolean" />
+    <set-property name="jsClassFormater" value="BooleanFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.Boolean" />
+    </set-list>
+  </bean>
+  <bean name="ChaineCharacteur" class="${formaterPack}.ChaineCharacteurFormater">
+    <set-property name="userTypeId" value="chainecharacteur" />
+    <set-property name="jsClassFormater" value="ChaineCharacteurFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="CreditCard" class="${formaterPack}.CreditCardFormater">
+    <set-property name="userTypeId" value="creditcard" />
+    <set-property name="jsClassFormater" value="CreditCardFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="Montant" class="${formaterPack}.CurrencyFormater">
+    <set-property name="userTypeId" value="montant" />
+    <set-property name="jsClassFormater" value="CurrencyFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="tn.com.smartsoft.framework.beans.Money" />
+      <add value="java.math.BigDecimal" />
+      <add value="java.lang.Double" />
+      <add value="java.lang.Float" />
+      <add value="java.lang.Integer" />
+    </set-list>
+  </bean>
+  <bean name="Date" class="${formaterPack}.DateFormater">
+    <set-property name="userTypeId" value="date" />
+    <set-property name="jsClassFormater" value="DateFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.sql.Date" />
+      <add value="java.util.Date" />
+      <add value="java.sql.Timestamp" />
+      <add value="java.sql.Time" />
+    </set-list>
+  </bean>
+  <bean name="DateTime" class="${formaterPack}.DateTimeFormater">
+    <set-property name="userTypeId" value="datetime" />
+    <set-property name="jsClassFormater" value="DateTimeFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.sql.Date" />
+      <add value="java.util.Date" />
+      <add value="java.sql.Timestamp" />
+      <add value="java.sql.Time" />
+    </set-list>
+  </bean>
+  <bean name="Time" class="${formaterPack}.TimeFormater">
+    <set-property name="userTypeId" value="time" />
+    <set-property name="jsClassFormater" value="TimeFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.sql.Date" />
+      <add value="java.util.Date" />
+      <add value="java.sql.Timestamp" />
+      <add value="java.sql.Time" />
+    </set-list>
+  </bean>
+  <bean name="Email" class="${formaterPack}.EmailFormater">
+    <set-property name="userTypeId" value="email" />
+    <set-property name="jsClassFormater" value="EmailFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="File" class="${formaterPack}.FileFormater">
+    <set-property name="userTypeId" value="file" />
+    <set-property name="jsClassFormater" value="FileFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="Numeric" class="${formaterPack}.NumericFormater">
+    <set-property name="userTypeId" value="numeric" />
+    <set-property name="jsClassFormater" value="NumericFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.Long" />
+      <add value="java.lang.Integer" />
+      <add value="java.math.BigInteger" />
+    </set-list>
+  </bean>
+  <bean name="NumericKey" class="${formaterPack}.NumericKeyFormater">
+    <set-property name="userTypeId" value="numerickey" />
+    <set-property name="jsClassFormater" value="NumericKeyFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.Long" />
+      <add value="java.lang.Integer" />
+      <add value="java.math.BigInteger" />
+    </set-list>
+  </bean>
+  <bean name="Phone" class="${formaterPack}.PhoneNumberFormater">
+    <set-property name="userTypeId" value="phone" />
+    <set-property name="jsClassFormater" value="PhoneNumberFormater" />
+    <set-list name="targetsClass" type="java.lang.Class">
+      <add value="java.lang.String" />
+    </set-list>
+  </bean>
+  <bean name="formaterManger" class="${formaterPack}.FormaterManger">
+    <set-map name="mapedFormater">
+      <add key="chainecharacteur" ref="ChaineCharacteur" />
+      <add key="alpha" ref="Alpha" />
+      <add key="alphanumeric" ref="AlphaNumeric" />
+      <add key="boolean" ref="Boolean" />
+      <add key="creditcard" ref="CreditCard" />
+      <add key="date" ref="Date" />
+      <add key="datetime" ref="DateTime" />
+      <add key="email" ref="Email" />
+      <add key="file" ref="File" />
+      <add key="montant" ref="Montant" />
+      <add key="numeric" ref="Numeric" />
+      <add key="numerickey" ref="NumericKey" />
+      <add key="phone" ref="Phone" />
+      <add key="time" ref="Time" />
+    </set-map>
+    <set-map name="mapedTypeClass" key-type="java.lang.Class">
+      <add key="java.lang.String" value="chainecharacteur" />
+      <add key="tn.com.smartsoft.framework.beans.Money" value="montant" />
+      <add key="java.math.BigDecimal" value="montant" />
+      <add key="java.lang.Double" value="montant" />
+      <add key="java.lang.Float" value="montant" />
+      <add key="java.sql.Date" value="date" />
+      <add key="java.util.Date" value="date" />
+      <add key="java.sql.Timestamp" value="datetime" />
+      <add key="java.sql.Time" value="time" />
+      <add key="java.lang.Boolean" value="boolean" />
+      <add key="java.math.BigInteger" value="numeric" />
+      <add key="java.lang.Integer" value="numeric" />
+      <add key="java.lang.Long" value="numeric" />
+      <add key="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" value="file" />
+    </set-map>
+  </bean>
+</web-beans>

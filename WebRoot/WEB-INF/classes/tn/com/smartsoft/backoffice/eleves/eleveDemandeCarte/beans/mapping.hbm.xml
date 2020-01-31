@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_backoffice_db" package="tn.com.smartsoft.backoffice.eleves.eleveDemandeCarte.beans">
+	<class name="EleveDemandeCartesBean" table="tr_eleve_demande_cartes">
+		<meta attribute="entite-id">eleveDemandeCartes</meta>
+		<composite-id name="id" class="EleveDemandeCartesBeanId">
+			<key-property name="eleveDemandeCarteId" column="tr_eleve_demande_carte_id" />
+			<key-property name="eleveSaisonId" column="tr_eleve_saison_id" />
+		</composite-id>
+		<property name="dateDemande" column="date_demande" />
+		<property name="dateImpresion" column="date_impresion" />
+		<property name="statuDemandesId" column="tr_statu_demandes_id" />
+		<property name="photoBdata" column="photo_bdata" />
+		<property name="photoCtype" column="photo_ctype" />
+		<property name="photoSdata" column="photo_sdata" />
+		<property name="telResponsable1" column="tel_responsable_1" />
+		<property name="telResponsable2" column="tel_responsable_2" />
+		<property name="codePermanent" column="tr_code_permanent" />
+		<many-to-one name="eleveSaison" class="tn.com.smartsoft.backoffice.eleves.eleves.beans.EleveSaisonsBean" fetch="join" update="false" insert="false">
+			<column name="tr_code_permanent" />
+			<column name="tr_eleve_saison_id" />
+		</many-to-one>
+		<many-to-one name="statuDemande" class="StatuDemandes" fetch="join" update="false" insert="false">
+			<column name="tr_statu_demandes_id" />
+		</many-to-one>
+	</class>
+	<class name="StatuDemandes" table="tr_statu_demandes">
+		<meta attribute="entite-id">eleveClasses</meta>
+		<id name="statuDemandesId" column="tr_statu_demandes_id">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="libelle" />
+	</class>
+</hibernate-mapping>

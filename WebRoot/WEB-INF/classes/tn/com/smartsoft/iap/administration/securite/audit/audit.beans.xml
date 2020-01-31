@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/sujet.xsd">
+<variable-system name="beanPack" value="tn.com.smartsoft.iap.administration.securite.audit.beans" />
+<variable-system name="businessPack" value="tn.com.smartsoft.iap.administration.securite.audit.business" />
+<variable-system name="daoPack" value="tn.com.smartsoft.iap.administration.securite.audit.dao" />
+<variable-system name="modelPack" value="tn.com.smartsoft.iap.administration.securite.audit.model" />
+<variable-system name="controlerPack" value="tn.com.smartsoft.iap.administration.securite.audit.controler" />
+<variable-system name="viewPack" value="tn/com/smartsoft/iap/administration/securite/audit/view" />
+ <controler-bean name="defaultControler" class="tn.com.smartsoft.iap.system.presentation.controler.DefaultControler"></controler-bean>
+ <user-action-bean name="creer" home-window-id="homeWindow" model-class="tn.com.smartsoft.iap.system.presentation.model.DefaultModel" controler-bean="defaultControler">
+   <window id="homeWindow" location="tn/com/smartsoft/iap/system/presentation/view/window/defaultWindow.xml" view-id="Login"></window>
+ </user-action-bean>
+ <controler-bean name="defaultControler" class="tn.com.smartsoft.iap.system.presentation.controler.DefaultControler"></controler-bean>
+ <user-action-bean name="consulter" home-window-id="homeWindow" model-class="tn.com.smartsoft.iap.system.presentation.model.DefaultModel" controler-bean="defaultControler">
+   <window id="homeWindow" location="tn/com/smartsoft/iap/system/presentation/view/window/defaultWindow.xml" view-id="Login"></window>
+ </user-action-bean>
+ <controler-bean name="defaultControler" class="tn.com.smartsoft.iap.system.presentation.controler.DefaultControler"></controler-bean>
+ <user-action-bean name="modifier" home-window-id="homeWindow" model-class="tn.com.smartsoft.iap.system.presentation.model.DefaultModel" controler-bean="defaultControler">
+   <window id="homeWindow" location="tn/com/smartsoft/iap/system/presentation/view/window/defaultWindow.xml" view-id="Login"></window>
+ </user-action-bean>
+ <controler-bean name="defaultControler" class="tn.com.smartsoft.iap.system.presentation.controler.DefaultControler"></controler-bean>
+ <user-action-bean name="supprimer" home-window-id="homeWindow" model-class="tn.com.smartsoft.iap.system.presentation.model.DefaultModel" controler-bean="defaultControler">
+   <window id="homeWindow" location="tn/com/smartsoft/iap/system/presentation/view/window/defaultWindow.xml" view-id="Login"></window>
+ </user-action-bean>
+</beans>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-image-path xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/setting.xsd">
+	<variable-system name="modulePath" value="images/module" />
+	<variable-system name="actionPath" value="images/action" />
+	<!-- image module -->
+	<image id="dictionary" height="32" width="32" path="${modulePath}/dictionary.png" />
+	<image id="partenaire" height="32" width="32" path="${modulePath}/partner.png" />
+	<image id="comptabilite" height="32" width="32" path="${modulePath}/graph.png" />
+	<image id="product" height="32" width="32" path="${modulePath}/product.png" />
+	<image id="ressourcesHumaine" height="32" width="32" path="${modulePath}/hr.png" />
+	<image id="Immobilisation" height="32" width="32" path="${modulePath}/immo.png" />
+	<image id="refCom" height="32" width="32" path="${modulePath}/refCommun.png" />
+	<image id="stock" height="32" width="32" path="${modulePath}/stock.png" />
+	<image id="administration" height="32" width="32" path="${modulePath}/administration.png" />
+	<image id="recouvrement" height="32" width="32" path="${modulePath}/recouvrement.png" />
+	<image id="configGenerale" height="32" width="32" path="${modulePath}/configGenerale.png" />
+	<image id="grhRef" height="32" width="32" path="${modulePath}/hr.png" />
+	<image id="presenceConges" height="32" width="32" path="${modulePath}/presence.png" />
+	<image id="declaration" height="32" width="32" path="${modulePath}/declaration.png" />
+	<image id="migration" height="32" width="32" path="${modulePath}/migration.png" />
+	<image id="mailling" height="32" width="32" path="${modulePath}/crm.png" />
+	<!-- image action -->
+	<image id="user" height="16" width="16" path="${actionPath}/user.png" />
+	<image id="creer" height="16" width="16" path="${actionPath}/creer.png" />
+	<image id="supprimer" height="16" width="16" path="${actionPath}/supprimer.png" />
+	<image id="importer" height="16" width="16" path="${actionPath}/importer.png" />
+	<image id="modifier" height="16" width="16" path="${actionPath}/modifier.png" />
+	<image id="valider" height="16" width="16" path="${actionPath}/valider.png" />
+	<image id="changerMotPasse" height="16" width="16" path="${actionPath}/changerMotPasse.png" />
+	<image id="ecrireMsg" height="16" width="16" path="${actionPath}/ecrireMsg.png" />
+	<image id="logout" height="16" width="16" path="${actionPath}/logout.png" />
+	<image id="consulter" height="16" width="16" path="${actionPath}/consulter.png" />
+	<image id="search" height="16" width="16" path="${actionPath}/search.gif" />
+	<image id="iconPdf" height="16" width="16" path="${actionPath}/iconPdf.png" />
+	<image id="iconXl" height="16" width="16" path="${actionPath}/iconXl.png" />
+	<image id="prevPage" height="16" width="16" path="${actionPath}/prevpage.png" />
+	<image id="nextPage" height="16" width="16" path="${actionPath}/nextpage.png" />
+	<image id="firstPage" height="16" width="16" path="${actionPath}/firstpage.png" />
+	<image id="lastPage" height="16" width="16" path="${actionPath}/lastpage.png" />
+	<image id="generer" height="16" width="16" path="${actionPath}/generer.png" />
+	<image id="etudier" height="16" width="16" path="${actionPath}/etudier.gif" />
+	<image id="retour" height="16" width="16" path="${actionPath}/retour.gif" />
+	<image id="traiter" height="16" width="16" path="${actionPath}/traiter.png" />
+	<image id="restaurer" height="16" width="16" path="${actionPath}/restore.png" />
+	<image id="transferer" height="16" width="16" path="${actionPath}/transferer.png" />
+	<image id="affecter" height="16" width="16" path="${actionPath}/affecter.png" />
+	<image id="activer" height="16" width="16" path="${actionPath}/activer.png" />
+	<image id="annuler" height="16" width="16" path="${actionPath}/annuler.jpg" />
+	<image id="accorder" height="16" width="16" path="${actionPath}/accorder.gif" />
+	<image id="retour" height="16" width="16" path="${actionPath}/retour.gif" />
+	<image id="verifier" height="16" width="16" path="${actionPath}/verifier.gif" />
+	<image id="societe" height="16" width="16" path="images/utils/societe.png" />
+	<image id="organisation" height="16" width="16" path="images/utils/organisation.png" />
+	<image id="start" height="16" width="16" path="${actionPath}/start.png" />
+	<image id="save" height="16" width="16" path="${actionPath}/save.png" />
+	<image id="iconTxt" height="16" width="16" path="${actionPath}/iconTxt.png" />
+	<image id="arbre" height="16" width="16" path="${actionPath}/arbre.png" />
+	<image id="deplacer" height="16" width="16" path="${actionPath}/arbre.png" />
+	<image id="formule" height="16" width="16" path="${actionPath}/bntFormule.png" />
+	<image id="reverse" height="16" width="16" path="${actionPath}/reverse.png" />
+	<image id="tableauBord" height="16" width="16" path="${actionPath}/tableauBord.png" />
+	<image id="comparer" height="16" width="16" path="${actionPath}/comparer.png" />
+	<image id="effectif" height="16" width="16" path="${actionPath}/comparer.png" />
+	<image id="cloturer" height="16" width="16" path="${actionPath}/cloturer.png" />
+	<image id="simuler" height="16" width="16" path="${actionPath}/simuler.png" />
+	<image id="attachment" height="16" width="16" path="${actionPath}/attachment.png" />
+	<image id="repondre" height="16" width="16" path="${actionPath}/repondre.png" />
+</web-image-path>

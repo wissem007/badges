@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-store root="data" id="storeListProfile" model-name="listProfile" id-property="profileIdIndex">
+			<ext-store-field id="profileLibelleIndex" property="libelle" />
+			<ext-store-field id="profileIdIndex" property="profileId" />
+		</ext-store>
+		<ext-store root="data" id="storeListUser" model-name="listUser" id-property="userIdIndex">
+			<ext-store-field id="userNameIndex" property="userName" />
+			<ext-store-field id="displayNameIndex" property="displayName" />
+			<ext-store-field id="userIdIndex" property="userId" />
+		</ext-store>
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="$L{criteresRecherche}" columnWidth=".99" body-style="padding:15px;" id="titlePanel">
+				<ext-fieldset layout="form">
+					<ext-panel layout="tform" border="false" label-width="80">
+						<ext-layout-config name="columns" value="6" expected="false" />
+						<ext-layout-config name="tableAttrs" value="{width:'100%'}" expected="false" />
+						<ext-field-suggest label-exp="${title}" id="userName" property="detailBean.userId" colspan="1" allow-blank="false" display-field="userNameIndex" store-id="storeListUser" width="100" next-element="displayName">
+							<linked-field-item field-ref="displayName" align="left" />
+						</ext-field-suggest>
+						<ext-field-suggest id="displayName" property="detailBean.userId" colspan="5" hideLabel="true" allow-blank="false" display-field="displayNameIndex" store-id="storeListUser" width="200"
+							next-element="detail">
+							<linked-field-item field-ref="userName" align="left" />
+						</ext-field-suggest>
+					</ext-panel>
+				</ext-fieldset>
+				<ext-grid id="detail" title-exp="$L{listAuto}" height="400" editable="${isEditableGrid}" editable-handler="editableGridDetail" fixed-number-row="true">
+					<ext-store root="data" model-name="profileModules">
+						<ext-store-field id="societeLibelleIndex" property="organisme.parentSociete.libelle" />
+						<ext-store-field id="organismeLibelleIndex" property="organisme.libelle" />
+						<ext-store-field id="listActiveIndex" property="listActive" />
+					</ext-store>
+					<ext-grid-row-header>
+						<ext-grid-column-header header="$L{organisme}" colspan="2" />
+						<ext-grid-column-header header="$L{module}" id="moduleHeader" colspan="4" />
+					</ext-grid-row-header>
+					<ext-grid-column data-index="societeLibelleIndex" label-exp="$L{organisme}" width="200">
+					</ext-grid-column>
+					<ext-grid-column data-index="organismeLibelleIndex" label-exp="$L{societe}" width="200">
+					</ext-grid-column>
+				</ext-grid>
+			</ext-panel>
+		</ext-panel>
+		<ext-tbutton id="searche" tpl-id="16">
+			<ajax-event name="click" action-listener="getDetails" handle-params="el,e" is-all-request-field="true" is-wait="true" maxLength="50" width="200">
+				<success>
+					<![CDATA[
+					   Ext.sss.Utils.reloadGrid(response,desktop,'detail');
+	  			      ]]>
+				</success>
+			</ajax-event>
+		</ext-tbutton>
+		<ext-tbutton id="valider" tpl-id="9" is-rendred="${isRenderValid}">
+			<submited-event name="click" action-listener="${validateMethod}" />
+		</ext-tbutton>
+		<ext-tbutton id="refresh" tpl-id="4" is-rendred="${isRenderAnnuler}">
+			<linked-event name="click" action-listener="doRefreshDetail" />
+		</ext-tbutton>
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="${retourListMethod}" />
+		</ext-tbutton>
+		<js-function name="editableGridDetail" list-param="colIndex,rowIndex,grid,store,record">
+		<![CDATA[
+		   var listActiveIndex=record.data["listActiveIndex"];
+		   if(!listActiveIndex)
+		   return false;
+		   var isAct=listActiveIndex.substring(colIndex,colIndex+1);
+		   return isAct==1;
+ 	 	]]>
+		</js-function>
+		<js-function name="setBackGroundColor" list-param="value, metaData, record, rowIndex, colIndex, store">
+		<![CDATA[
+		var listActiveIndex=record.data["listActiveIndex"];
+		 if(!listActiveIndex)
+		   return false;
+		var isAct=listActiveIndex.substring(colIndex,colIndex+1);
+		if(isAct!=1)
+		Ext.sss.Utils.setColorInMeta( metaData,'Silver');
+	    return value;
+ 	 	]]>
+		</js-function>
+	</root>
+</window>

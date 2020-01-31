@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.decoupage.application.beans">
+	<class name="ApplicationBean" table="AD_APPLICATION">
+		<id name="applicationId" column="AD_APPLICATION_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="moduleBaseId" column="AD_MODULE_BASE_ID" />
+		<property name="deviseId" column="CR_DEVISE_ID" />
+		<property name="paysId" column="CR_PAYS_ID" />
+		<property name="fileId" column="CR_FILE_ID" />
+		<property name="systemModuleId" column="AD_SYSTEM_MODULE_ID" />
+		<property name="version" column="VERSION" />
+		<many-to-one name="logoFile" class="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean"  fetch="join" update="false" insert="false">
+			<column name="CR_FILE_ID" />
+		</many-to-one>
+		<many-to-one name="deviseBase" class="tn.com.smartsoft.configGenerale.devises.devise.beans.DeviseBean" fetch="join" update="false" insert="false">
+			<column name="CR_DEVISE_ID" />
+		</many-to-one>
+		<many-to-one name="moduleBase" class="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_MODULE_BASE_ID" />
+		</many-to-one>
+		<many-to-one name="moduleystem" class="tn.com.smartsoft.iap.dictionary.decoupage.module.beans.ModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_SYSTEM_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="payBean" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false">
+			<column name="CR_PAYS_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

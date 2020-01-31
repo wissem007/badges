@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="libelleIndex" property="nom" />
+		<ext-store-field id="openedIndex" property="opened" />
+	</ext-store>
+	<ext-grid-column data-index="libelleIndex" width="150" />
+	<ext-grid-column data-index="openedIndex" width="100" renderer="booleanRender" />
+	<js-function name="booleanRender" list-param="value, metaData, record, rowIndex, colIndex, store,handler">
+		<![CDATA[
+		   if(value && value=='true')
+		   return 'Oui';
+		    return 'Non';
+ 	 	]]>
+	</js-function>
+</root>

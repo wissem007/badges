@@ -1,0 +1,75 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.dao.definition">
+	<class name="DataBaseDefinition" node="data-base-setting">
+		<mapped-property-node addedMethode="addCustomSqlErrorCategories" node="custom-sql-error-categorie" attributeKey="name" attributeValue="application-error-code" />
+		<many-ref addedMethode="addDbDialectDefinition" classRef="DbDialectDefinition" />
+	</class>
+	<class name="DbDialectDefinition" node="dialect">
+		<property name="productName" attribute="product-name" />
+		<property name="useSqlStateForTranslation" attribute="use-sql-state-for-translation" />
+		<property name="dialectClassName" attribute="class" />
+		<many-ref addedMethode="addSqlErrorValue" classRef="DbCustomSqlErrorDefinition" />
+	</class>
+	<class name="DbCustomSqlErrorDefinition" node="custom-sql-error">
+		<property name="sqlErrorCode" attribute="sql" />
+		<property name="applicationErrorCode" attribute="application" />
+		<property name="exceptionClass" attribute="exception-class" />
+	</class>
+	<class name="DataSourceDefinition" node="data-source">
+		<property name="name" attribute="name" />
+		<property name="productName" attribute="product-name" />
+		<mapped-property-node addedMethode="setProperty" node="property" attributeKey="name" attributeValue="value" />
+		<list-property-node addedMethode="addResource" node="mapping" attributeValue="location" />
+	</class>
+	<class name="DaoBeanDefinition" node="dao-bean">
+		<property name="name" attribute="name" />
+		<property name="classInterface" attribute="interface" />
+		<many-ref addedMethode="addMethodBeanDefinition" classRef="DaoQueryMethodDefinition" />
+		<many-ref addedMethode="addMethodBeanDefinition" classRef="DaoSqlQueryMethodDefinition" />
+	</class>
+	<class name="DbConstraintDefinition" node="pk-constraint">
+		<property name="name" attribute="name" />
+		<property name="schema" attribute="schema" />
+		<property name="classException" attribute="exception" />
+		<property name="errorId" attribute="error-id" />
+	</class>
+	<class name="DbFkConstraintDefinition" node="fk-constraint">
+		<property name="name" attribute="name" />
+		<property name="schema" attribute="schema" />
+		<property name="classException" attribute="exception" />
+		<property name="onDeleteErrorId" attribute="on-delete-error-id" />
+		<property name="onUpdateErrorId" attribute="on-update-error-id" />
+	</class>
+	<class name="DaoSqlQueryMethodDefinition" node="sql-query-method">
+		<property name="name" attribute="name" />
+		<property name="updateQuery" attribute="is-updater" />
+		<property name="daoParseBeanRef" attribute="dao-parse-bean" />
+		<property name="classResultat" attribute="class-resultat" />
+		<property name="sessionArgRang" attribute="session-arg-rang" />
+		<property name="prefixArgName" attribute="prefix-arg-name" />
+		<property-node name="query" node="query" required="true" />
+		<one-ref name="accessor" classRef="DbQueryAccessorDefinition" />
+	</class>
+	<class name="DaoQueryMethodDefinition" node="query-method">
+		<property name="name" attribute="name" />
+		<property name="updateQuery" attribute="is-updater" />
+		<property name="daoParseBeanRef" attribute="dao-parse-bean" />
+		<property name="classResultat" attribute="class-resultat" />
+		<property name="sessionArgRang" attribute="session-arg-rang" />
+		<property name="prefixArgName" attribute="prefix-arg-name" />
+		<property-node name="query" node="query" required="true" />
+		<one-ref name="accessor" classRef="DbQueryAccessorDefinition" />
+	</class>
+	<class name="DaoParseBeanDefinition" node="dao-parse-bean">
+		<property name="id" attribute="id" />
+		<property name="property" attribute="property" />
+		<property name="recursive" attribute="recursive" />
+		<many-ref addedMethode="addDaoParsePropertyBeanDefinition" classRef="DaoParseBeanDefinition" />
+	</class>
+	<class name="DbQueryAccessorDefinition" node="accessor">
+		<property name="name" attribute="cached" />
+		<property name="dataSourceName" attribute="fetch-size" />
+		<property name="updateQuery" attribute="max-results" />
+		<property name="sqlQuery" attribute="cache-region" />
+		<mapped-property-node addedMethode="addLockModeEntite" node="lock-mode" attributeKey="alias" attributeValue="mode" />
+	</class>
+</xml-mapping>

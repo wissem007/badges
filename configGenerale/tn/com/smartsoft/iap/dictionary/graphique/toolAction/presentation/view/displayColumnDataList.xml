@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true">
+		<ext-store-field id="toolActionIdIndex" property="toolActionId" />
+		<ext-store-field id="sujetIdIndex" property="action.parentSujet.libelle" />
+		<ext-store-field id="subModuleIdIndex" property="action.parentSujet.parentSubModule.libelle" />
+		<ext-store-field id="moduleIdIndex" property="action.parentSujet.parentSubModule.parentModule.libelle" />
+		
+		<ext-store-field id="actionIdIndex" property="action.libelle" />
+		<ext-store-field id="isToolBarIndex" property="toolBar" />
+	</ext-store>
+	<ext-grid-column data-index="toolActionIdIndex" width="80" />
+	<ext-grid-column data-index="sujetIdIndex" label-exp="Sujet" width="200" />
+	<ext-grid-column data-index="subModuleIdIndex" label-exp="Sous Module" width="200" />
+	<ext-grid-column data-index="moduleIdIndex" label-exp="Module" width="200" />
+	<ext-grid-column data-index="actionIdIndex" label-exp="Action" width="200" />
+	<ext-grid-column data-index="isToolBarIndex" label-exp="Tool Bar" width="150" />
+</root>

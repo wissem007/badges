@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="tn.com.smartsoft.iap.administration.securite.utilisateur.beans">
+	<class name="UserBean" table="AC_USERS">
+		<meta attribute="entite-id">user</meta>
+		<id name="userId" column="AC_USER_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="passeWord" column="PASSE_WORD" />
+		<property name="displayName" column="DISPLAY_NAME" />
+		<property name="isActive" column="IS_ACTIVE" />
+		<property name="userName" column="USER_NAME" />
+		<property name="gsm" column="GSM" />
+		<property name="telephone" column="TELEPHONE" />
+		<property name="adresse" column="ADRESSE" />
+		<property name="paysId" column="CR_PAYS_ID" />
+		<property name="governoratId" column="CR_GOVERNORAT_ID" />
+		<property name="localiteId" column="CR_LOCALITE_ID" />
+		<property name="mail" column="MAIL" />
+		<property name="userType" column="USER_TYPE" />
+		<property name="collaborateurAgentId" column="bo_collaborateur_agent_id" />
+		<property name="collaborateurId" column="bo_collaborateur_id" />
+	 	<property name="fonctionUtilisationId" column="AC_FONCTION_UTILISATION_ID" />
+		<many-to-one name="gouvernorat" class="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" fetch="join" update="false" insert="false">
+			<column name="CR_GOVERNORAT_ID" />
+		</many-to-one>
+		<many-to-one name="localite" class="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" fetch="join" update="false" insert="false">
+			<column name="CR_LOCALITE_ID" />
+		</many-to-one>
+		<many-to-one name="pays" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false">
+			<column name="CR_PAYS_ID" />
+		</many-to-one>
+		<many-to-one name="fonctionUtilisation" class="tn.com.smartsoft.configGenerale.administration.fonctionUtilisation.beans.FonctionUtilisationBean" fetch="join" update="false" insert="false">
+			<column name="AC_FONCTION_UTILISATION_ID" />
+		</many-to-one>
+		<bag name="menuPreferences" cascade="all" lazy="false" inverse="true">
+			<key>
+				<column name="AC_USER_ID" />
+			</key>
+			<one-to-many class="UserMenuBean" />
+		</bag>
+		<map name="preferences" cascade="all" lazy="false" inverse="true">
+			<key>
+				<column name="AC_USER_ID" />
+			</key>
+			<map-key formula="AC_USER_PREFERENCE_ID" type="string" />
+			<one-to-many class="UserPreferenceBean" />
+		</map>
+	</class>
+	<class name="UserMenuBean" table="AC_USER_MENUS">
+		<composite-id name="id" class="UserMenuBeanId">
+			<key-property name="userId" column="AC_USER_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+			<key-property name="menuId" column="UI_MENU_ID" />
+		</composite-id>
+		<many-to-one name="menuAction" class="tn.com.smartsoft.iap.dictionary.graphique.menuAction.beans.MenuActionBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="UI_MENU_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<property name="libelle" column="LIBELLE" />
+	</class>
+	<class name="UserPreferenceBean" table="AC_USER_PREFERENCES">
+		<meta attribute="entite-id">userPreference</meta>
+		<composite-id name="id" class="UserPreferenceBeanId">
+			<key-property name="userId" column="AC_USER_ID" />
+			<key-property name="userPreferenceId" column="AC_USER_PREFERENCE_ID" />
+		</composite-id>
+		<property name="value" column="VALUE" />
+	</class>
+</hibernate-mapping>

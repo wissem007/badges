@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListParamaters" model-name="listModule" id-property="idIndex">
+		<ext-store-field id="idIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-combo id="methodName" is-blank="false" label-exp="$L{module}" property="searcheBean.moduleId" allow-blank="false" display-field="libelleIndex" store-id="storeListParamaters" width="250"
+		next-element="valider" colspan="2">
+	</ext-field-combo>
+</root>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="tn.com.smartsoft.iap.administration.securite.audit.beans">
+	<class name="AuditActionBean" table="AU_AUDIT_ACTIONS">
+		<meta attribute="entite-id">auditAction</meta>
+		<composite-id name="id" class="AuditActionBeanId">
+			<key-property name="auditActionId" column="AU_AUDIT_ACTION_ID" />
+			<key-property name="actionId" column="AD_ACTION_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="userId" column="AC_USER_ID" />
+		<property name="organismeId" column="CR_ORGANISME_ID" />
+		<property name="dateAudit" column="DATE_AUDIT" />
+		<property name="auditValue" column="AUDIT_VALUE" />
+		<property name="societeId" column="CR_SOCIETE_ID" />
+		<many-to-one name="action" class="tn.com.smartsoft.iap.dictionary.decoupage.action.beans.ActionBean" fetch="join" update="false" insert="false">
+			<column name="AD_ACTION_ID" />
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="oragnisme" class="tn.com.smartsoft.configGenerale.organisationSociete.organisation.beans.OrganismeBean" fetch="join" update="false" insert="false">
+			<column name="CR_ORGANISME_ID" />
+			<column name="CR_SOCIETE_ID" />
+		</many-to-one>
+		<many-to-one name="user" class="tn.com.smartsoft.iap.administration.securite.utilisateur.beans.UserBean" fetch="join" update="false" insert="false">
+			<column name="AC_USER_ID" />
+		</many-to-one>
+		<bag name="auditEntites" cascade="all" lazy="false" inverse="true">
+			<key>
+				<column name="AU_AUDIT_ACTION_ID" />
+				<column name="AD_ACTION_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+			</key>
+			<one-to-many class="AuditEntiteBean" />
+		</bag>
+	</class>
+	<class name="AuditEntiteBean" table="AU_AUDIT_ENTITES">
+		<meta attribute="entite-id">auditEntite</meta>
+		<composite-id name="id" class="AuditEntiteBeanId">
+			<key-property name="auditEntiteId" column="AU_AUDIT_ENTITE_ID" />
+			<key-property name="actionId" column="AD_ACTION_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+			<key-property name="entiteId" column="AD_ENTITE_ID" />
+			<key-property name="auditActionId" column="AU_AUDIT_ACTION_ID" />
+		</composite-id>
+		<property name="actionTypeId" column="AD_ACTION_TYPE_ID" />
+		<property name="objectIdValue" column="OBJECT_ID_VALUE" />
+		<property name="parentEntiteId" column="AU_PARENT_ENTITE_ID" />
+		<property name="parentAuditEntiteId" column="AU_PARENT_AUDIT_ENTITE_ID" />
+		<many-to-one name="entite" class="tn.com.smartsoft.iap.dictionary.decoupage.entite.beans.EntiteBean" fetch="join" update="false" insert="false">
+			<column name="AD_ENTITE_ID" />
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+		<many-to-one name="actionType" class="tn.com.smartsoft.iap.dictionary.decoupage.actionType.beans.ActionTypeBean" fetch="join" update="false" insert="false">
+			<column name="AD_ACTION_TYPE_ID" />
+		</many-to-one>
+		<bag name="detailAuditEntite" cascade="all" lazy="false" inverse="true">
+			<key>
+				<column name="AU_PARENT_AUDIT_ENTITE_ID" />
+				<column name="AD_ACTION_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+				<column name="AU_PARENT_ENTITE_ID" />
+				<column name="AU_AUDIT_ACTION_ID" />
+			</key>
+			<one-to-many class="AuditEntiteBean" />
+		</bag>
+		<bag name="auditPropertys" cascade="all" lazy="false" inverse="true">
+			<key>
+				<column name="AU_AUDIT_ENTITE_ID" />
+				<column name="AD_ACTION_ID" />
+				<column name="AD_SUJET_ID" />
+				<column name="AD_SUB_MODULE_ID" />
+				<column name="AD_MODULE_ID" />
+				<column name="AD_ENTITE_ID" />
+				<column name="AU_AUDIT_ACTION_ID" />
+			</key>
+			<one-to-many class="AuditPropertyBean" />
+		</bag>
+	</class>
+	<class name="AuditPropertyBean" table="AU_AUDIT_PROPERTYS">
+		<meta attribute="entite-id">auditProperty</meta>
+		<composite-id name="id" class="AuditPropertyBeanId">
+			<key-property name="actionId" column="AD_ACTION_ID" />
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+			<key-property name="entiteId" column="AD_ENTITE_ID" />
+			<key-property name="auditEntiteId" column="AU_AUDIT_ENTITE_ID" />
+			<key-property name="auditActionId" column="AU_AUDIT_ACTION_ID" />
+			<key-property name="propertyName" column="AD_PROPERTY_NAME" />
+		</composite-id>
+		<property name="oldValue" column="OLD_VALUE" />
+		<property name="newValue" column="NEW_VALUE" />
+		<many-to-one name="property" class="tn.com.smartsoft.iap.dictionary.decoupage.entite.beans.PropertyBean" fetch="join" update="false" insert="false">
+			<column name="AD_PROPERTY_NAME" />
+			<column name="AD_ENTITE_ID" />
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

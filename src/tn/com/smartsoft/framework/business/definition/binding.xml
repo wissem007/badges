@@ -1,0 +1,32 @@
+<xml-mapping packageValue="tn.com.smartsoft.framework.business.definition">
+  <class name="BusinessBeanDefinition" node="business-bean" extendsClass="tn.com.smartsoft.framework.beans.definition.BeanDefinition">
+    <many-ref addedMethode="addDaoSession" classRef="DaoSessionRefDefinition" />
+    <many-ref addedMethode="addDaoBeanRef" classRef="DaoBeanRefDefinition" />
+    <many-ref addedMethode="addDaoParseBeanRef" classRef="DaoParseBeanRefDefinition" />
+  </class>
+  <class name="DaoSessionRefDefinition" node="set-dao-session">
+    <property name="name" attribute="name" />
+    <property name="ref" attribute="data-source-name" />
+  </class>
+  <class name="BusinessBeanRefDefinition" node="set-business-bean">
+    <property name="name" attribute="name" />
+    <property name="ref" attribute="ref" />
+    <property name="sujet" attribute="sujet" />
+    <property name="subModule" attribute="sub-module" />
+    <property name="module" attribute="module" />
+  </class>
+  <class name="DaoBeanRefDefinition" node="set-dao-bean">
+    <property name="name" attribute="name" />
+    <property name="ref" attribute="ref" />
+    <property name="sujet" attribute="sujet" />
+    <property name="subModule" attribute="sub-module" />
+    <property name="module" attribute="module" />
+  </class>
+  <class name="DaoParseBeanRefDefinition" node="set-dao-parse-bean">
+    <property name="name" attribute="name" />
+    <property name="ref" attribute="ref" />
+    <property name="sujet" attribute="sujet" />
+    <property name="subModule" attribute="sub-module" />
+    <property name="module" attribute="module" />
+  </class>
+</xml-mapping>

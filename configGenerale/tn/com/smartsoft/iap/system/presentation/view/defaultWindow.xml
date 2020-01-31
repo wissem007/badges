@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="hbox">
+		<ext-box>
+		</ext-box>
+	</root>
+</window>

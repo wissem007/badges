@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-binding-system>
+  <binding location="tn/com/smartsoft/framework/dao/definition/binding.xml" />
+  <binding location="tn/com/smartsoft/framework/beans/definition/binding.xml" />
+  <binding location="tn/com/smartsoft/framework/business/definition/binding.xml" />
+  <binding location="tn/com/smartsoft/framework/presentation/view/tags/binding.xml" />
+  <binding location="tn/com/smartsoft/framework/presentation/definition/binding.xml" />
+  <binding location="tn/com/smartsoft/framework/configuration/definition/binding.xml" />
+</xml-binding-system>

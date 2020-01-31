@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+  <diskStore path="java.io.tmpdir" />
+  <defaultCache />
+  <cache name="entiteDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="entiteDictionaryCacheByClass" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="menuDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="actionDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="moduleDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="subModuleDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="viewDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="libelleDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="deviseDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="userTypeDictionary" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="toolActionDictionary" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="applicationDictionary" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="roleDictionary" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="actionTemplateDictionary" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+  <cache name="messageDictionaryCache" maxElementsInMemory="500" eternal="true" overflowToDisk="true" />
+</ehcache>

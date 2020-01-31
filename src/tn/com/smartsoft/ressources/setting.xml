@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/setting.xsd">
+	<admin-data-source value="DefaultSession" />
+	<default-data-source value="DefaultSession" />
+	<default-user-action module-id="system" sub-module-id="system" sujet-id="system" user-action-id="DefaultAction" />
+	<login-user-action module-id="system" sub-module-id="system" sujet-id="system" user-action-id="LoginAction" />
+	<web-setting location="tn/com/smartsoft/ressources/web-setting.xml" />
+	<data-base-setting location="tn/com/smartsoft/ressources/data-base-setting.xml" />
+	<modules>
+		<module location="tn/com/smartsoft/ressources/sys-module.xml" />
+		<module location="tn/com/smartsoft/iap/dictionary/module.xml" />
+		<module location="tn/com/smartsoft/configGenerale/module.xml" />
+		<module location="tn/com/smartsoft/backoffice/module.xml" />
+	</modules>
+</setting>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="400" />
+</root>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.toolAction.beans">
+	<class name="ToolActionBean" table="UI_TOOL_ACTIONS">
+		<meta attribute="entite-id">toolAction</meta>
+		<id name="toolActionId" column="UI_TOOL_ACTION_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="actionId" column="AD_ACTION_ID" />
+		<property name="sujetId" column="AD_SUJET_ID" />
+		<property name="subModuleId" column="AD_SUB_MODULE_ID" />
+		<property name="moduleId" column="AD_MODULE_ID" />
+		<property name="rang" column="RANG" />
+		<property name="toolBar" column="IS_TOOL_BAR" />
+		<many-to-one name="action" class="tn.com.smartsoft.iap.dictionary.decoupage.action.beans.ActionBean" fetch="join" update="false" insert="false">
+			<column name="AD_ACTION_ID" />
+			<column name="AD_SUJET_ID" />
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

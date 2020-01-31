@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ 	<ext-store root="data" model-name="listBean" id-property="coursIdIndex"  reload-submit-all-field="true" reload-action-listener="doFilter" >
+		<ext-store-field id="coursIndex" property="cours[$i]" />
+		<ext-store-field id="dateCoursIndex" property="dateCours[$i]" />
+		<ext-store-field id="deviseLibelleIndex" property="devise[$i].libelle" />
+	</ext-store>
+
+ 	<ext-grid-column data-index="coursIndex" width="300" />
+ 	<ext-grid-column data-index="dateCoursIndex" width="300" />
+ 	<ext-grid-column data-index="deviseLibelleIndex" label-exp="$L{devise}"  width="300" locked="true" />
+  </root>

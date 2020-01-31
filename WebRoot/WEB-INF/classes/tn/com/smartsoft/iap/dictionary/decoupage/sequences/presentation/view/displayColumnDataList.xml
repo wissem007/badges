@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-auto-load="false" reload-action-listener="doFilter" reload-handler-params="el,e" reload-submit-all-field="true">
+		<ext-store-field id="sequenceIdIndex" property="sequenceId" />
+		<ext-store-field id="startNumberIndex" property="startNumber" />
+		<ext-store-field id="valueExpressionIndex" property="valueExpression" />
+		<ext-store-field id="valueGroupExpressionIndex" property="valueGroupExpression" />
+		<ext-store-field id="lengthNumberIndex" property="lengthNumber" />
+		<ext-store-field id="helpIndex" property="help" />
+	</ext-store>
+	<ext-grid-column data-index="sequenceIdIndex" width="200" locked="true" />
+	<ext-grid-column data-index="startNumberIndex" width="100" />
+	<ext-grid-column data-index="valueExpressionIndex" width="200" />
+	<ext-grid-column data-index="valueGroupExpressionIndex" width="200" />
+	<ext-grid-column data-index="lengthNumberIndex" width="50" />
+	<ext-grid-column data-index="helpIndex" width="200" />
+</root>

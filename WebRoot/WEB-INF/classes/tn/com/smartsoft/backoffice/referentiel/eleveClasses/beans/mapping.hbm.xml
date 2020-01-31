@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_backoffice_db" package="tn.com.smartsoft.backoffice.referentiel.eleveClasses.beans">
+	<class name="EleveClassesBean" table="tr_eleve_classes">
+		<meta attribute="entite-id">eleveClasses</meta>
+		<id name="eleveClasseId" column="tr_eleve_classe_id">
+			<generator class="assigned" />
+		</id>
+		<property name="nom" column="nom" />
+		<property name="eleveClasseNiveauId" column="tr_eleve_classe_niveau_id" />
+		<many-to-one name="eleveClasseNiveau" class="tn.com.smartsoft.backoffice.referentiel.eleveClasseNiveaux.beans.EleveClasseNiveauxBean" fetch="join" update="false" insert="false">
+			<column name="tr_eleve_classe_niveau_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

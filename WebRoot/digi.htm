@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <link rel="shortcut icon" href="./favicon.ico" /> 
+ <title> Espoir CRM </title>
+  <link href='js/grhcss.css' type='text/css' rel='stylesheet'>
+  <link href='css/ext-all.css' type='text/css' rel='stylesheet'>
+  <link href='css/ext-ux-all.css' type='text/css' rel='stylesheet'>
+  <link href='css/xtheme-gray.css' type='text/css' rel='stylesheet'>
+  <link href='css/ext-ux-livegrid.css' type='text/css' rel='stylesheet'>
+  <link href='css/ext-3s.css' type='text/css' rel='stylesheet'>
+  <link href='css/ext-suggest.css' type='text/css' rel='stylesheet'>
+  <script src='js/grhUtils.js'></script>
+  <script src='js/ext/ext-base.js'></script>
+  <script src='js/ext/ext-all.js'></script>
+  <script src='js/ext/ext-ux-all.js'></script>
+  <script src='js/ext/ext-3s.js'></script>
+  <script src='js/ext/ext-livegrid-all.js'></script>
+  <script src='js/typeUtils.js'></script>
+  <script src='js/ext/ext-desktop.js'></script>
+  <script src='js/ext/ext-suggest.js'></script>
+  <script src='js/ext/ext-3s-grid.js'></script>
+  <script src='js/ext/Ext.ux.grid.Search.js'></script>
+  <script src='js/ext/ext-lang-fr.js'></script>
+  <script src='js/cometd/cometd.js'></script>
+  <script src='js/cometd/AckExtension.js'></script>
+  <script src='js/cometd/jquery-1.3.2.js'></script>
+  <script src='js/cometd/jquery.json-2.2.js'></script>
+  <script src='js/cometd/jquery.cometd.js'></script>
+  <script src='js/cometd.js'></script>
+ </head>
+ <body>
+<script>
+            Ext.onReady(function() {
+        var supervision = desktop.createSupervision();
+        supervision.addSubscription('/sss/dossierSupervision', function(message) {
+        var dossierRow= message.data ;
+        var agentId=parseInt(userid);
+        if(agentId== dossierRow['agentIdIndex']){
+        var gridDossier=desktop.getCmp('listDossiers');
+        var storeDossier=gridDossier.getStore();
+        var dossierRecord= smartsoft.grid.createRecord(storeDossier,dossierRow);
+        storeDossier.add(dossierRecord);
+        smartsoft.grid.focusLastRow(gridDossier);
+        smartsoft.grid.selectLastRow(gridDossier);
+        }
+        });
+        supervision.addSubscription('/sss/mailSupervision', function(message) {
+        var mailRow= message.data ;
+        var agentId=parseInt(userid);
+        if(agentId== mailRow['agentIdIndex']){
+        var gridMail=desktop.getCmp('listMail');
+        var storeMail=gridMail.getStore();
+        var mailRecord= smartsoft.grid.createRecord(storeMail,mailRow);
+        storeMail.add(mailRecord);
+        smartsoft.grid.focusLastRow(gridMail);
+        smartsoft.grid.selectLastRow(gridMail);
+        }
+        });
+        supervision.init();
+        });
+</script>
+  <script>
+//********************** list des fonctions **************************** 
+var userid='000011';
+var desktop=new Ext.sss.Desktop({'isDisplayToolbar':true,'titelModule':'Module Explorer','isDisplayedModuleBar':false,'titelShortcutMenu':'PRÉFÉRENCE MENUS','sociteLabel':'Digivoip','isDisplayedMenuBar':true,'isShortcutMenuExplorer':false,'isDisplayedStatusBar':true,'collapsedModule':true,'appContainerLayout':'column','appContainerLayoutConfig':{},'path':'/crm/tableauBord'});
+function setIndictorDossierColorRow(record, rowIndex, rowParams, ds){
+            var indictorColorIndex= record.get("indictorColorIndex");
+        rowParams.tstyle += "background-color:" + indictorColorIndex + ';';
+        rowParams.tstyle += "font:bold 11px tahoma;";
+        var gridlistDossiers= Ext.getCmp("listDossiers");
+        gridlistDossiers.setTitle("Dossiers("+ds.getCount()+")");
+
+}
+function setIndictorTypeMailColor(value, metaData, record, rowIndex, colIndex, store){
+            var indictorColorIndex= record.get("indictorColorIndex");
+        var statusIdIndex= record.get("statusIdIndex");
+        if(statusIdIndex!=1)
+        metaData.attr =metaData.attr+ 'style="color:' + indictorColorIndex + ';font:11px tahoma;"';
+        else
+        metaData.attr =metaData.attr+ 'style="color:' + indictorColorIndex + ';font:bold 11px tahoma;"';
+        var gridlistMail= Ext.getCmp("listMail");
+        if(!store.diginl)
+        store.diginl=0;
+        if(record.digitrt!=1){
+        record.digitrt=1;
+        if(statusIdIndex==1){
+        store.diginl=store.diginl+1;
+        }
+        }
+        gridlistMail.setTitle("Emails("+store.diginl+"/"+store.getCount()+")");
+        return value;
+
+}
+//********************** list des composants**************************** 
+Ext.onReady(function() {
+    //****************************Menu start**************************
+var menuItem5030202=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Consulter','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030202'})();}});
+var menuItem5030203=new Ext.menu.Item({'icon':'images/action/creer.png','text':'Envoyer','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030203'})();}});
+var menu50302=new Ext.menu.Menu({'items':[menuItem5030202,menuItem5030203]});
+var menuItem5030502=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Consulter','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030502'})();}});
+var menuItem5030503=new Ext.menu.Item({'icon':'images/action/modifier.png','text':'Modifier','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030503'})();}});
+var menuItem5030504=new Ext.menu.Item({'icon':'images/action/creer.png','text':'Enregistrer','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030504'})();}});
+var menu50305=new Ext.menu.Menu({'items':[menuItem5030502,menuItem5030503,menuItem5030504]});
+var menuItem5030402=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Consulter','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030402'})();}});
+var menuItem5030404=new Ext.menu.Item({'icon':'images/action/modifier.png','text':'Modifier','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030404'})();}});
+var menuItem5030405=new Ext.menu.Item({'icon':'images/action/creer.png','text':'Enregistrer','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'5030405'})();}});
+var menu50304=new Ext.menu.Menu({'items':[menuItem5030402,menuItem5030404,menuItem5030405]});
+var menu503=new Ext.menu.Menu({'items':[{'text':'Email','menu':menu50302,'handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'50302'})();}},{'text':'Dossier','menu':menu50305,'handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'50305'})();}},{'text':'Opération','menu':menu50304,'handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'50304'})();}}]});
+desktop.addMenu({'text':'Catalogue','menu':menu503});
+var menuItem60205=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Email spontané','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'60205'})();}});
+var menuItem60202=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Tableau de bord','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'60202'})();}});
+var menuItem60203=new Ext.menu.Item({'icon':'images/action/consulter.png','text':'Avancement de dossiers','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'60203'})();}});
+var menu602=new Ext.menu.Menu({'items':[menuItem60205,menuItem60202,menuItem60203]});
+desktop.addMenu({'text':'Espace Agent','menu':menu602});
+desktop.addAction("->");
+var sssUserSocieteMenu=new Ext.Button({'icon':'images/utils/organisation.png','text':'Digivoip'});
+desktop.addAction(sssUserSocieteMenu);
+var menusssUserMenu=new Ext.menu.Menu({'items':[{'icon':'images/action/logout.png','text':'Fermer session','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'sssUserAction1'})();}},{'icon':'images/action/generer.png','text':'Menu Pr&eacute;f&eacute;rence','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'sssUserAction3'})();}},{'icon':'images/action/changerMotPasse.png','text':'Changer le mot de passe','handler':function (el,e){desktop.createHandelServerAction({'actionPattern':'menu','args':[el,e],'xtype':'href','eventName':'Click','componentId':'sssUserAction2'})();}}]});
+var sssUserMenu=new Ext.SplitButton({'icon':'images/action/user.png','text':'Sellami Meryam','menu':menusssUserMenu});
+desktop.addAction(sssUserMenu);
+    //****************************Menu end**************************
+    var colModellistDossiers=new Ext.grid.ColumnModel({columns:[new Ext.grid.Column({'id':'id9','gridId':'listDossiers','align':'left','sortable':true,'width':150,'dataIndex':'labelboxIndex','header':'Site'}),new Ext.grid.Column({'id':'id10','gridId':'listDossiers','align':'left','sortable':true,'width':140,'dataIndex':'dossierCodeIndex','header':'N° Dossier'}),new Ext.grid.Column({'id':'id11','gridId':'listDossiers','align':'left','sortable':true,'width':100,'dataIndex':'dateInterventionIndex','header':'Intervention le'}),new Ext.grid.Column({'id':'id12','gridId':'listDossiers','align':'left','sortable':true,'width':110,'dataIndex':'createdDateIndex','header':'Créer le'}),new Ext.grid.Column({'id':'id13','gridId':'listDossiers','align':'left','sortable':true,'width':110,'dataIndex':'statusIndex','header':'Etat'}),new Ext.grid.Column({'id':'id14','gridId':'listDossiers','align':'left','sortable':true,'width':180,'dataIndex':'nomIndex','header':'Nom'}),new Ext.grid.Column({'id':'id15','gridId':'listDossiers','align':'left','sortable':true,'width':210,'dataIndex':'prenomIndex','header':'Prénom'}),new Ext.grid.Column({'id':'id16','gridId':'listDossiers','align':'left','sortable':true,'width':280,'dataIndex':'emailIndex','header':'Email'})]});
+    var listDossiersView=new Ext.grid.GridView({'nearLimit':100,'getRowClass':setIndictorDossierColorRow,'loadMask':{'msg':'Loading...'}});
+var id8Reader=new Ext.data.JsonReader({'id':'index','versionProperty':'version','messageProperty':'message','totalProperty':'totalCount','root':'data','successProperty':'success','fields':[{'name':'index','type':'string'},{'name':'agentIdIndex','sortDir':'ASC'},{'name':'nomAgentIndex','sortDir':'ASC'},{'name':'prenomAgentIndex','sortDir':'ASC'},{'name':'nomIndex','sortDir':'ASC'},{'name':'prenomIndex','sortDir':'ASC'},{'name':'emailIndex','sortDir':'ASC'},{'name':'dossierCodeIndex','sortDir':'ASC'},{'name':'dateInterventionIndex','sortDir':'ASC'},{'name':'createdDateIndex','sortDir':'ASC'},{'name':'mboxIdIndex','sortDir':'ASC'},{'name':'labelboxIndex','sortDir':'ASC'},{'name':'statusIndex','sortDir':'ASC'},{'name':'indictorColorIndex','sortDir':'ASC'}]});
+var id8=new Ext.ux.data.Store({'bufferSize':300,'id':'id8','isExpandAllParam':false,'reader':id8Reader,'queryParam':'query','desktop':desktop,'relaodAction':{'allField':false},'remoteSort':true,'autoLoad':true,'url':'/crm/tableauBord.id8.Init.action','sortInfo':[{'field':'agentIdIndex','direction':'ASC'},{'field':'nomAgentIndex','direction':'ASC'},{'field':'prenomAgentIndex','direction':'ASC'},{'field':'nomIndex','direction':'ASC'},{'field':'prenomIndex','direction':'ASC'},{'field':'emailIndex','direction':'ASC'},{'field':'dossierCodeIndex','direction':'ASC'},{'field':'dateInterventionIndex','direction':'ASC'},{'field':'createdDateIndex','direction':'ASC'},{'field':'mboxIdIndex','direction':'ASC'},{'field':'labelboxIndex','direction':'ASC'},{'field':'statusIndex','direction':'ASC'},{'field':'indictorColorIndex','direction':'ASC'}]});
+var listDossiers=new Ext.ux.grid.GridPanel({tbar:new Ext.Toolbar({
+		  }),'listeners':{'save':function (el,e){desktop.createHandelServerAction({'args':[el,e],'xtype':'ajax','eventName':'save','componentId':'listDossiers'})();},'rowdblclick':function (grid,rowIndex,e){desktop.createHandelServerAction({'args':[grid,rowIndex,e],'xtype':'href','eventName':'rowdblclick','params':{'listDossiers:selectedRow':rowIndex},'componentId':'listDossiers'})();},'checkall':function (el,e){desktop.createHandelServerAction({'args':[el,e],'xtype':'ajax','eventName':'checkAll','componentId':'listDossiers'})();}},'labelWidth':100,'store':id8,'plugins':[new Ext.ux.grid.Search({
+				iconCls:'icon-zoom',
+				mode:'local',
+				width:200
+				,position:'top'
+				,readonlyIndexes:[ ]
+				,disableIndexes:[ ]
+				,minChars:2
+				,autoFocus:true
+//				,menuStyle:'radio'
+			})],'displayMsg':'Total Des Lignes: {0}','maxNumberRow':0,'desktop':desktop,'autoHeight':false,'id':'listDossiers','title':'Dossiers','height':300,'isSavedMenu':true,'isUpAndDowRowMenu':true,'selModel':new Ext.grid.RowSelectionModel(),'buttonAlign':'center','view':listDossiersView,'labelAlign':'left','colModel':colModellistDossiers,'border':true,'loadMask':{'msg':'Loading...'},'fixedNumberRow':false});
+    var colModellistMail=new Ext.grid.ColumnModel({columns:[new Ext.grid.Column({'id':'id18','gridId':'listMail','align':'left','sortable':true,'width':150,'dataIndex':'mboxUserIndex','renderer':setIndictorTypeMailColor,'header':'Site'}),new Ext.grid.Column({'id':'id19','gridId':'listMail','align':'left','sortable':true,'width':130,'dataIndex':'mailTypeLabelIndex','renderer':setIndictorTypeMailColor,'header':'Type'}),new Ext.grid.Column({'id':'id20','gridId':'listMail','align':'left','sortable':true,'width':340,'dataIndex':'subjectIndex','renderer':setIndictorTypeMailColor,'header':'Sujet'}),new Ext.grid.Column({'id':'id21','gridId':'listMail','align':'left','sortable':true,'width':310,'dataIndex':'expediteurIndex','renderer':setIndictorTypeMailColor,'header':'Expéditeur'}),new Ext.grid.Column({'id':'id22','gridId':'listMail','align':'left','sortable':true,'width':130,'dataIndex':'senderDateIndex','renderer':setIndictorTypeMailColor,'header':'Date Email'}),new Ext.grid.Column({'id':'id23','gridId':'listMail','align':'left','sortable':true,'width':90,'dataIndex':'statusIndex','renderer':setIndictorTypeMailColor,'header':'Etat'}),new Ext.grid.Column({'id':'id24','gridId':'listMail','align':'left','sortable':true,'width':120,'dataIndex':'msgReadDateIndex','renderer':setIndictorTypeMailColor,'header':'Lu le'})]});
+    var listMailView=new Ext.grid.GridView({'nearLimit':100,'loadMask':{'msg':'Loading...'}});
+var id17Reader=new Ext.data.JsonReader({'id':'index','versionProperty':'version','messageProperty':'message','totalProperty':'totalCount','root':'data','successProperty':'success','fields':[{'name':'index','type':'string'},{'name':'mailIdIndex','sortDir':'ASC'},{'name':'mailTypeIdIndex','sortDir':'ASC'},{'name':'statusIdIndex','sortDir':'ASC'},{'name':'statusIndex','sortDir':'ASC'},{'name':'mailTypeLabelIndex','sortDir':'ASC'},{'name':'mboxIdIndex','sortDir':'ASC'},{'name':'mboxUserIndex','sortDir':'ASC'},{'name':'subjectIndex','sortDir':'ASC'},{'name':'senderDateIndex','sortDir':'ASC'},{'name':'dateCreationIndex','sortDir':'ASC'},{'name':'msgReadDateIndex','sortDir':'ASC'},{'name':'messageIdIndex','sortDir':'ASC'},{'name':'agentIdIndex','sortDir':'ASC'},{'name':'mailFromIndex','sortDir':'ASC'},{'name':'expediteurIndex','sortDir':'ASC'},{'name':'receveurIndex','sortDir':'ASC'},{'name':'indictorColorIndex','sortDir':'ASC'},{'name':'indictorColorTypeIndex','sortDir':'ASC'}]});
+var id17=new Ext.ux.data.Store({'bufferSize':300,'id':'id17','isExpandAllParam':false,'reader':id17Reader,'queryParam':'query','desktop':desktop,'relaodAction':{'allField':false},'remoteSort':true,'autoLoad':true,'url':'/crm/tableauBord.id17.Init.action','sortInfo':[{'field':'mailIdIndex','direction':'ASC'},{'field':'mailTypeIdIndex','direction':'ASC'},{'field':'statusIdIndex','direction':'ASC'},{'field':'statusIndex','direction':'ASC'},{'field':'mailTypeLabelIndex','direction':'ASC'},{'field':'mboxIdIndex','direction':'ASC'},{'field':'mboxUserIndex','direction':'ASC'},{'field':'subjectIndex','direction':'ASC'},{'field':'senderDateIndex','direction':'ASC'},{'field':'dateCreationIndex','direction':'ASC'},{'field':'msgReadDateIndex','direction':'ASC'},{'field':'messageIdIndex','direction':'ASC'},{'field':'agentIdIndex','direction':'ASC'},{'field':'mailFromIndex','direction':'ASC'},{'field':'expediteurIndex','direction':'ASC'},{'field':'receveurIndex','direction':'ASC'},{'field':'indictorColorIndex','direction':'ASC'},{'field':'indictorColorTypeIndex','direction':'ASC'}]});
+var listMail=new Ext.ux.grid.GridPanel({'listeners':{'save':function (el,e){desktop.createHandelServerAction({'args':[el,e],'xtype':'ajax','eventName':'save','componentId':'listMail'})();},'rowdblclick':function (grid,rowIndex,e){desktop.createHandelServerAction({'args':[grid,rowIndex,e],'xtype':'href','eventName':'rowdblclick','params':{'listMail:selectedRow':rowIndex},'componentId':'listMail'})();},'checkall':function (el,e){desktop.createHandelServerAction({'args':[el,e],'xtype':'ajax','eventName':'checkAll','componentId':'listMail'})();}},'labelWidth':100,'store':id17,'plugins':[],'displayMsg':'Total Des Lignes: {0}','maxNumberRow':0,'desktop':desktop,'autoHeight':false,'id':'listMail','title':'Emails','height':400,'isSavedMenu':true,'isUpAndDowRowMenu':true,'selModel':new Ext.grid.RowSelectionModel(),'buttonAlign':'center','view':listMailView,'labelAlign':'left','colModel':colModellistMail,'border':true,'loadMask':{'msg':'Loading...'},'fixedNumberRow':false});
+var id7=new Ext.Panel({'layoutConfig':{'tableAttrs':{width:'100%'},'columns':1},'id':'id7','labelWidth':100,'items':[listDossiers,listMail],'layout':'tform','desktop':desktop,'buttonAlign':'center','labelAlign':'left','border':false});
+var id6=new Ext.Panel({'id':'id6','labelWidth':100,'items':[id7],'columnWidth':'.99','desktop':desktop,'buttonAlign':'center','labelAlign':'left'});
+desktop.addToContainer(id6);
+var refresh=new Ext.Button({'id':'refresh','listeners':{'click':function (el,e){desktop.createHandelServerAction({'args':[el,e],'xtype':'href','eventName':'click','componentId':'refresh'})();}},'icon':'images/action/creer.png','text':'Charger','desktop':desktop});
+desktop.addToolItem(refresh);
+ desktop.doInitDesktop();
+});
+  </script>
+ <div id='exportDivFile' style='display:none;'></div>
+ </body>
+</html>

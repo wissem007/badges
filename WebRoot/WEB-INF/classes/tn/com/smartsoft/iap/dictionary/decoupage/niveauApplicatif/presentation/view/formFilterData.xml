@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-field-number id="niveauApplicatifId" property="searcheBean.niveauApplicatifId" width="250" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" width="250"  next-element="searche" />
+</root>

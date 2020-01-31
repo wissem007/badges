@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="dateNaisanceIndex" property="dateNaisance" />
+		<ext-store-field id="nomIndex" property="nom" />
+		<ext-store-field id="prenomIndex" property="prenom" />
+		<ext-store-field id="codePermanentIndex" property="codePermanent" />
+	</ext-store>
+	<ext-grid-column data-index="codePermanentIndex" width="120" />
+	<ext-grid-column data-index="nomIndex" width="200" />
+	<ext-grid-column data-index="prenomIndex" width="200" />
+	<ext-grid-column data-index="dateNaisanceIndex" width="100" />
+</root>

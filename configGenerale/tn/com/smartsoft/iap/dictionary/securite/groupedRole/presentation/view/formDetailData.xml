@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListModules" model-name="listModules" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store root="data" id="storeListRoles" model-name="listRoles" id-property="roleIdIndex" >
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="roleIdIndex" property="roleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="roleId" property="detailBean.roleId" width="250" editable="false" is-rendred="${isRendredId}" next-element="moduleId" colspan="2" />
+	<ext-field-combo id="moduleId" property="detailBean.moduleId" allow-blank="false" editable="${isEditableModule}" display-field="libelleIndex" store-id="storeListModules" width="250"
+		next-element="prentRoleId" colspan="2">
+		<ajax-event name="change" action-listener="onInitListParentByModule" handle-params="el,e" is-wait="true">
+			<request-field field="moduleId" />
+			<success>
+						<![CDATA[
+					
+									var object = Ext.util.JSON.decode(response.responseText);
+									
+									desktop.getCmp('prentRoleId').getStore().removeAll();
+									desktop.getCmp('prentRoleId').getStore().load();
+									desktop.getCmp("prentRoleId").clearValue();
+									
+				
+                  ]]>
+			</success>
+		</ajax-event>
+	</ext-field-combo>
+	<ext-field-text id="libelle" property="detailBean.libelle" allow-blank="false" width="250" next-element="prentRoleId" colspan="2" />
+	<ext-field-spinner id="rang" property="detailBean.rang" min-value="1" max-value="99" allow-blank="false" width="100" next-element="prentRoleId" colspan="2" />
+	<ext-field-text id="help" property="detailBean.help" allow-blank="false" width="250" next-element="prentRoleId" colspan="2" />
+	<ext-field-combo id="prentRoleId" property="detailBean.prentRoleId" allow-blank="${allowBlankprentRoleId}" display-field="libelleIndex" store-id="storeListRoles" width="250"
+		next-element="valider" colspan="2">
+	</ext-field-combo>
+</root>

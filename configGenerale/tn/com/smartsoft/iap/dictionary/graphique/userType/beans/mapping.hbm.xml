@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.graphique.userType.beans">
+	<class name="UserTypeBean" table="UI_USER_TYPES">
+		<meta attribute="entite-id">userType</meta>
+		<id name="userTypeId" column="UI_USER_TYPE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="messagesId" column="UI_MESSAGES_ID" />
+		<property name="ltr" column="IS_LTR" />
+		<property name="comparable" column="IS_COMPARABLE" />
+		<property name="patern" column="PATERN" />
+		<many-to-one name="message" class="tn.com.smartsoft.iap.dictionary.graphique.message.beans.MessageBean" fetch="join" update="false" insert="false">
+			<column name="UI_MESSAGES_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

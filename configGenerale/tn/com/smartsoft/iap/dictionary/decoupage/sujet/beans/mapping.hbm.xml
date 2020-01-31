@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="SSS_DICTIONARY_DB" package="tn.com.smartsoft.iap.dictionary.decoupage.sujet.beans">
+	<class name="SujetBean" table="AD_SUJET">
+		<composite-id name="id" class="SujetBeanId">
+			<key-property name="sujetId" column="AD_SUJET_ID" />
+			<key-property name="subModuleId" column="AD_SUB_MODULE_ID" />
+			<key-property name="moduleId" column="AD_MODULE_ID" />
+		</composite-id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="rang" column="RANG" />
+		<property name="help" column="HELP" />
+		<many-to-one name="parentSubModule" class="tn.com.smartsoft.iap.dictionary.decoupage.subModule.beans.SubModuleBean" fetch="join" update="false" insert="false">
+			<column name="AD_SUB_MODULE_ID" />
+			<column name="AD_MODULE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

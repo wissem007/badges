@@ -1,0 +1,46 @@
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.GroupScriptsDefinition">
+   <xsd:sequence>
+    <xsd:element name="variable-system" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="optional">
+      </xsd:attribute>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="group" type="tn.com.smartsoft.framework.presentation.definition.GroupScriptDefinition" minOccurs="0" maxOccurs="unbounded"/>
+   </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tn.com.smartsoft.framework.presentation.definition.GroupScriptDefinition">
+   <xsd:sequence>
+    <xsd:element name="js" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="css" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="group-ref" minOccurs="0" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:attribute name="value" type="xsd:string" use="optional">
+      </xsd:attribute>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="name" type="xsd:string" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="minimize" type="xsd:string" default="true" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="minimizeCss" type="xsd:string" default="false" use="optional">
+   </xsd:attribute>
+   <xsd:attribute name="retention" type="xsd:string" default="false" use="optional">
+   </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="scripts" type="tn.com.smartsoft.framework.presentation.definition.GroupScriptsDefinition"/>
+ </xsd:schema>

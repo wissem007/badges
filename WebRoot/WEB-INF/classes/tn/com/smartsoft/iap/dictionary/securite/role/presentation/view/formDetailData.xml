@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-fieldset layout="tform" label-width="120">
+		<ext-layout-config name="columns" value="2" expected="false" />
+		<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+		<ext-store root="data" id="storeListModules" model-name="listModules" id-property="moduleIdIndex">
+			<ext-store-field id="moduleIdIndex" property="moduleId" />
+			<ext-store-field id="libelleIndex" property="libelle" />
+		</ext-store>
+		<ext-field-combo id="moduleIdFilter" property="searcheBean.moduleId" allow-blank="false" display-field="libelleIndex" store-id="storeListModules" width="250" next-element="prentRoleId"
+			colspan="2">
+			<ajax-event name="select" action-listener="onInitTreeRoles" handle-params="el,e" is-wait="true">
+				<request-field field="moduleId" />
+				<success>
+					<![CDATA[
+			 			var object = Ext.util.JSON.decode(response.responseText);
+						desktop.getCmp('listBean').getStore().removeAll();
+						desktop.getCmp('listBean').getStore().load();
+			        ]]>
+				</success>
+			</ajax-event>
+		</ext-field-combo>
+	</ext-fieldset>
+	<ext-grid id="listBean" is-tree="true" type-tree="2" border="true" height="400" auto-height="false">
+		<linked-event name="rowdblclick" action-listener="doSelectedBean" handle-params="grid,rowIndex,e">
+			<request-field field="getSelectedGrid" expected="false" />
+			<condition>
+			<![CDATA[ 
+				var val = grid.getStore().getAt(rowIndex).get('natureRoleIndex');
+				if(val=='A' || val=='F')
+                  return false; 
+                return true;
+				]]>
+			</condition>
+		</linked-event>
+		<include path="${displayColumn}" />
+		<ext-panel-tool id="doExporterPdf" tpl-id="33" is-label="false">
+			<open-media-event name="click" ext="PDF" action-listener="doExporterPdf" handle-params="el,e" />
+		</ext-panel-tool>
+		<ext-panel-tool id="doExporterXl" tpl-id="17" is-label="false">
+			<export-file-event name="click" action-listener="doExporterXl" handle-params="el,e" />
+		</ext-panel-tool>
+	</ext-grid>
+	<js-function name="getSelectedGrid" list-param="grid,rowIndex,e"><![CDATA[
+		    var index= grid.getSelectedServerIndex();
+		    return {"listBean:selectedRow":index};
+ 	 	]]>
+	</js-function>
+</root>

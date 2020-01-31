@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" id-property="" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<xtpl-foreach exp="$item  in  $entiteBean.getPropertys()">
+			<ext-store-field id="#{item.getPropertyName()}Index" property="#{item.getPropertyName()}" />
+		</xtpl-foreach>
+	</ext-store>
+	<xtpl-foreach exp="$item  in  $entiteBean.getPropertys()">
+		<ext-grid-column data-index="#{item.getPropertyName()}Index" width="150" />
+	</xtpl-foreach>
+</root>

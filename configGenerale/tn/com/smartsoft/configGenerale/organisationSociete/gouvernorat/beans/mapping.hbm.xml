@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db" package="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans">
+	<class name="GovernoratBean" table="CR_GOVERNORAT">
+		<id name="governoratId" column="CR_GOVERNORAT_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="libelle" column="LIBELLE" />
+		<property name="libelleArabe" column="LIBELLE_ARABE" />
+		<property name="createdById" column="MAT_PERS_CRE" />
+		<property name="createdDate" column="DATECREATION" />
+		<property name="updatedById" column="MAT_PERS_MOD" />
+		<property name="updatedDate" column="DATEMODIFICATION" />
+		<property name="paysId" column="CR_PAYS_ID" />
+		<many-to-one name="pays" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_PAYS_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

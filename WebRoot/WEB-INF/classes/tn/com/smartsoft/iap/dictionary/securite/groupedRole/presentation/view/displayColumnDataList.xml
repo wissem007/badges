@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" model-name="listBean" is-expand-all="true" id-property="roleId" parentProperty="prentRoleId" reload-submit-all-field="true" reload-action-listener="doFilter">
+		<ext-store-field id="roleIdIndex" property="roleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+		<ext-store-field id="rangIndex" property="rang" />
+		<ext-store-field id="helpIndex" property="help" />
+		<ext-store-field id="typeRoleIndex" property="typeRole" />
+		<ext-store-field id="natureRoleIndex" property="natureRole" />
+	</ext-store>
+	<ext-grid-column data-index="libelleIndex" width="100" renderer="roleIdRender" />
+	<ext-grid-column data-index="typeRoleIndex" width="200" />
+	<ext-grid-column data-index="rangIndex" width="100" />
+	<ext-grid-column data-index="helpIndex" width="500" />
+	<js-function name="roleIdRender" list-param="v, meta, record, row_idx, col_idx, store">
+ 		<![CDATA[
+		   	var	 imgMaster='<img src="' + Ext.BLANK_IMAGE_URL + '" class="tg-'+record.get("natureRoleIndex")+'-icon" />';
+		    var labelMaster = '<span class="tg-mastercol-editorplace">' + v + '</span>';
+			return [ imgMaster,labelMaster ].join('');
+ 	 	]]>
+	</js-function>
+</root>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store root="data" id="storeListDevise" model-name="listDevise" id-property="deviseIdIndex" >
+		<ext-store-field id="libelleIndex" property="libelle[$i]" />
+		<ext-store-field id="deviseIdIndex" property="deviseId[$i]" />
+	</ext-store>
+
+	<ext-field-text id="libelle" property="searcheBean.libelle" maxLength="60"  width="255" next-element="nationalite" />
+    <ext-field-text id="nationalite" property="searcheBean.nationalite" maxLength="60"  width="255" next-element="devise" />
+    
+   <ext-field-combo id="devise" label-exp="Devise" property="searcheBean.deviseId" link-property="searcheBean.devise.deviseId"
+    display-field="libelleIndex"  store-id="storeListDevise" next-element="searche" />
+
+</root>

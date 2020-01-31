@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://tn.com.smartsoft/dtds/module.xsd">
+	<module-id value="system" />
+	<default-data-source value="DefaultSession" />
+	<data-source name="DefaultSession" product-name="postgres">
+		<property name="connection.datasource">java:comp/env/jdbc/smartDS</property>
+		<property name="show_sql" value="true" />
+		<property name="default_schema" value="sss_config_general_db" />
+	</data-source>
+	<sub-modules>
+		<sub-module sub-module-id="system" default-data-source="DefaultSession">
+			<sujet sujet-id="system" default-data-source="DefaultSession">
+				<beans location="tn/com/smartsoft/iap/system/system.beans.xml" />
+			</sujet>
+		</sub-module>
+	</sub-modules>
+</module>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="sss_config_general_db" package="tn.com.smartsoft.configGenerale.organisationSociete.societe.beans">
+	<class name="SocieteBean" table="CR_SOCIETES">
+		<id name="societeId" column="CR_SOCIETE_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="fileId" column="CR_FILE_ID" />
+		<property name="abreviation" column="ABREVIATION" />
+		<property name="libelle" column="LIBELLE" />
+		<property name="libelleArabe" column="LIBELLE_ARABE" />
+		<property name="adresse" column="ADRESSE" />
+		<property name="paysId" column="CR_PAYS_ID" />
+		<property name="governoratId" column="CR_GOVERNORAT_ID" />
+		<property name="localiteId" column="CR_LOCALITE_ID" />
+		<property name="adresseArabe" column="ADRESSE_ARABE" />
+		<property name="telephone1" column="TELEPHONE1" />
+		<property name="telephone2" column="TELEPHONE2" />
+		<property name="fax" column="FAX" />
+		<property name="matriculeFiscal" column="MATRICULE_FISCAL" />
+		<property name="registreCommerce" column="REGISTRE_COMMERCE" />
+		<property name="deviseId" column="CR_DEVISE_ID" />
+		<property name="matriculeCnss" column="MATRICULE_CNSS" />
+		<property name="activiteId" column="CR_ACTIVITE_ID" />
+		<property name="numeroCcb" column="NUMERO_CCB" />
+		<property name="matriculeCnrps" column="MATRICULE_CNRPS" />
+		<property name="email" column="EMAIL" />
+		<property name="siteWeb" column="SITE_WEB" />
+		<property name="conventionId" column="convention_id" />
+		<property name="matriculeCavis" column="MATRICULE_CAVIS" />
+		<property name="createdById" column="MAT_PERS_CRE" />
+		<property name="createdDate" column="DATECREATION" />
+		<property name="updatedById" column="MAT_PERS_MOD" />
+		<property name="updatedDate" column="DATEMODIFICATION" />
+		<property name="siteId" column="CR_SITE_ID" />
+		<property name="nationaliteId" column="NATIONALITE_ID" />
+		<property name="residenceFiscaleId" column="residence_fiscale_id" />
+		<many-to-one name="residenceFiscale" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="residence_fiscale_id" />
+		</many-to-one>
+		<many-to-one name="nationalite" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="NATIONALITE_ID" />
+		</many-to-one>
+		<many-to-one name="pays" class="tn.com.smartsoft.configGenerale.organisationSociete.pays.beans.PayBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_PAYS_ID" />
+		</many-to-one>
+		<many-to-one name="governorat" class="tn.com.smartsoft.configGenerale.organisationSociete.gouvernorat.beans.GovernoratBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_GOVERNORAT_ID" />
+		</many-to-one>
+		<many-to-one name="localite" class="tn.com.smartsoft.configGenerale.organisationSociete.localite.beans.LocaliteBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_LOCALITE_ID" />
+		</many-to-one>
+		<many-to-one name="devise" class="tn.com.smartsoft.configGenerale.devises.devise.beans.DeviseBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_DEVISE_ID" />
+		</many-to-one>
+		<many-to-one name="file" class="tn.com.smartsoft.iap.administration.referentiel.file.beans.FileBean" fetch="join" update="false" insert="false" lazy="false">
+			<column name="CR_FILE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

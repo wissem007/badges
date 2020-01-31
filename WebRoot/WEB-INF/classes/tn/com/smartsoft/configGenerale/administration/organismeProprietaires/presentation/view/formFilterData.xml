@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<script-lib></script-lib>
+	<root layout="column">
+		<ext-panel columnWidth=".99">
+			<ext-panel title-exp="${title}" columnWidth=".99" label-width="190" layout="form" body-style="padding:15px;" id="titlePanel">
+				<ext-store id="storeListSociete" model-name="listSociete" id-property="societeIdIndex">
+					<ext-store-field id="societeIdIndex" property="societeId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+				</ext-store>
+				<ext-store root="data" id="storeListOrganisme" model-name="listOrganisme" id-property="organismeIdIndex">
+					<ext-store-field id="organismeIdIndex" property="organismeId" />
+					<ext-store-field id="libelleIndex" property="libelle" />
+				</ext-store>
+				<ext-panel layout="tform" border="false" label-width="120">
+					<ext-layout-config name="columns" value="2" expected="false" />
+					<ext-layout-config name="tableAttrs" value="{width:'90%'}" expected="false" />
+					<ext-field-combo id="societeId" property="searcheBean.societeId" width="250" display-field="libelleIndex" store-id="storeListSociete" next-element="organismeId">
+						<ajax-event name="change" action-listener="getOrganismeFilter" handle-params="el,e" is-wait="false" maxLength="50">
+							<request-field field="societeId" />
+							<success>
+						<![CDATA[
+	  					var object = Ext.util.JSON.decode(response.responseText);
+	         			desktop.getCmp('organismeId').clearValue();	         			
+	           			desktop.getCmp('organismeId').getStore().removeAll();
+	           			desktop.getCmp('organismeId').getStore().load();
+						
+	                 ]]>
+							</success>
+						</ajax-event>
+					</ext-field-combo>
+					<ext-field-combo id="organismeId" property="searcheBean.organismeId" width="250" display-field="libelleIndex" store-id="storeListOrganisme" next-element="dataValueId" />
+				</ext-panel>
+				<ext-grid id="listBean" border="true" height="400" editable="false" fixed-number-row="true" is-up-and-dow-row-menu="false" is-saved-menu="false">
+					<linked-event name="rowdblclick" action-listener="doSelectedBean" handle-params="grid,rowIndex,e">
+						<request-param name="listBean:selectedRow" value="rowIndex" expected="false" />
+					</linked-event>
+					<ext-store root="data" model-name="listBean" index-name="i">
+						<ext-store-field id="displayNameIndex" property="displayName" />
+						<ext-store-field id="societeLibelleIndex" property="organisme.parentSociete.libelle" />
+						<ext-store-field id="organismeLibelleIndex" property="organisme.libelle" />
+					</ext-store>
+					<ext-grid-row-header>
+						<ext-grid-column-header header="$L{organisme}" colspan="3" />
+						<ext-grid-column-header header="$L{module}" id="moduleHeader" colspan="4" />
+					</ext-grid-row-header>
+					<ext-grid-column data-index="displayNameIndex" width="200">
+					</ext-grid-column>
+					<ext-grid-column data-index="societeLibelleIndex" label-exp="$L{organisme}" width="200">
+					</ext-grid-column>
+					<ext-grid-column data-index="organismeLibelleIndex" label-exp="$L{societe}" width="200">
+					</ext-grid-column>
+				</ext-grid>
+			</ext-panel>
+		</ext-panel>
+		<ext-tbutton id="searche" tpl-id="16">
+			<ajax-event name="click" action-listener="doFilterOrganisme" handle-params="el,e" is-wait="true">
+				<request-field field="organismeId" />
+				<request-field field="societeId" />
+				<success>
+								<![CDATA[
+				              Ext.sss.Utils.reloadGrid(response,desktop,'listBean');
+				             ]]>
+				</success>
+			</ajax-event>
+		</ext-tbutton>
+		<ext-tbseparator />
+		<ext-tbspacer />
+		<ext-tbspacer />
+		<ext-tbutton id="retour" tpl-id="29">
+			<linked-event name="click" action-listener="doHomePage" handle-params="el,e" />
+		</ext-tbutton>
+	</root>
+</window>

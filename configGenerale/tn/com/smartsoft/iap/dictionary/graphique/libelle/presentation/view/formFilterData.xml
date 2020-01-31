@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ext-store id="storeListModule" model-name="listModule" id-property="moduleIdIndex">
+		<ext-store-field id="moduleIdIndex" property="moduleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSubModule" model-name="listSubModule" id-property="subModuleIdIndex">
+		<ext-store-field id="subModuleIdIndex" property="subModuleId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-store id="storeListSujet" model-name="listSujet" id-property="sujetIdIndex">
+		<ext-store-field id="sujetIdIndex" property="sujetId" />
+		<ext-store-field id="libelleIndex" property="libelle" />
+	</ext-store>
+	<ext-field-text id="libelleId" property="searcheBean.libelleId" maxLength="50" width="200" next-element="libelle" />
+	<ext-field-text id="libelle" property="searcheBean.libelle" maxLength="60" width="200" next-element="module" />
+	<ext-field-combo id="module" label-exp="$L{module}" property="searcheBean.moduleId"  display-field="libelleIndex" store-id="storeListModule" next-element="subModule">
+		<ajax-event name="change" action-listener="getSubModule" handle-params="el,e" is-wait="false">
+			<request-field field="module" />
+			<success>
+					<![CDATA[
+                     var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('subModule').clearValue();
+           			desktop.getCmp('subModule').getStore().removeAll();
+           			   
+					desktop.getCmp('subModule').getStore().load();
+                 ]]>
+			</success>
+		</ajax-event>
+	</ext-field-combo>
+	<ext-field-combo id="subModule" label-exp="$L{subbmodule}" property="searcheBean.subModuleId" display-field="libelleIndex"
+		store-id="storeListSubModule" next-element="sujet">
+		<ajax-event name="change" action-listener="getSujet" handle-params="el,e" is-wait="false">
+			<request-field field="subModule" />
+			<success>
+					<![CDATA[
+                    	var object = Ext.util.JSON.decode(response.responseText);
+         			desktop.getCmp('sujet').clearValue();
+           			desktop.getCmp('sujet').getStore().removeAll();
+           			   
+					desktop.getCmp('sujet').getStore().load();
+                 ]]>
+			</success>
+		</ajax-event>
+	</ext-field-combo>
+	<ext-field-combo id="sujet" label-exp="$L{susujet}" property="searcheBean.sujetId"  display-field="libelleIndex" store-id="storeListSujet"  next-element="searche"/>
+</root>
